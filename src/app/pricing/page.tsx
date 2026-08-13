@@ -11,7 +11,7 @@ export default function PricingPage() {
   return (
     <>
       <SiteHeader />
-      <main className="bg-[var(--background)] pb-16 pt-8">
+      <main className="bg-background pb-16 pt-8">
         <PricingTable />
       </main>
       <SiteFooter />

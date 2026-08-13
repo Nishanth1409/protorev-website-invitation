@@ -46,8 +46,14 @@
 
 html {
   scroll-behavior: smooth;
-  scrollbar-width: none; /* Firefox — hide scrollbar line */
   -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+/* Firefox + Chrome 121+ — Safari / older Chromium use ::-webkit-scrollbar below */
+@supports (scrollbar-width: none) {
+  html {
+    scrollbar-width: none;
+  }
 }
 
 html::-webkit-scrollbar {
@@ -61,8 +67,13 @@ body {
   color: var(--foreground);
   font-family: var(--font-brand), var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  scrollbar-width: none;
   -ms-overflow-style: none;
+}
+
+@supports (scrollbar-width: none) {
+  body {
+    scrollbar-width: none;
+  }
 }
 
 body::-webkit-scrollbar {

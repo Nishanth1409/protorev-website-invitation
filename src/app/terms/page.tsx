@@ -18,7 +18,7 @@ export default function TermsPage() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#5b4aff]">
             Legal
           </p>
-          <h1 className="mt-3 font-[family-name:var(--font-brand)] text-3xl font-bold tracking-tight">
+          <h1 className="mt-3 font-brand text-3xl font-bold tracking-tight">
             Terms of Service
           </h1>
           <p className="mt-3 text-sm text-[#4a4a6a]">

@@ -16,7 +16,7 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#5b4aff]">
             Simple packages
           </p>
-          <h1 className="mt-3 font-[family-name:var(--font-brand)] text-2xl font-bold tracking-tight text-[#0f0f1a] sm:text-3xl">
+          <h1 className="mt-3 font-brand text-2xl font-bold tracking-tight text-[#0f0f1a] sm:text-3xl">
             Beginner prices. Grown-up care.
           </h1>
           <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-[#4a4a6a]">
@@ -32,7 +32,7 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
           {pricingPlans.map((plan) => (
             <article
               key={plan.id}
-              className={`rounded-[1.5rem] border p-5 ${
+              className={`rounded-3xl border p-5 ${
                 plan.highlighted
                   ? "border-[#5b4aff]/40 bg-white shadow-[0_12px_40px_rgba(91,74,255,0.12)] ring-1 ring-[#5b4aff]/20"
                   : "border-[#e8e8f0] bg-white/90 shadow-[0_8px_30px_rgba(15,15,26,0.04)]"
