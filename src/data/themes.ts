@@ -1,5 +1,7 @@
 import type { DesignStyleId, InviteFormatId, InviteTheme } from "./types";
 import type { MusicMood } from "./music";
+import type { CeremonyCategoryId } from "./ceremony";
+import { festivalThemes } from "./festivalThemes";
 
 export type ExperienceKey =
   | "gilded-curtain"
@@ -26,19 +28,38 @@ export type ExperienceKey =
   | "petal-story"
   | "neon-dual"
   | "noir-strip"
-  | "ivory-edit";
+  | "ivory-edit"
+  | "diya-vivah"
+  | "mehendi-mandala"
+  | "haldi-sunburst"
+  | "peacock-palace"
+  | "watercolour-shaadi"
+  | "bollywood-reel"
+  | "naming-lotus"
+  | "gruhapravesha-glow"
+  | "campus-farewell"
+  | "school-annual"
+  | "birthday-spark"
+  | "silver-toast"
+  | "engagement-sparkle"
+  | "festival-lane"
+  | "marigold-baraat";
 
 export type CreateTheme = {
   id: string;
   name: string;
   blurb: string;
   format: InviteFormatId;
-  badge?: "Premium" | "New" | "Flagship" | "Trending" | "Free";
+  badge?: "Premium" | "New" | "Flagship" | "Trending" | "Free" | "Festival" | "Ceremony";
+  /** Defaults to wedding for classic catalog themes */
+  ceremony?: CeremonyCategoryId;
   designStyle: DesignStyleId;
   experience: ExperienceKey;
   musicMood: MusicMood;
   previewAccent: string;
   theme: InviteTheme;
+  /** Optional art motif image key under /motifs */
+  artMotif?: "diyas" | "mehendi" | "naming" | "campus";
 };
 
 export const formatMeta: Record<
@@ -734,6 +755,8 @@ export const createThemes: CreateTheme[] = [
       inkSoft: "#78716C",
     },
   },
+  // ——— Festival & ceremony expansions (additive) ———
+  ...(festivalThemes as CreateTheme[]),
 ];
 
 export function getCreateTheme(id: string) {

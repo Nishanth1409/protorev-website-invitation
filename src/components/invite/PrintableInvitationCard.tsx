@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 import type { WeddingInvite } from "@/data/types";
 import type { ExperienceKey } from "@/data/themes";
 import { getCreateTheme } from "@/data/themes";
+import { FestivalArtCard, isRichFestivalCard } from "./FestivalArtCard";
 
 type Props = {
   invite: WeddingInvite;
@@ -15,11 +16,23 @@ type Props = {
  * Fixed 5×7 invitation card for PNG / PDF export.
  * Ceremonial themes use blessing-first maroon/gold styling
  * inspired by traditional digital invitation websites.
+ * Festival / ceremony themes use richer Canva-market art cards.
  */
 export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
   function PrintableInvitationCard({ invite, watermarked = false }, ref) {
     const theme = invite.themeId ? getCreateTheme(invite.themeId) : null;
     const experience = (theme?.experience ?? "classic-ornate") as ExperienceKey;
+
+    if (isRichFestivalCard(experience)) {
+      return (
+        <FestivalArtCard
+          ref={ref}
+          invite={invite}
+          experience={experience}
+          watermarked={watermarked}
+        />
+      );
+    }
 
     if (
       experience === "temple-dawn" ||

@@ -9,6 +9,11 @@ import {
   type CreateTheme,
 } from "@/data/themes";
 import type { InviteFormatId } from "@/data/types";
+import {
+  allCeremonyIds,
+  ceremonyMeta,
+  type CeremonyCategoryId,
+} from "@/data/ceremony";
 import { TemplateOrCustomize } from "./TemplateOrCustomize";
 import { CustomDesignShowcase } from "./CustomDesignShowcase";
 
@@ -16,21 +21,26 @@ type Filter = "all" | InviteFormatId;
 
 export function CreateHub() {
   const [filter, setFilter] = useState<Filter>("all");
+  const [ceremony, setCeremony] = useState<CeremonyCategoryId | "all">("all");
   const [query, setQuery] = useState("");
 
   const themes = useMemo(() => {
     const q = query.trim().toLowerCase();
     return createThemes.filter((t) => {
       if (filter !== "all" && t.format !== filter) return false;
+      const cat = t.ceremony ?? "wedding";
+      if (ceremony !== "all" && cat !== ceremony) return false;
       if (!q) return true;
+      const meta = ceremonyMeta[cat];
       return (
         t.name.toLowerCase().includes(q) ||
         t.blurb.toLowerCase().includes(q) ||
         t.designStyle.includes(q) ||
-        t.experience.includes(q)
+        t.experience.includes(q) ||
+        meta.label.toLowerCase().includes(q)
       );
     });
-  }, [filter, query]);
+  }, [filter, ceremony, query]);
 
   const cards = themes.filter((t) => t.format === "invitation-card");
   const pages = themes.filter((t) => t.format === "event-page");
@@ -52,17 +62,16 @@ export function CreateHub() {
           <span className="pr-gradient-text italic">make it yours</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)] md:text-lg">
-          Use a ready template from ₹99 — or ask us to customise. Cards: sign
-          in, pay, then download PNG/PDF. Event pages are full guest websites.
-          See{" "}
+          Wedding, naming, college, school & more — festival-feel cards and guest
+          websites from ₹99. See{" "}
           <Link href="/pricing" className="pr-gradient-text font-semibold">
             budget pricing
           </Link>
           .
         </p>
         <p className="mt-4 text-sm font-medium text-[var(--ink-mute)]">
-          {createThemes.length} designs · 6 faiths · 6 languages ·{" "}
-          {totalCombos.toLocaleString()} preview combinations
+          {createThemes.length} designs · {allCeremonyIds.length} ceremony types · 6
+          faiths · 6 languages · {totalCombos.toLocaleString()} preview combinations
         </p>
       </section>
 
@@ -118,6 +127,39 @@ export function CreateHub() {
             </button>
           );
         })}
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 pb-4">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ink-mute)]">
+          Ceremony type
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setCeremony("all")}
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+              ceremony === "all"
+                ? "pr-gradient-btn"
+                : "border border-[var(--line)] bg-white text-[var(--ink-soft)]"
+            }`}
+          >
+            All ceremonies
+          </button>
+          {allCeremonyIds.map((id) => (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setCeremony(id)}
+              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+                ceremony === id
+                  ? "pr-gradient-btn"
+                  : "border border-[var(--line)] bg-white text-[var(--ink-soft)]"
+              }`}
+            >
+              {ceremonyMeta[id].emoji} {ceremonyMeta[id].short}
+            </button>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-6 pb-8">
@@ -206,6 +248,8 @@ function ThemeGroup({
 function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
   const isCard = theme.format === "invitation-card";
   const t = theme.theme;
+  const cat = theme.ceremony ?? "wedding";
+  const cMeta = ceremonyMeta[cat];
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
@@ -221,7 +265,7 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
         }}
       >
         <span className="absolute left-3 top-3 rounded-full bg-black/35 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur">
-          {isCard ? "Invitation card" : "Event page"}
+          {cMeta.emoji} {isCard ? "Card" : "Website"}
         </span>
         {theme.badge && (
           <span className="absolute right-3 top-3 rounded-full bg-[rgba(250,204,21,0.92)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-black">
@@ -229,7 +273,6 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
           </span>
         )}
 
-        {/* Mini invite mock — client-attractive preview */}
         <div
           className="absolute inset-x-8 bottom-5 top-12 rounded-2xl border px-4 py-5 text-center backdrop-blur-sm transition duration-300 group-hover:scale-[1.02]"
           style={{
@@ -240,13 +283,13 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
           }}
         >
           <p className="text-[10px] tracking-[0.28em]" style={{ color: t.accent }}>
-            PROTOREV
+            {cMeta.short.toUpperCase()}
           </p>
           <p
             className="mt-2 font-[family-name:var(--font-script)] text-xl"
             style={{ color: t.accentSoft || t.accent }}
           >
-            Forever begins
+            {theme.name.split(" ")[0]}
           </p>
           <div
             className="mx-auto mt-3 h-8 w-8 rounded-full border text-xs leading-8"
@@ -258,9 +301,7 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
       </div>
       <div className="p-5">
         <p className="mb-1 text-xs font-medium" style={{ color: theme.previewAccent }}>
-          {isCard
-            ? "PNG + PDF download · All faiths · All languages"
-            : "Full website · All faiths · All languages"}
+          {cMeta.label} · {isCard ? "PNG + PDF" : "Guest website"}
         </p>
         <h3 className="text-lg font-bold text-[var(--ink)]">{theme.name}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[var(--ink-soft)]">

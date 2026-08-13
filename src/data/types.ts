@@ -1,3 +1,7 @@
+import type { CeremonyCategoryId } from "./ceremony";
+
+export type { CeremonyCategoryId };
+
 export type FaithId =
   | "hindu"
   | "muslim"
@@ -109,6 +113,10 @@ export type WeddingInvite = {
   };
   /** Create-studio theme id for unique cinematic experiences */
   themeId?: string;
+  /** Celebration category — wedding, naming, college, etc. */
+  ceremony?: CeremonyCategoryId;
+  /** Label for “of” line — Wedding of / Naming of / Farewell · */
+  ofLabel?: string;
   socials: {
     instagram?: string;
     whatsapp?: string;

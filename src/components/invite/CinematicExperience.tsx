@@ -10,6 +10,10 @@ import {
   SharedEvents,
   SharedLocationClosing,
 } from "./styles/InviteShell";
+import {
+  FestivalSiteBody,
+  isFestivalWebExperience,
+} from "./FestivalSiteLayouts";
 
 type Props = {
   invite: WeddingInvite;
@@ -259,10 +263,16 @@ function DefaultCover({
             {invite.copy.weddingOf}
           </p>
           <h1 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl">{invite.bride}</h1>
-          <p className="my-2" style={{ color: t.accent }}>
-            &
-          </p>
-          <h1 className="mb-8 font-[family-name:var(--font-display)] text-3xl sm:text-4xl">{invite.groom}</h1>
+          {invite.groom?.trim() ? (
+            <>
+              <p className="my-2" style={{ color: t.accent }}>
+                &
+              </p>
+              <h1 className="mb-8 font-[family-name:var(--font-display)] text-3xl sm:text-4xl">{invite.groom}</h1>
+            </>
+          ) : (
+            <div className="mb-8" />
+          )}
           <button
             type="button"
             onClick={onOpen}
@@ -318,6 +328,18 @@ function coverFor(
       return <DefaultCover invite={invite} onOpen={onOpen} kicker="Editorial Invite" />;
     case "lantern-fire":
       return <DefaultCover invite={invite} onOpen={onOpen} kicker="Lantern Light" />;
+    case "festival-lane":
+    case "diya-vivah":
+    case "marigold-baraat":
+      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Festival Lights" />;
+    case "mehendi-mandala":
+      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Mehendi Garden" />;
+    case "naming-lotus":
+      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Naming Blessing" />;
+    case "campus-farewell":
+      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Campus Night" />;
+    case "school-annual":
+      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Annual Day" />;
     default:
       return <DefaultCover invite={invite} onOpen={onOpen} />;
   }
@@ -387,12 +409,18 @@ function HeroBlock({ invite, cinematic }: { invite: WeddingInvite; cinematic?: b
           <h1 className="font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
             {invite.bride}
           </h1>
-          <p className="my-2 font-[family-name:var(--font-script)] text-2xl sm:text-3xl" style={{ color: t.accent }}>
-            &
-          </p>
-          <h1 className="mb-5 font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
-            {invite.groom}
-          </h1>
+          {invite.groom?.trim() ? (
+            <>
+              <p className="my-2 font-[family-name:var(--font-script)] text-2xl sm:text-3xl" style={{ color: t.accent }}>
+                &
+              </p>
+              <h1 className="mb-5 font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
+                {invite.groom}
+              </h1>
+            </>
+          ) : (
+            <div className="mb-5" />
+          )}
           <p className="tracking-[0.2em] sm:tracking-[0.25em]" style={{ color: t.accentSoft }}>
             {invite.weddingDateLabel}
           </p>
@@ -424,12 +452,19 @@ export function CinematicExperience({ invite, experience }: Props) {
     "noir-strip",
     "ivory-edit",
     "gilded-curtain",
+    "festival-lane",
+    "mehendi-mandala",
+    "naming-lotus",
+    "campus-farewell",
+    "school-annual",
   ].includes(experience);
 
   const particleMode =
     experience.includes("bloom") ||
     experience.includes("garden") ||
-    experience.includes("petal")
+    experience.includes("petal") ||
+    experience.includes("mehendi") ||
+    experience.includes("lotus")
       ? "petals"
       : "sparks";
 
@@ -439,17 +474,21 @@ export function CinematicExperience({ invite, experience }: Props) {
       particleMode={particleMode}
       cover={(open) => coverFor(experience, invite, open)}
     >
-      {() => (
-        <div style={{ background: t.bgDeep, color: t.ink }}>
-          <HeroBlock invite={invite} cinematic={isEvent} />
-          <div className="invite-stage px-4 sm:px-6">
-            <SharedCountdown invite={invite} />
+      {() =>
+        isFestivalWebExperience(experience) ? (
+          <FestivalSiteBody invite={invite} experience={experience} />
+        ) : (
+          <div style={{ background: t.bgDeep, color: t.ink }}>
+            <HeroBlock invite={invite} cinematic={isEvent} />
+            <div className="invite-stage px-4 sm:px-6">
+              <SharedCountdown invite={invite} />
+            </div>
+            {isEvent && <StoryStrip invite={invite} />}
+            <SharedEvents invite={invite} />
+            <SharedLocationClosing invite={invite} />
           </div>
-          {isEvent && <StoryStrip invite={invite} />}
-          <SharedEvents invite={invite} />
-          <SharedLocationClosing invite={invite} />
-        </div>
-      )}
+        )
+      }
     </InviteShell>
   );
 }
