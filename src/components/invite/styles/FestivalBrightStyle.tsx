@@ -26,8 +26,8 @@ export function FestivalBrightStyle({ invite }: { invite: WeddingInvite }) {
           <div className="w-full max-w-md overflow-hidden rounded-3xl" style={{ background: t.accent }}>
             <div className="bg-white px-7 py-10 text-center" style={{ color: t.ink }}>
               <p className="text-4xl">{invite.emblem}</p>
-              <h1 className="mt-3 text-3xl font-extrabold tracking-tight">{c.openingTitle}</h1>
-              <p className="mt-3 text-sm font-medium">
+              <h1 className="mt-3 invite-name text-3xl tracking-tight">{c.openingTitle}</h1>
+              <p className="mt-3 invite-name text-sm">
                 {invite.bride} + {invite.groom}
               </p>
               <button
@@ -55,15 +55,15 @@ export function FestivalBrightStyle({ invite }: { invite: WeddingInvite }) {
               className="mx-auto max-w-md rounded-[2rem] px-6 py-10"
               style={{ background: t.card, border: `3px solid ${t.accent}` }}
             >
-              <p className="text-xs font-bold uppercase tracking-[0.25em]" style={{ color: t.accent }}>
+              <p className="invite-meta" style={{ color: t.accent }}>
                 {c.weddingOf}
               </p>
-              <h1 className="mt-4 text-4xl font-extrabold">{invite.bride}</h1>
-              <p className="my-2 text-2xl font-black" style={{ color: t.accent }}>
+              <h1 className="mt-4 invite-name text-4xl">{invite.bride}</h1>
+              <p className="invite-script my-2 text-2xl" style={{ color: t.accent }}>
                 &
               </p>
-              <h1 className="text-4xl font-extrabold">{invite.groom}</h1>
-              <p className="mt-5 text-lg font-semibold">{invite.weddingDateLabel}</p>
+              <h1 className="invite-name text-4xl">{invite.groom}</h1>
+              <p className="mt-5 invite-name text-lg">{invite.weddingDateLabel}</p>
             </div>
             <p className="mx-auto mt-8 max-w-md text-sm leading-7" style={{ color: t.inkSoft }}>
               {invite.invitationCopy}

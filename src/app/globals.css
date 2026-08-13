@@ -56,28 +56,65 @@ body {
 }
 
 /* ——— Invitation typography (print / Illustrator feel) ——— */
-:lang(kn),
-[lang="kn"] {
+/* Scoped to invite surfaces so marketing chrome keeps brand sans */
+.invite-viewport :lang(kn),
+.invite-viewport [lang="kn"],
+.invite-print-card:lang(kn),
+.invite-print-card [lang="kn"],
+.physical-invite-card:lang(kn),
+.physical-invite-card [lang="kn"],
+[data-invite-card]:lang(kn),
+[data-invite-card] [lang="kn"] {
   font-family: var(--font-invite-kn);
 }
-:lang(ta),
-[lang="ta"] {
+.invite-viewport :lang(ta),
+.invite-viewport [lang="ta"],
+.invite-print-card:lang(ta),
+.invite-print-card [lang="ta"],
+.physical-invite-card:lang(ta),
+.physical-invite-card [lang="ta"],
+[data-invite-card]:lang(ta),
+[data-invite-card] [lang="ta"] {
   font-family: var(--font-invite-ta);
 }
-:lang(te),
-[lang="te"] {
+.invite-viewport :lang(te),
+.invite-viewport [lang="te"],
+.invite-print-card:lang(te),
+.invite-print-card [lang="te"],
+.physical-invite-card:lang(te),
+.physical-invite-card [lang="te"],
+[data-invite-card]:lang(te),
+[data-invite-card] [lang="te"] {
   font-family: var(--font-invite-te);
 }
-:lang(hi),
-[lang="hi"] {
+.invite-viewport :lang(hi),
+.invite-viewport [lang="hi"],
+.invite-print-card:lang(hi),
+.invite-print-card [lang="hi"],
+.physical-invite-card:lang(hi),
+.physical-invite-card [lang="hi"],
+[data-invite-card]:lang(hi),
+[data-invite-card] [lang="hi"] {
   font-family: var(--font-invite-hi);
 }
-:lang(ml),
-[lang="ml"] {
+.invite-viewport :lang(ml),
+.invite-viewport [lang="ml"],
+.invite-print-card:lang(ml),
+.invite-print-card [lang="ml"],
+.physical-invite-card:lang(ml),
+.physical-invite-card [lang="ml"],
+[data-invite-card]:lang(ml),
+[data-invite-card] [lang="ml"] {
   font-family: var(--font-invite-ml);
 }
-:lang(en),
-[lang="en"] {
+.invite-viewport :lang(en),
+.invite-viewport [lang="en"],
+.invite-print-card:lang(en),
+.invite-print-card [lang="en"],
+.physical-invite-card:lang(en),
+.physical-invite-card [lang="en"],
+[data-invite-card]:lang(en),
+[data-invite-card] [lang="en"] {
   font-family: var(--font-invite-en-soft);
 }
 

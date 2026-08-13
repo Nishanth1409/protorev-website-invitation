@@ -27,9 +27,9 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-xs font-semibold uppercase tracking-[0.35em]" style={{ color: t.accent }}>
               {invite.styleLabel}
             </p>
-            <h1 className="mt-6 text-5xl font-bold leading-[1.05] tracking-tight md:text-6xl">
+            <h1 className="mt-6 invite-name text-5xl leading-[1.05] tracking-tight md:text-6xl">
               {invite.bride}
-              <span className="block text-[var(--ink-mute)]">&</span>
+              <span className="invite-script block text-[var(--ink-mute)]">&</span>
               {invite.groom}
             </h1>
             <p className="mt-6 text-sm" style={{ color: t.inkSoft }}>
@@ -55,7 +55,7 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
                 <p className="text-xs uppercase tracking-[0.3em]" style={{ color: t.inkSoft }}>
                   {c.weddingOf}
                 </p>
-                <h1 className="mt-4 text-5xl font-bold tracking-tight">{invite.monogram}</h1>
+                <h1 className="mt-4 invite-name text-5xl tracking-tight">{invite.monogram}</h1>
               </div>
               <p className="text-sm leading-7" style={{ color: t.inkSoft }}>
                 {invite.invitationCopy}
@@ -65,7 +65,7 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
               <p className="text-xs uppercase tracking-[0.3em]" style={{ color: t.inkSoft }}>
                 {c.saveTheDate}
               </p>
-              <p className="mt-2 text-3xl font-semibold">{invite.weddingDateLabel}</p>
+              <p className="mt-2 invite-name text-3xl">{invite.weddingDateLabel}</p>
             </div>
           </section>
           <div className="relative z-20">
