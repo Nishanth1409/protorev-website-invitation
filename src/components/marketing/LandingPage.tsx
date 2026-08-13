@@ -36,7 +36,7 @@ export function LandingPage() {
             <span className="h-1.5 w-1.5 rounded-full bg-[#22c55e]" />
             New creators · Taking flight
           </p>
-          <h1 className="mt-6 font-[family-name:var(--font-brand)] text-[2rem] font-bold leading-[1.15] tracking-tight text-[#0f0f1a] sm:text-5xl">
+          <h1 className="mt-6 font-brand text-[2rem] font-bold leading-[1.15] tracking-tight text-[#0f0f1a] sm:text-5xl">
             We&apos;re just getting{" "}
             <span
               className="bg-clip-text text-transparent"
@@ -110,7 +110,7 @@ export function LandingPage() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#5b4aff]">
             Take flight with us
           </p>
-          <h2 className="mt-3 font-[family-name:var(--font-brand)] text-2xl font-bold text-[#0f0f1a] sm:text-3xl">
+          <h2 className="mt-3 font-brand text-2xl font-bold text-[#0f0f1a] sm:text-3xl">
             Your story. Our first chapters.
           </h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-[#4a4a6a]">

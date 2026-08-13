@@ -64,7 +64,7 @@ export function InvitationExperience({
         className="mobile-card-stage flex min-h-full items-start justify-center px-2 pb-8 pt-6"
         style={{ background: stageBg }}
       >
-        <div className="w-full max-w-[100%] [&_[data-invite-card]]:!max-w-none">
+        <div className="w-full max-w-full **:data-invite-card:max-w-none!">
           <PrintableInvitationCard invite={invite} watermarked={false} />
         </div>
       </div>

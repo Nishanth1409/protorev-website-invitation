@@ -131,7 +131,7 @@ export function ThemeStudio({
 
   return (
     <div className="relative min-h-screen bg-[#F4EFE7]">
-      <div className="sticky top-0 z-[70] border-b border-[#E4D9C8] bg-[#F8F3EA]/96 backdrop-blur-xl">
+      <div className="sticky top-0 z-70 border-b border-[#E4D9C8] bg-[#F8F3EA]/96 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 py-3">
           <div className="min-w-0">
             <Link
@@ -140,7 +140,7 @@ export function ThemeStudio({
             >
               ← Invitations
             </Link>
-            <h1 className="truncate font-[family-name:var(--font-display)] text-base font-semibold text-[#1A1210]">
+            <h1 className="truncate font-display text-base font-semibold text-[#1A1210]">
               {displayName}
             </h1>
             <p className="truncate text-[11px] text-[#5C4A42]">
@@ -194,7 +194,7 @@ export function ThemeStudio({
       <AnimatePresence>
         {setupOpen && (
           <motion.div
-            className="fixed inset-0 z-[80] flex items-end justify-center bg-black/45 px-3 pb-3 pt-16 sm:items-center sm:p-6"
+            className="fixed inset-0 z-80 flex items-end justify-center bg-black/45 px-3 pb-3 pt-16 sm:items-center sm:p-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -203,7 +203,7 @@ export function ThemeStudio({
               role="dialog"
               aria-modal="true"
               aria-labelledby="style-title"
-              className="max-h-[90svh] w-full max-w-xl overflow-y-auto rounded-[1.5rem] border border-[#E4D9C8] bg-white p-5 shadow-xl sm:p-7"
+              className="max-h-[90svh] w-full max-w-xl overflow-y-auto rounded-3xl border border-[#E4D9C8] bg-white p-5 shadow-xl sm:p-7"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 24, opacity: 0 }}
@@ -213,7 +213,7 @@ export function ThemeStudio({
               </p>
               <h2
                 id="style-title"
-                className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]"
+                className="mt-2 font-display text-2xl font-semibold text-[#1A1210]"
               >
                 Faith & languages
               </h2>

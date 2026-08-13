@@ -22,7 +22,7 @@ export function CreateHub() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
           Invitation studio
         </p>
-        <h1 className="mt-4 font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.12] text-[#1A1210] sm:text-4xl">
+        <h1 className="mt-4 font-display text-[1.85rem] font-semibold leading-[1.12] text-[#1A1210] sm:text-4xl">
           Designs with distinct art direction
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#5C4A42]">
@@ -41,7 +41,7 @@ export function CreateHub() {
         <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8B6914]">
           Custom design
         </p>
-        <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-semibold">
+        <h2 className="mt-3 font-display text-xl font-semibold">
           Request something bespoke
         </h2>
         <p className="mt-2 text-sm leading-relaxed text-[#5C4A42]">
@@ -68,7 +68,7 @@ function CollectionSection({ group }: { group: CollectionGroup }) {
   return (
     <section id={group}>
       <div className="mb-12 text-center">
-        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]">
+        <h2 className="font-display text-2xl font-semibold text-[#1A1210]">
           {meta.label}
         </h2>
         <p className="mt-2 text-sm text-[#5C4A42]">{meta.blurb}</p>
@@ -107,7 +107,7 @@ function FlagshipCard({ id, index }: { id: string; index: number }) {
       className="flex flex-col items-center text-center"
     >
       <div
-        className="w-full max-w-[320px] rounded-[2rem] px-3 pb-8 pt-10"
+        className="w-full max-w-[320px] rounded-4xl px-3 pb-8 pt-10"
         style={{
           background: `radial-gradient(ellipse at 50% 22%, ${glow}, transparent 55%), linear-gradient(180deg, ${shell}18, transparent 70%)`,
         }}
@@ -118,7 +118,7 @@ function FlagshipCard({ id, index }: { id: string; index: number }) {
       <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#8B6914]">
         {category}
       </p>
-      <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]">
+      <h3 className="mt-2 font-display text-2xl font-semibold text-[#1A1210]">
         {meta.title}
       </h3>
       <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#5C4A42]">

@@ -184,7 +184,7 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
             )}
 
             <div
-              className="mx-auto mt-3 h-[2px] w-16"
+              className="mx-auto mt-3 h-0.5 w-16"
               style={{
                 background: `linear-gradient(90deg, transparent, ${gold}, transparent)`,
               }}

@@ -148,7 +148,7 @@ function CurtainCover({
           Tap anywhere to enter
         </p>
       </Stage>
-      <button type="button" className="absolute inset-0 z-[5]" aria-label="Enter" onClick={onOpen} />
+      <button type="button" className="absolute inset-0 z-5" aria-label="Enter" onClick={onOpen} />
     </motion.div>
   );
 }
@@ -261,7 +261,7 @@ function DefaultCover({
     >
       <Stage className="w-full">
         <div
-          className="mx-auto w-full max-w-md rounded-[2rem] border px-6 py-12 text-center backdrop-blur-xl sm:px-8 sm:py-14"
+          className="mx-auto w-full max-w-md rounded-4xl border px-6 py-12 text-center backdrop-blur-xl sm:px-8 sm:py-14"
           style={{ borderColor: t.border, background: t.card, color: t.text }}
         >
           <p className="mb-3 text-xs tracking-[0.35em]" style={{ color: t.accent }}>
@@ -584,7 +584,7 @@ function GuestEssentials({ invite }: { invite: WeddingInvite }) {
         </div>
 
         <div
-          className="mt-10 rounded-[1.5rem] border px-5 py-8 text-center"
+          className="mt-10 rounded-3xl border px-5 py-8 text-center"
           style={{ borderColor: t.border, background: t.card }}
         >
           <h2 className="invite-name text-2xl" style={{ color: t.ink }}>

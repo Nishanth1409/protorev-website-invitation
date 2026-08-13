@@ -183,7 +183,7 @@ export function MusicToggle({ music, accent, enabled }: Props) {
       <div
         ref={hostRef}
         aria-hidden
-        className="pointer-events-none fixed -left-[9999px] h-px w-px overflow-hidden opacity-0"
+        className="pointer-events-none fixed left-[-9999px] h-px w-px overflow-hidden opacity-0"
       />
 
       {/* Optional Spotify embed (hidden when idle) */}
@@ -215,7 +215,7 @@ export function MusicToggle({ music, accent, enabled }: Props) {
             {playing ? "Music" : needsTap ? "Tap music" : ready ? "Play" : "…"}
           </span>
         </button>
-        <p className="max-w-[10rem] text-right text-[10px] leading-snug text-white/70 sm:max-w-[12rem]">
+        <p className="max-w-40 text-right text-[10px] leading-snug text-white/70 sm:max-w-48">
           {music.label}
           <span className="opacity-70"> · YouTube Music</span>
         </p>

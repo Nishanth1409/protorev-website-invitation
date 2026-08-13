@@ -23,7 +23,7 @@ export function PhoneMockup({ theme }: { theme: CreateTheme }) {
 
   return (
     <motion.div
-      className="relative mx-auto w-full max-w-[260px]"
+      className="relative mx-auto w-full max-w-65"
       animate={{ y: [0, -8, 0] }}
       transition={{ duration: 4.4, repeat: Infinity, ease: "easeInOut" }}
     >
@@ -34,15 +34,15 @@ export function PhoneMockup({ theme }: { theme: CreateTheme }) {
       />
 
       <div
-        className="relative overflow-hidden rounded-[2rem] border-[3px] border-[#1a1a1f] bg-[#0c0c10] shadow-[0_28px_65px_rgba(20,12,8,0.38)]"
+        className="relative overflow-hidden rounded-4xl border-[3px] border-[#1a1a1f] bg-[#0c0c10] shadow-[0_28px_65px_rgba(20,12,8,0.38)]"
         style={{ aspectRatio: "9 / 19.5" }}
       >
-        <div className="absolute left-1/2 top-[7px] z-30 h-[20px] w-[34%] -translate-x-1/2 rounded-full bg-[#0c0c10]" />
+        <div className="absolute left-1/2 top-1.75 z-30 h-5 w-[34%] -translate-x-1/2 rounded-full bg-[#0c0c10]" />
 
-        <div className="absolute inset-[3px] overflow-hidden rounded-[1.7rem] bg-[#16120f]">
+        <div className="absolute inset-0.75 overflow-hidden rounded-[1.7rem] bg-[#16120f]">
           {isCard ? (
             <div className="flex h-full items-start justify-center px-1.5 pt-7">
-              <div className="w-full overflow-hidden rounded-sm shadow-lg [&_[data-invite-card]]:!max-w-none">
+              <div className="w-full overflow-hidden rounded-sm shadow-lg **:data-invite-card:max-w-none!">
                 <PrintableInvitationCard invite={invite} watermarked={false} />
               </div>
             </div>

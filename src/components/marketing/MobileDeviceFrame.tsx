@@ -49,7 +49,7 @@ export function MobileDeviceFrame({
   if (!showFrame) {
     return (
       <div
-        className={`mobile-preview-root min-h-[100svh] w-full bg-[#F7F4EF] ${className}`}
+        className={`mobile-preview-root min-h-svh w-full bg-[#F7F4EF] ${className}`}
         aria-label={label}
       >
         {children}
@@ -77,9 +77,9 @@ export function MobileDeviceFrame({
         style={{ width: "100%", aspectRatio: "390 / 844" }}
         aria-label={label}
       >
-        <div className="absolute left-1/2 top-[10px] z-30 h-[24px] w-[32%] -translate-x-1/2 rounded-full bg-[#0a0a0d]" />
+        <div className="absolute left-1/2 top-2.5 z-30 h-6 w-[32%] -translate-x-1/2 rounded-full bg-[#0a0a0d]" />
         <div
-          className={`mobile-preview-root absolute inset-[3px] overflow-hidden rounded-[1.85rem] bg-[#F7F4EF] ${
+          className={`mobile-preview-root absolute inset-0.75 overflow-hidden rounded-[1.85rem] bg-[#F7F4EF] ${
             scrollable ? "overflow-y-auto overscroll-contain" : ""
           }`}
         >

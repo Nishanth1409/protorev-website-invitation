@@ -52,7 +52,7 @@ export function CustomWorkPreview() {
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8b5cf6]">
             Live website · Tap to explore
           </p>
-          <h2 className="mt-3 font-[family-name:var(--font-brand)] text-2xl font-bold tracking-tight sm:text-3xl">
+          <h2 className="mt-3 font-brand text-2xl font-bold tracking-tight sm:text-3xl">
             Opening Blessing
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-white/65">
@@ -87,7 +87,7 @@ export function CustomWorkPreview() {
             {CAPABILITIES.map((label) => (
               <span
                 key={label}
-                className="rounded-full border border-white/12 bg-white/[0.04] px-3 py-2 text-[11px] text-white/75"
+                className="rounded-full border border-white/12 bg-white/4 px-3 py-2 text-[11px] text-white/75"
               >
                 {label}
               </span>
@@ -146,7 +146,7 @@ function ScaledMobileCanva() {
   return (
     <div
       ref={hostRef}
-      className="relative h-full w-full overflow-hidden overscroll-contain bg-[#51100f] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden touch-pan-y"
+      className="relative h-full w-full overflow-hidden overscroll-contain bg-[#51100f] scrollbar-none [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden touch-pan-y"
     >
       {!ready && (
         <div className="absolute inset-0 z-20 flex items-center justify-center bg-[#51100f] text-[11px] text-white/50">
@@ -186,12 +186,12 @@ function ScaledMobileCanva() {
 /** Phone frame sized for real taps on mobile (near native Canva width). */
 function MobileFrame({ children }: { children: ReactNode }) {
   return (
-    <div className="relative w-[min(88vw,360px)] sm:w-[320px] md:w-[340px]">
+    <div className="relative w-[min(88vw,360px)] sm:w-[320px] md:w-85">
       <div
         className="relative overflow-hidden rounded-[1.85rem] border-[3px] border-[#2a2a2e] bg-[#0a0a0d] shadow-[0_28px_60px_rgba(91,74,255,0.25)]"
         style={{ aspectRatio: PHONE_RATIO }}
       >
-        <div className="pointer-events-none absolute left-1/2 top-[8px] z-20 h-[16px] w-[30%] -translate-x-1/2 rounded-full bg-[#0a0a0d]" />
+        <div className="pointer-events-none absolute left-1/2 top-2 z-20 h-4 w-[30%] -translate-x-1/2 rounded-full bg-[#0a0a0d]" />
         <div className="absolute inset-0 overflow-hidden rounded-[1.65rem] bg-[#51100f]">
           {children}
         </div>

@@ -41,7 +41,7 @@ export function MobilePreviewPage({
             >
               ← All invitations
             </Link>
-            <h1 className="mt-2 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
+            <h1 className="mt-2 font-display text-xl font-semibold text-[#1A1210]">
               {themeName}
             </h1>
             {subtitle && (
@@ -51,7 +51,7 @@ export function MobilePreviewPage({
         )}
 
         <div
-          className={`flex justify-center rounded-[2rem] px-2 py-6 md:px-4 md:py-10 ${
+          className={`flex justify-center rounded-4xl px-2 py-6 md:px-4 md:py-10 ${
             hidePageHeader ? "mt-2" : "mt-6"
           }`}
           style={{

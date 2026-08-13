@@ -13,7 +13,7 @@ export function OpeningBlessingInvite() {
     <div className="min-h-full bg-[#F7F0E4] text-[#3D2415]">
       {/* Opening cover */}
       <section
-        className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden px-6 py-16 text-center"
+        className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-16 text-center"
         style={{
           background:
             "radial-gradient(ellipse at 50% 20%, rgba(184,134,11,0.18), transparent 55%), linear-gradient(180deg, #2A1010 0%, #4A1818 45%, #1A0808 100%)",
@@ -42,7 +42,7 @@ export function OpeningBlessingInvite() {
           <p className="invite-meta mt-3 text-[11px] tracking-[0.22em] text-[#D4AF6A]">
             Shri Ganeshaya Namaha
           </p>
-          <div className="mx-auto mt-8 h-px w-16 bg-gradient-to-r from-transparent via-[#E8C56A] to-transparent" />
+          <div className="mx-auto mt-8 h-px w-16 bg-linear-to-r from-transparent via-[#E8C56A] to-transparent" />
           <p className="invite-script mt-8 text-xl text-[#E8C56A]">
             The wedding of
           </p>

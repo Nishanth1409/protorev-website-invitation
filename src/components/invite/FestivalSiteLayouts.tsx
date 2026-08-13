@@ -70,7 +70,7 @@ export function FestivalSiteBody({
 
   return (
     <div style={{ background: t.bgDeep, color: t.ink }}>
-      <section className="relative min-h-[560px] overflow-hidden">
+      <section className="relative min-h-140 overflow-hidden">
         {motif && (
           <div className="absolute inset-0">
             <Image src={motif} alt="" fill priority className="object-cover opacity-45" sizes="100vw" />
@@ -82,7 +82,7 @@ export function FestivalSiteBody({
             />
           </div>
         )}
-        <div className="relative z-10 mx-auto flex min-h-[560px] max-w-3xl flex-col items-center justify-center px-6 py-16 text-center">
+        <div className="relative z-10 mx-auto flex min-h-140 max-w-3xl flex-col items-center justify-center px-6 py-16 text-center">
           {(experience === "festival-lane" || experience === "diya-vivah" || experience === "marigold-baraat") && (
             <div className="mb-6 w-full max-w-md opacity-90">
               <LaceToran color={t.accent} />

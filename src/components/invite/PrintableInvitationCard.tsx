@@ -375,7 +375,7 @@ function CardChrome({
     experience === "petal-story"
   ) {
     return (
-      <div className="pointer-events-none absolute inset-4 rounded-[2rem] border" style={{ borderColor: border }} />
+      <div className="pointer-events-none absolute inset-4 rounded-4xl border" style={{ borderColor: border }} />
     );
   }
   if (

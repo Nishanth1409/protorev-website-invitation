@@ -128,7 +128,7 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
               {indian?.openingLine ?? "Shubha Vivaha"} · {invite.languageLabel}
             </p>
             {motif && (
-              <div className="relative mt-3 h-24 w-full max-w-[220px] overflow-hidden rounded-2xl border" style={{ borderColor: t.border }}>
+              <div className="relative mt-3 h-24 w-full max-w-55 overflow-hidden rounded-2xl border" style={{ borderColor: t.border }}>
                 <Image src={motif} alt="" fill className="object-cover" sizes="220px" />
               </div>
             )}
@@ -179,7 +179,7 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
               <Image src={motif} alt="" fill className="object-cover" sizes="420px" />
             </div>
           )}
-          <div className="pointer-events-none absolute inset-4 rounded-[2rem] border-2" style={{ borderColor: t.accent }} />
+          <div className="pointer-events-none absolute inset-4 rounded-4xl border-2" style={{ borderColor: t.accent }} />
           <div className="relative z-10 flex h-full flex-col items-center justify-between px-[10%] py-[12%] text-center">
             <div>
               <p className="text-3xl" aria-hidden>
@@ -264,7 +264,7 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
           {motif && (
             <div className="absolute inset-x-0 top-0 h-[38%] opacity-90">
               <Image src={motif} alt="" fill className="object-cover" sizes="420px" />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[var(--fade)]" style={{ ["--fade" as string]: t.bg }} />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent to-(--fade)" style={{ ["--fade" as string]: t.bg }} />
             </div>
           )}
           <div className="relative z-10 flex h-full flex-col items-center justify-end px-[9%] pb-[10%] pt-[42%] text-center">

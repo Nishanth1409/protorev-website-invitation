@@ -30,7 +30,7 @@ export function CustomDesignShowcase({
 
   if (compact) {
     return (
-      <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[#0f0f1a] text-white">
+      <div className="overflow-hidden rounded-2xl border border-(--line) bg-[#0f0f1a] text-white">
         <div className="border-b border-white/10 px-4 py-3">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#C9A227]">
             Commission this theme
@@ -68,23 +68,23 @@ export function CustomDesignShowcase({
 
   return (
     <section className="mx-auto max-w-3xl px-5 py-6" id="customise">
-      <div className="overflow-hidden rounded-[1.5rem] border border-[var(--line)] bg-white shadow-[var(--shadow-soft)]">
+      <div className="overflow-hidden rounded-3xl border border-(--line) bg-white shadow-(--shadow-soft)">
         <div className="p-5 sm:p-7">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-(--grad-a)">
             Concierge customisation
           </p>
-          <h2 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)]">
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-(--ink)">
             You choose the look. We finish every detail.
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
+          <p className="mt-3 text-sm leading-relaxed text-(--ink-soft)">
             This is our invitation gallery. When a design feels right, message
             our studio with your names, date, venue, photos and language — we
             customise and deliver polished files.
           </p>
-          <p className="mt-3 text-base font-bold text-[var(--ink)]">
+          <p className="mt-3 text-base font-bold text-(--ink)">
             {COMPANY.phoneDisplay}
           </p>
-          <p className="text-sm text-[var(--ink-mute)]">{COMPANY.email}</p>
+          <p className="text-sm text-(--ink-mute)">{COMPANY.email}</p>
           <div className="mt-5 flex flex-col gap-2 sm:flex-row">
             <a
               href={wa}
@@ -96,7 +96,7 @@ export function CustomDesignShowcase({
             </a>
             <a
               href={mail}
-              className="inline-flex justify-center rounded-2xl border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--ink)]"
+              className="inline-flex justify-center rounded-2xl border border-(--line) px-5 py-3 text-sm font-semibold text-(--ink)"
             >
               Email the studio
             </a>
@@ -104,7 +104,7 @@ export function CustomDesignShowcase({
         </div>
 
         <div
-          className="border-t border-[var(--line)] p-5 sm:p-7"
+          className="border-t border-(--line) p-5 sm:p-7"
           style={{
             background:
               "radial-gradient(circle at 30% 20%, rgba(232,197,106,0.15), transparent 50%), linear-gradient(145deg,#2A0810,#4A0E18)",

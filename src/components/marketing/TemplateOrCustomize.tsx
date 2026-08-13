@@ -40,14 +40,14 @@ export function TemplateOrCustomize({
   return (
     <section className="mx-auto max-w-3xl px-5 py-8">
       <div className="space-y-4">
-        <div className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 shadow-[var(--shadow-card)]">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
+        <div className="rounded-3xl border border-(--line) bg-white p-5 shadow-(--shadow-card)">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-(--grad-a)">
             Step 1
           </p>
-          <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">
+          <h3 className="mt-2 text-xl font-bold text-(--ink)">
             Browse the gallery
           </h3>
-          <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+          <p className="mt-2 text-sm leading-relaxed text-(--ink-soft)">
             Preview invitation cards and guest websites by faith and language.
             Sample names are illustrative — your details are set when we
             customise.
@@ -60,7 +60,7 @@ export function TemplateOrCustomize({
           </Link>
         </div>
 
-        <div className="rounded-[1.5rem] border border-transparent bg-[linear-gradient(135deg,#0f0f1a,#1e1b4b)] p-5 text-white shadow-[var(--shadow-soft)]">
+        <div className="rounded-3xl border border-transparent bg-[linear-gradient(135deg,#0f0f1a,#1e1b4b)] p-5 text-white shadow-(--shadow-soft)">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
             Step 2
           </p>

@@ -22,7 +22,7 @@ export function FloatingCeremonyHero({ invite }: { invite: WeddingInvite }) {
 
   return (
     <section
-      className="relative flex min-h-[100%] flex-col overflow-hidden"
+      className="relative flex min-h-full flex-col overflow-hidden"
       style={{
         background: `radial-gradient(circle at 72% 12%, ${t.glow}, transparent 42%), linear-gradient(180deg, ${t.bg} 0%, ${t.bgDeep} 100%)`,
         color: t.ink,
@@ -34,7 +34,7 @@ export function FloatingCeremonyHero({ invite }: { invite: WeddingInvite }) {
         <motion.div
           animate={{ y: [0, -12, 0] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-full max-w-[280px]"
+          className="w-full max-w-70"
         >
           <PalaceSvg accent={t.accent} soft={t.accentSoft || t.accent} fill={t.card} />
         </motion.div>
