@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { formatInr, pricingPlans } from "@/data/pricing";
-import { customizeWhatsAppUrl, CUSTOM_SHOWCASE } from "@/data/contact";
+import { COMPANY, customizeWhatsAppUrl } from "@/data/contact";
 import { TemplateOrCustomize } from "@/components/marketing/TemplateOrCustomize";
 import { CustomDesignShowcase } from "@/components/marketing/CustomDesignShowcase";
 
@@ -82,19 +82,10 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
           Customisation (still budget-friendly)
         </h2>
         <p className="mb-4 max-w-2xl text-sm text-[var(--ink-soft)]">
-          Need something uniquely yours? Custom stays within reach for local
-          families — see our live sample, then message us.
+          Need something uniquely yours? Message our team on WhatsApp at{" "}
+          <strong>{COMPANY.phoneDisplay}</strong> — we design print-ready cards
+          for your ceremony.
         </p>
-        <div className="mb-6">
-          <a
-            href={CUSTOM_SHOWCASE.url}
-            target="_blank"
-            rel="noreferrer"
-            className="pr-gradient-text text-sm font-semibold"
-          >
-            View our custom sample — {CUSTOM_SHOWCASE.title} →
-          </a>
-        </div>
         <div className="grid gap-4 md:grid-cols-3">
           {customs.map((plan) => (
             <article
@@ -125,23 +116,21 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
               </ul>
               <div className="mt-6 space-y-2">
                 <a
-                  href={CUSTOM_SHOWCASE.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex w-full justify-center rounded-2xl bg-[#E8C56A] px-4 py-3 text-sm font-semibold text-[#2A0810]"
-                >
-                  See custom sample
-                </a>
-                <a
                   href={customizeWhatsAppUrl({
-                    format: plan.format === "both" ? "both" : plan.format,
+                    format: "invitation-card",
                     themeName: plan.name,
                   })}
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex w-full justify-center rounded-2xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
                 >
-                  Message to customise
+                  WhatsApp to order — {COMPANY.phoneDisplay}
+                </a>
+                <a
+                  href={`mailto:${COMPANY.email}`}
+                  className="inline-flex w-full justify-center rounded-2xl border border-white/25 px-4 py-3 text-sm font-semibold text-white"
+                >
+                  Email us
                 </a>
               </div>
             </article>

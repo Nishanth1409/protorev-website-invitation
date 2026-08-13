@@ -105,7 +105,7 @@ export function assembleInvite(
       : localized.events ?? preset.events,
     audioSrc: preset.audioSrc,
     music,
-    socials: { whatsapp: "https://wa.me/919999999999" },
+    socials: { whatsapp: `https://wa.me/919019726464` },
     theme: theme.theme,
     coverSubtitle: useCeremonyPeople
       ? ceremonyPreset.coverSubtitle

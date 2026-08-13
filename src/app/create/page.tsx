@@ -1,17 +1,20 @@
+import { Suspense } from "react";
 import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
 import { CreateHub } from "@/components/marketing/CreateHub";
 
 export const metadata = {
-  title: "Create Invitation — Protorev Digital",
+  title: "Example invitation cards — Protorev Digital",
   description:
-    "Choose invitation card or event page themes. Every design works across all faiths and languages.",
+    "Browse wedding invitation card examples. Edit names, faith & language, download PNG/PDF.",
 };
 
 export default function CreatePage() {
   return (
     <>
       <SiteHeader />
-      <CreateHub />
+      <Suspense fallback={<div className="min-h-[50vh]" />}>
+        <CreateHub />
+      </Suspense>
       <SiteFooter />
     </>
   );

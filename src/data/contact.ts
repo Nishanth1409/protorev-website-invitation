@@ -3,21 +3,34 @@ export const COMPANY = {
   name: "Protorev Digital",
   site: "https://www.protorevdigital.com/",
   email: "hello@protorevdigital.com",
+  /** Customer service — WhatsApp & calls */
+  whatsapp: "919019726464",
+  phoneDisplay: "+91 90197 26464",
   tagline: "Where creativity meets code",
-  productLine: "Young studio. Timeless invitations.",
+  productLine: "Invitation cards · Edit, preview, download PNG/PDF",
 } as const;
 
+export function whatsappUrl(text?: string) {
+  const base = `https://wa.me/${COMPANY.whatsapp}`;
+  if (!text) return base;
+  return `${base}?text=${encodeURIComponent(text)}`;
+}
+
+export function telUrl() {
+  return `tel:+${COMPANY.whatsapp}`;
+}
+
 /**
- * Protorev’s own custom invitation website — portfolio example for clients.
- * Not a ready template from the catalog; this is bespoke work we designed.
+ * Portfolio reference only — bespoke work we designed.
+ * Not a ready template from the catalog.
  */
 export const CUSTOM_SHOWCASE = {
   title: "Shubha Vivaha — Opening Blessing",
-  subtitle: "Our custom invitation website",
+  subtitle: "Custom design reference",
   blurb:
-    "A ceremonial guest site we designed end-to-end — blessing-first open, Kannada auspicious cover, and full wedding storytelling. This is what customisation looks like when it is crafted for one family.",
+    "When you need something fully bespoke — blessing-first cover, family photos, regional wording — our team designs it for you. Message us on WhatsApp or email.",
   url: "https://sample-wedding-the-invitationweb.canva.link/",
-  formatLabel: "Custom event website",
+  formatLabel: "Custom reference sample",
   credit: "Designed by Protorev Digital",
 } as const;
 
@@ -26,38 +39,50 @@ export function customizeWhatsAppUrl(details: {
   format?: "invitation-card" | "event-page" | string;
   faith?: string;
   languages?: string;
+  bride?: string;
+  groom?: string;
 }) {
+  const isCard = !details.format || details.format === "invitation-card";
   const lines = [
     `Hello Protorev Digital,`,
     ``,
-    `I saw your custom sample invitation (${CUSTOM_SHOWCASE.title}):`,
-    CUSTOM_SHOWCASE.url,
-    ``,
-    `I would like a customised wedding invitation in that quality.`,
-    details.themeName ? `Theme interest: ${details.themeName}` : null,
-    details.format ? `Format: ${details.format}` : null,
+    isCard
+      ? `I want a custom wedding invitation *card* (PNG/PDF for WhatsApp & print).`
+      : `I want a custom wedding invitation.`,
+    details.themeName ? `Template I liked: ${details.themeName}` : null,
+    details.bride || details.groom
+      ? `Names: ${[details.bride, details.groom].filter(Boolean).join(" & ")}`
+      : null,
     details.faith ? `Faith: ${details.faith}` : null,
     details.languages ? `Languages: ${details.languages}` : null,
     ``,
     `Please share options, timeline, and pricing.`,
+    ``,
+    `Contact: ${COMPANY.phoneDisplay}`,
   ]
     .filter(Boolean)
     .join("\n");
 
-  return `https://api.whatsapp.com/send?text=${encodeURIComponent(lines)}`;
+  return whatsappUrl(lines);
 }
 
 export function customizeEmailUrl(details: {
   themeName?: string;
   format?: string;
+  bride?: string;
+  groom?: string;
 }) {
   const subject = encodeURIComponent(
-    `Custom wedding invitation${details.themeName ? ` — ${details.themeName}` : ""}`,
+    `Custom invitation card${details.themeName ? ` — ${details.themeName}` : ""}`,
   );
   const body = encodeURIComponent(
-    `Hello Protorev Digital,\n\nI saw your custom sample (${CUSTOM_SHOWCASE.title}):\n${CUSTOM_SHOWCASE.url}\n\nI want a customised invitation${
-      details.themeName ? ` based on “${details.themeName}”` : ""
-    }${details.format ? ` (${details.format})` : ""} in that quality.\n\nPlease share options and next steps.\n`,
+    `Hello Protorev Digital,\n\nI want a custom invitation card (PNG/PDF)${
+      details.themeName ? ` inspired by “${details.themeName}”` : ""
+    }.\n${
+      details.bride || details.groom
+        ? `Names: ${[details.bride, details.groom].filter(Boolean).join(" & ")}\n`
+        : ""
+    }${details.format ? `Format: ${details.format}\n` : ""}\nPlease share options and next steps.\n\nMy phone: \n`,
   );
   return `mailto:${COMPANY.email}?subject=${subject}&body=${body}`;
 }

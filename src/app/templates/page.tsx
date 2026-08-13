@@ -1,17 +1,10 @@
-import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
-import { TemplatesGallery } from "@/components/marketing/TemplatesGallery";
+import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Templates — Protorev Digital",
-  description: "Browse multi-faith wedding invitation demos by Protorev Digital.",
+  title: "Example cards — Protorev Digital",
+  description: "Browse wedding invitation card examples — edit and download PNG/PDF.",
 };
 
 export default function TemplatesPage() {
-  return (
-    <>
-      <SiteHeader />
-      <TemplatesGallery />
-      <SiteFooter />
-    </>
-  );
+  redirect("/create?format=invitation-card");
 }

@@ -2,23 +2,22 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { COMPANY } from "@/data/contact";
+import { COMPANY, whatsappUrl } from "@/data/contact";
 import { BrandLogo } from "./BrandLogo";
 
 const SITE = COMPANY.site;
+const WA = whatsappUrl();
 
 const nav = [
-  { href: "/create", label: "Create" },
+  { href: "/create", label: "Example cards" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/templates", label: "Templates" },
-  { href: "/#customise", label: "Custom" },
+  { href: "/#customise", label: "Custom order" },
 ] as const;
 
 const footerInvites = [
-  { href: "/create", label: "Create Invitation" },
+  { href: "/create", label: "Example cards" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/templates", label: "Templates" },
-  { href: "/#customise", label: "Custom sample" },
+  { href: "/#customise", label: "Custom order" },
 ] as const;
 
 const footerCompany = [
@@ -47,12 +46,12 @@ export function SiteHeader() {
             </Link>
           ))}
           <a
-            href={`${SITE}#contact`}
+            href={WA}
             target="_blank"
             rel="noreferrer"
             className="pr-gradient-btn inline-flex items-center rounded-full px-5 py-2.5 text-xs font-semibold tracking-wide"
           >
-            Let&apos;s Talk →
+            WhatsApp {COMPANY.phoneDisplay}
           </a>
         </nav>
 
@@ -92,13 +91,13 @@ export function SiteHeader() {
               </Link>
             ))}
             <a
-              href={`${SITE}#contact`}
+              href={WA}
               target="_blank"
               rel="noreferrer"
               onClick={() => setOpen(false)}
               className="pr-gradient-btn mt-2 inline-flex justify-center rounded-full px-5 py-3 text-sm font-semibold"
             >
-              Let&apos;s Talk →
+              WhatsApp us
             </a>
           </nav>
         </div>
@@ -158,12 +157,12 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2.5 text-sm text-white/65">
             <li>
               <a
-                href={`${SITE}#contact`}
+                href={WA}
                 target="_blank"
                 rel="noreferrer"
                 className="transition hover:text-white"
               >
-                Start a Project
+                WhatsApp {COMPANY.phoneDisplay}
               </a>
             </li>
             <li>

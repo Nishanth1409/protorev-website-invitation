@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import {
   createThemes,
@@ -20,7 +21,11 @@ import { CustomDesignShowcase } from "./CustomDesignShowcase";
 type Filter = "all" | InviteFormatId;
 
 export function CreateHub() {
-  const [filter, setFilter] = useState<Filter>("all");
+  const searchParams = useSearchParams();
+  const initialFormat = searchParams.get("format");
+  const [filter, setFilter] = useState<Filter>(
+    initialFormat === "event-page" ? "event-page" : "invitation-card",
+  );
   const [ceremony, setCeremony] = useState<CeremonyCategoryId | "all">("all");
   const [query, setQuery] = useState("");
 
@@ -58,25 +63,19 @@ export function CreateHub() {
           Create with Protorev
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-[var(--ink)] md:text-5xl">
-          Choose a theme,{" "}
-          <span className="pr-gradient-text italic">make it yours</span>
+          Example invitation cards —{" "}
+          <span className="pr-gradient-text italic">edit & download</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)] md:text-lg">
-          Wedding, naming, college, school & more — festival-feel cards and guest
-          websites from ₹99. See{" "}
-          <Link href="/pricing" className="pr-gradient-text font-semibold">
-            budget pricing
-          </Link>
-          .
+          Pick a design, set faith & language, edit names and date, then download
+          PNG or PDF from ₹99. Need fully custom work? WhatsApp us at{" "}
+          <strong className="text-[var(--ink)]">+91 90197 26464</strong>.
         </p>
         <p className="mt-4 text-sm font-medium text-[var(--ink-mute)]">
           {createThemes.length} designs · {allCeremonyIds.length} ceremony types · 6
           faiths · 6 languages · {totalCombos.toLocaleString()} preview combinations
         </p>
       </section>
-
-      <CustomDesignShowcase />
-      <TemplateOrCustomize />
 
       <section className="mx-auto grid max-w-6xl gap-4 px-6 pb-8 md:grid-cols-2">
         {(
@@ -219,6 +218,9 @@ export function CreateHub() {
           </p>
         )}
       </section>
+
+      <CustomDesignShowcase />
+      <TemplateOrCustomize />
     </main>
   );
 }
@@ -309,16 +311,16 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Link
-            href={`/demo/${theme.id}`}
+            href={`/create/${theme.id}?ready=1`}
             className="pr-gradient-btn rounded-xl px-4 py-2 text-xs font-semibold"
           >
-            {isCard ? "Create invitation" : "Create event page"}
+            {isCard ? "Customise & download" : "Open website theme"}
           </Link>
           <Link
-            href={`/demo/${theme.id}`}
+            href={`/create/${theme.id}?ready=1`}
             className="rounded-xl border border-[var(--line)] px-4 py-2 text-xs font-semibold text-[var(--ink-soft)] transition hover:text-[var(--ink)]"
           >
-            Preview theme
+            Preview
           </Link>
         </div>
       </div>

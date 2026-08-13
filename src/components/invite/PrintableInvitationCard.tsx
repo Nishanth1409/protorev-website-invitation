@@ -52,6 +52,24 @@ export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
       );
     }
 
+    if (
+      experience === "classic-ornate" ||
+      experience === "temple-dawn" ||
+      experience === "velvet-royal" ||
+      experience === "ribbon-envelope" ||
+      experience === "heritage-arch" ||
+      experience === "lantern-fire" ||
+      experience === "vivah-festival"
+    ) {
+      return (
+        <CeremonialBlessingCard
+          ref={ref}
+          invite={invite}
+          watermarked={watermarked}
+        />
+      );
+    }
+
     return (
       <ModernStudioCard
         ref={ref}
@@ -108,8 +126,8 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
           aspectRatio: "5 / 7",
           background: `radial-gradient(circle at 50% 18%, rgba(232,197,106,0.18), transparent 42%), linear-gradient(180deg, ${maroon}, ${deep})`,
           color: cream,
-          fontFamily: "Georgia, 'Times New Roman', serif",
         }}
+        lang={invite.language}
       >
         {/* Ornate gold bands */}
         <div
@@ -143,47 +161,44 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
             >
               {invite.emblem}
             </div>
-            <p
-              className="text-[10px] font-semibold uppercase tracking-[0.32em]"
-              style={{ color: gold }}
-            >
+            <p className="invite-meta" style={{ color: gold }}>
               Opening blessing
             </p>
-            <p className="mt-2 text-lg" style={{ color: cream }}>
+            <p className="invite-blessing mt-2 text-lg" style={{ color: cream }}>
               {invite.copy.openingTitle}
             </p>
-            <p className="mt-1 text-xs tracking-[0.2em]" style={{ color: "rgba(248,241,227,0.7)" }}>
+            <p className="invite-meta mt-1" style={{ color: "rgba(248,241,227,0.7)" }}>
               {invite.faithLabel} · {invite.languageLabel}
             </p>
           </div>
 
           <div className="w-full">
-            <p className="text-sm italic" style={{ color: gold }}>
+            <p className="invite-script text-sm" style={{ color: gold }}>
               {c.weddingOf}
             </p>
-            <h1 className="mt-2 text-[1.7rem] leading-tight" style={{ color: cream }}>
+            <h1 className="invite-name mt-2 text-[1.7rem] leading-tight" style={{ color: cream }} lang={invite.language}>
               {invite.bride}
             </h1>
-            <p className="my-1 text-xl" style={{ color: gold }}>
+            <p className="invite-script my-1 text-xl leading-none" style={{ color: gold }}>
               &
             </p>
-            <h1 className="text-[1.7rem] leading-tight" style={{ color: cream }}>
+            <h1 className="invite-name text-[1.7rem] leading-tight" style={{ color: cream }} lang={invite.language}>
               {invite.groom}
             </h1>
             <div className="mx-auto mt-4 h-px w-20" style={{ background: gold }} />
-            <p className="mt-4 text-sm leading-relaxed" style={{ color: gold }}>
+            <p className="invite-blessing mt-4 text-sm leading-relaxed" style={{ color: gold }} lang={invite.language}>
               {invite.blessingNative}
             </p>
-            <p className="mt-2 text-[11px] leading-relaxed" style={{ color: "rgba(248,241,227,0.75)" }}>
+            <p className="invite-body-copy mt-2 text-[11px] leading-relaxed" style={{ color: "rgba(248,241,227,0.75)" }}>
               {invite.tagline}
             </p>
           </div>
 
           <div>
-            <p className="text-sm tracking-[0.18em]" style={{ color: gold }}>
+            <p className="invite-name text-sm tracking-[0.18em]" style={{ color: gold }}>
               {invite.weddingDateLabel}
             </p>
-            <p className="mt-2 text-xs" style={{ color: cream }}>
+            <p className="invite-body-copy mt-2 text-xs" style={{ color: cream }}>
               {invite.location.name}
             </p>
             <p className="mt-4 text-[10px] tracking-[0.28em]" style={{ color: "rgba(232,197,106,0.8)" }}>

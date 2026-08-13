@@ -251,9 +251,8 @@ export function AuthPaywallModal({
               </p>
             </div>
             <p className="text-xs text-[var(--ink-soft)]">
-              Demo checkout for this studio build — payment succeeds on this device
-              and unlocks clean downloads for <strong>{themeName}</strong>. Wire
-              Razorpay/Stripe keys for live collection later.
+              Secure checkout unlocks clean PNG/PDF downloads for{" "}
+              <strong>{themeName}</strong> on this device.
             </p>
             {error && <p className="text-xs font-medium text-red-600">{error}</p>}
             <button
