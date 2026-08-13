@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { formatInr, pricingPlans } from "@/data/pricing";
 import { COMPANY, whatsappUrl } from "@/data/contact";
+import { handleHomeHashClick } from "@/lib/scrollToId";
 
 const btnPrimary =
   "mt-5 inline-flex min-h-11 w-full items-center justify-center rounded-full bg-[linear-gradient(135deg,#5b4aff_0%,#8b5cf6_50%,#06b6d4_100%)] px-4 py-3 text-sm font-semibold text-white shadow-[0_4px_24px_rgba(91,74,255,0.35)] transition hover:brightness-105";
@@ -81,9 +83,13 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
         <p className="mt-8 text-center text-sm text-[#4a4a6a]">
           Need a combination? WhatsApp us — we can bundle packages.
           <br />
-          <a href="/#custom-work" className="font-semibold text-[#5b4aff]">
+          <Link
+            href="/#custom-work"
+            onClick={(e) => handleHomeHashClick(e, "/#custom-work")}
+            className="font-semibold text-[#5b4aff]"
+          >
             View custom work →
-          </a>
+          </Link>
           {" · "}
           <a
             href={`mailto:${COMPANY.email}`}
