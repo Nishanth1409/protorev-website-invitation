@@ -5,8 +5,8 @@ export const COMPANY = {
   email: "hello@protorevdigital.com",
   whatsapp: "919019726464",
   phoneDisplay: "+91 90197 26464",
-  tagline: "Premium digital wedding invitations",
-  productLine: "Multi-faith · Multi-language · Concierge customisation",
+  tagline: "New creators. Real invitations. Taking flight.",
+  productLine: "Fresh ideas · Honest prices · Made with care",
 } as const;
 
 export function whatsappUrl(text?: string) {
@@ -19,7 +19,7 @@ export function telUrl() {
   return `tel:+${COMPANY.whatsapp}`;
 }
 
-/** Custom work showcase — live Canva invitation via same-origin proxy. */
+/** Custom work showcase — proxied preview only; external work URL is not published. */
 export const CUSTOM_SHOWCASE = {
   title: "Opening Blessing",
   subtitle: "Custom Work",
@@ -27,7 +27,6 @@ export const CUSTOM_SHOWCASE = {
     "A commissioned digital wedding website — designed uniquely for one celebration.",
   /** Proxied live site for device frames (Canva blocks direct iframes). */
   embedPath: "/canva-live/",
-  liveUrl: "https://sample-wedding-the-invitationweb.canva.link/",
   formatLabel: "Custom Work",
   credit: "Designed by Protorev Digital",
 } as const;

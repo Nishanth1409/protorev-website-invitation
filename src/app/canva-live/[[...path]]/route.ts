@@ -26,7 +26,7 @@ export async function GET(
       "Accept-Language": request.headers.get("accept-language") ?? "en",
       "User-Agent":
         request.headers.get("user-agent") ??
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
     },
     redirect: "follow",
   });
@@ -80,11 +80,13 @@ function rewriteHtml(html: string) {
     "if(false && window.top!==window.self)",
   );
 
-  // Preview embed: no scrollbar lines, clip to one artboard (360×720)
+  // Preview embed: keep Canva interactive (tap buttons / page changes).
+  // Clip horizontal overflow from wide decorative borders, allow vertical flow.
   const embedCss = `<style id="protorev-preview-embed">
-html,body{overflow:hidden!important;height:720px!important;max-height:720px!important;scrollbar-width:none!important;-ms-overflow-style:none!important;}
-html::-webkit-scrollbar,body::-webkit-scrollbar,#root::-webkit-scrollbar,*::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;}
-#root,main{overflow:hidden!important;max-height:720px!important;height:100%!important;}
+html,body{margin:0!important;padding:0!important;width:100%!important;height:100%!important;max-width:100%!important;overflow-x:hidden!important;overflow-y:auto!important;scrollbar-width:none!important;-ms-overflow-style:none!important;background:#51100f!important;-webkit-overflow-scrolling:touch!important;}
+html::-webkit-scrollbar,body::-webkit-scrollbar,#root::-webkit-scrollbar{display:none!important;width:0!important;height:0!important;}
+#root,main{width:100%!important;min-height:100%!important;max-width:100%!important;overflow-x:hidden!important;}
+a,button,[role="button"]{touch-action:manipulation!important;}
 </style>`;
   if (/<\/head>/i.test(out)) {
     out = out.replace(/<\/head>/i, `${embedCss}</head>`);
