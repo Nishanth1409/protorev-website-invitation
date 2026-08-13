@@ -46,6 +46,14 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-width: none; /* Firefox — hide scrollbar line */
+  -ms-overflow-style: none; /* IE/Edge legacy */
+}
+
+html::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
+  width: 0;
+  height: 0;
 }
 
 body {
@@ -53,6 +61,14 @@ body {
   color: var(--foreground);
   font-family: var(--font-brand), var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 /* ——— Invitation typography (print / Illustrator feel) ——— */
@@ -128,10 +144,31 @@ body {
 .invite-name {
   font-family: var(--font-invite-en);
   font-weight: 600;
-  letter-spacing: 0.04em;
-  line-height: 1.2;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
   font-feature-settings: "liga" 1, "kern" 1;
   text-rendering: optimizeLegibility;
+}
+
+[data-art-family] .invite-name {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+[data-art-family="temple-gold"] .invite-name,
+[data-art-family="kanakam-heritage"] .invite-name,
+[data-art-family="tamil-temple"] .invite-name,
+[data-art-family="telugu-pellikuthuru"] .invite-name {
+  letter-spacing: 0.01em;
+}
+
+[data-art-family="floral-editorial"] .invite-name,
+[data-art-family="ivory-atelier"] .invite-name,
+[data-art-family="modern-monogram"] .invite-name {
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.92em;
 }
 
 .invite-name:lang(kn),
@@ -405,10 +442,15 @@ a {
   }
 }
 
-.invite-protect {
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 

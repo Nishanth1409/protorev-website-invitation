@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { InvitationExperience } from "@/components/invite/InvitationExperience";
 import type { CreateTheme } from "@/data/themes";
 import { formatMeta } from "@/data/themes";
+import { getFlagshipMeta } from "@/data/flagship";
 import {
   languageMeta,
   type FaithId,
@@ -17,14 +18,13 @@ import {
   assembleInvite,
 } from "@/lib/buildInvite";
 import { faithMeta } from "@/data/invites";
-import { PhoneMockup } from "./PhoneMockup";
 
 type Props = {
   theme: CreateTheme;
   initialFaith?: FaithId;
   initialLanguages?: LanguageId[];
   initialActiveLanguage?: LanguageId;
-  /** When true, skip opening the setup sheet (deep-link already configured). */
+  /** Always open preview; sheet only for Change style */
   startReady?: boolean;
 };
 
@@ -42,18 +42,19 @@ function formatLangSummary(langs: LanguageId[]) {
 }
 
 /**
- * Theme preview studio:
- * - One faith
- * - Multiple languages (guest can switch on the invite)
- * - Sheet closes on confirm; reopen anytime to change
+ * Live Preview — sample invite opens immediately.
+ * "Change style" adjusts faith + languages without blocking the first view.
  */
 export function ThemeStudio({
   theme,
   initialFaith = "hindu",
   initialLanguages = ["en"],
   initialActiveLanguage,
-  startReady = false,
+  startReady = true,
 }: Props) {
+  const flag = getFlagshipMeta(theme.id);
+  const displayName = flag?.title ?? theme.name;
+
   const seededLangs = uniqueLangs(
     initialLanguages.length ? initialLanguages : ["en"],
   );
@@ -62,19 +63,17 @@ export function ThemeStudio({
       ? initialActiveLanguage
       : seededLangs[0];
 
-  const [faith, setFaith] = useState<FaithId>(initialFaith);
+  const [faith, setFaith] = useState<FaithId>(
+    initialFaith || flag?.defaultFaith || "hindu",
+  );
   const [languages, setLanguages] = useState<LanguageId[]>(seededLangs);
   const [activeLanguage, setActiveLanguage] =
     useState<LanguageId>(seededActive);
 
-  const [draftFaith, setDraftFaith] = useState<FaithId | null>(
-    startReady ? initialFaith : null,
-  );
-  const [draftLangs, setDraftLangs] = useState<LanguageId[]>(
-    startReady ? seededLangs : [],
-  );
-  const [setupOpen, setSetupOpen] = useState(!startReady);
-  const [ready, setReady] = useState(startReady);
+  const [draftFaith, setDraftFaith] = useState<FaithId>(faith);
+  const [draftLangs, setDraftLangs] = useState<LanguageId[]>(seededLangs);
+  const [setupOpen, setSetupOpen] = useState(false);
+  const ready = startReady !== false;
 
   const invite = useMemo(
     () => assembleInvite(theme, faith, activeLanguage),
@@ -97,24 +96,20 @@ export function ThemeStudio({
     window.history.replaceState({}, "", url.toString());
   };
 
-  const applySelection = (f: FaithId, langs: LanguageId[]) => {
-    const clean = uniqueLangs(langs);
-    if (!clean.length) return;
-    const active = clean.includes(activeLanguage)
-      ? activeLanguage
-      : clean[0];
-    setFaith(f);
+  const applySelection = () => {
+    const clean = uniqueLangs(draftLangs);
+    if (!clean.length || !draftFaith) return;
+    const active = clean.includes(activeLanguage) ? activeLanguage : clean[0];
+    setFaith(draftFaith);
     setLanguages(clean);
     setActiveLanguage(active);
-    setReady(true);
     setSetupOpen(false);
-    persistUrl(f, clean, active);
+    persistUrl(draftFaith, clean, active);
   };
 
   const toggleDraftLang = (id: LanguageId) => {
     setDraftLangs((prev) => {
       if (prev.includes(id)) {
-        // Keep at least one language selected
         if (prev.length === 1) return prev;
         return prev.filter((x) => x !== id);
       }
@@ -134,51 +129,44 @@ export function ThemeStudio({
     persistUrl(faith, languages, id);
   };
 
-  const canOpen = Boolean(draftFaith && draftLangs.length > 0);
-
   return (
-    <div className="relative min-h-screen bg-[#F7F4EF]">
-      {/* Always show compact chrome so faith/language stays reachable */}
-      <div className="sticky top-0 z-[70] border-b border-[var(--line)] bg-[rgba(247,244,239,0.96)] backdrop-blur-xl">
+    <div className="relative min-h-screen bg-[#F4EFE7]">
+      <div className="sticky top-0 z-[70] border-b border-[#E4D9C8] bg-[#F8F3EA]/96 backdrop-blur-xl">
         <div className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 py-3">
           <div className="min-w-0">
             <Link
               href="/create"
-              className="text-xs font-medium text-[var(--ink-mute)] hover:text-[var(--ink)]"
+              className="text-xs font-medium text-[#8A7A70] hover:text-[#1A1210]"
             >
-              ← All themes
+              ← Invitations
             </Link>
-            <h1 className="truncate text-base font-bold text-[var(--ink)]">
-              {theme.name}
+            <h1 className="truncate font-[family-name:var(--font-display)] text-base font-semibold text-[#1A1210]">
+              {displayName}
             </h1>
-            <p className="truncate text-[11px] text-[var(--ink-soft)]">
-              {format.label} · {theme.badge ?? "Studio"}
+            <p className="truncate text-[11px] text-[#5C4A42]">
+              {format.label}
             </p>
           </div>
 
           <button
             type="button"
             onClick={openSetup}
-            className="shrink-0 rounded-full border border-[var(--line)] bg-white px-3 py-2 text-left shadow-[var(--shadow-card)]"
-            title="Change faith or languages"
+            className="inline-flex min-h-11 shrink-0 flex-col justify-center rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-left"
           >
-            <span className="block text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-              {ready ? "Your selection" : "Choose"}
+            <span className="text-[10px] font-semibold uppercase tracking-wide text-[#8A7A70]">
+              Change style
             </span>
-            <span className="text-sm font-semibold text-[var(--ink)]">
+            <span className="text-sm font-semibold text-[#1A1210]">
               {faithMeta[faith]?.icon} {faithMeta[faith]?.label} ·{" "}
               {formatLangSummary(languages)}
-            </span>
-            <span className="mt-0.5 block text-[11px] text-[var(--grad-a)]">
-              Change →
             </span>
           </button>
         </div>
 
-        {ready && !setupOpen && languages.length > 1 && (
-          <div className="border-t border-[var(--line)] bg-white/70">
+        {languages.length > 1 && (
+          <div className="border-t border-[#E4D9C8] bg-white/60">
             <div className="mx-auto flex w-full max-w-lg gap-2 overflow-x-auto px-4 py-2">
-              <span className="shrink-0 self-center text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
+              <span className="shrink-0 self-center text-[10px] font-semibold uppercase tracking-wide text-[#8A7A70]">
                 View in
               </span>
               {languages.map((id) => {
@@ -188,10 +176,10 @@ export function ThemeStudio({
                     key={id}
                     type="button"
                     onClick={() => switchLanguage(id)}
-                    className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-semibold transition ${
+                    className={`inline-flex min-h-11 shrink-0 items-center rounded-full px-4 py-2 text-xs font-semibold transition ${
                       active
-                        ? "pr-gradient-btn"
-                        : "border border-[var(--line)] bg-white text-[var(--ink-soft)] hover:text-[var(--ink)]"
+                        ? "bg-[#1A1210] text-[#F7F4EF]"
+                        : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
                     }`}
                   >
                     {languageMeta[id].native}
@@ -214,31 +202,29 @@ export function ThemeStudio({
             <motion.div
               role="dialog"
               aria-modal="true"
-              aria-labelledby="setup-title"
-              className="max-h-[90svh] w-full max-w-xl overflow-y-auto rounded-[1.75rem] border border-[var(--line)] bg-white p-5 shadow-[var(--shadow-soft)] sm:p-7"
+              aria-labelledby="style-title"
+              className="max-h-[90svh] w-full max-w-xl overflow-y-auto rounded-[1.5rem] border border-[#E4D9C8] bg-white p-5 shadow-xl sm:p-7"
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: 24, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 320, damping: 28 }}
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
-                Customize preview
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#8B6914]">
+                Change style
               </p>
               <h2
-                id="setup-title"
-                className="mt-2 text-2xl font-bold tracking-tight text-[var(--ink)]"
+                id="style-title"
+                className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]"
               >
-                Preview this theme
+                Faith & languages
               </h2>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-                See how this design looks for your faith and language.
-                When you like a theme, WhatsApp us — we customise it with your
-                names, photos, and details.
+              <p className="mt-2 text-sm leading-relaxed text-[#5C4A42]">
+                See how this design adapts. When you are ready, customise with
+                Protorev Digital.
               </p>
 
               <div className="mt-6">
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                  1 · Faith / religion
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#8A7A70]">
+                  Religion / cultural style
                 </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {allFaithIds.map((id) => {
@@ -248,16 +234,11 @@ export function ThemeStudio({
                         key={id}
                         type="button"
                         onClick={() => setDraftFaith(id)}
-                        className={`rounded-2xl border px-3 py-3 text-left transition ${
+                        className={`min-h-11 rounded-2xl border px-3 py-3 text-left transition ${
                           active
-                            ? "border-transparent text-white shadow-[var(--shadow-soft)]"
-                            : "border-[var(--line)] bg-[var(--background)] text-[var(--ink)] hover:border-[var(--grad-a)]"
+                            ? "border-[#1A1210] bg-[#1A1210] text-white"
+                            : "border-[#E4D9C8] bg-[#F8F3EA] text-[#1A1210]"
                         }`}
-                        style={
-                          active
-                            ? { background: "var(--brand-gradient)" }
-                            : undefined
-                        }
                       >
                         <span className="block text-lg leading-none">
                           {faithMeta[id]?.icon}
@@ -272,53 +253,29 @@ export function ThemeStudio({
               </div>
 
               <div className="mt-6">
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    2 · Languages{" "}
-                    <span className="normal-case tracking-normal text-[var(--grad-a)]">
-                      (multi-select)
-                    </span>
-                  </p>
-                  {draftLangs.length > 0 && (
-                    <p className="text-[11px] font-medium text-[var(--ink-soft)]">
-                      {draftLangs.length} selected
-                    </p>
-                  )}
-                </div>
+                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-[#8A7A70]">
+                  Languages (multi-select)
+                </p>
                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                   {allLanguageIds.map((id) => {
                     const active = draftLangs.includes(id);
-                    const disabled = !draftFaith;
                     return (
                       <button
                         key={id}
                         type="button"
-                        disabled={disabled}
                         onClick={() => toggleDraftLang(id)}
                         aria-pressed={active}
-                        className={`rounded-2xl border px-3 py-3 text-left transition disabled:cursor-not-allowed disabled:opacity-40 ${
+                        className={`min-h-11 rounded-2xl border px-3 py-3 text-left transition ${
                           active
-                            ? "border-transparent text-white shadow-[var(--shadow-soft)]"
-                            : "border-[var(--line)] bg-[var(--background)] text-[var(--ink)] hover:border-[var(--grad-a)]"
+                            ? "border-[#1A1210] bg-[#1A1210] text-white"
+                            : "border-[#E4D9C8] bg-[#F8F3EA] text-[#1A1210]"
                         }`}
-                        style={
-                          active
-                            ? { background: "var(--brand-gradient)" }
-                            : undefined
-                        }
                       >
-                        <span className="flex items-center justify-between gap-2">
-                          <span className="text-sm font-semibold">
-                            {languageMeta[id].label}
-                          </span>
-                          <span
-                            className={`text-xs ${active ? "text-white" : "text-[var(--ink-mute)]"}`}
-                          >
-                            {active ? "✓" : "+"}
-                          </span>
+                        <span className="text-sm font-semibold">
+                          {languageMeta[id].label}
                         </span>
                         <span
-                          className={`mt-1 block text-xs ${active ? "text-white/85" : "text-[var(--ink-mute)]"}`}
+                          className={`mt-1 block text-xs ${active ? "text-white/80" : "text-[#8A7A70]"}`}
                         >
                           {languageMeta[id].native}
                         </span>
@@ -326,74 +283,35 @@ export function ThemeStudio({
                     );
                   })}
                 </div>
-                {!draftFaith && (
-                  <p className="mt-2 text-xs text-[var(--ink-mute)]">
-                    Select a faith first, then one or more languages.
-                  </p>
-                )}
-                {draftFaith && draftLangs.length > 0 && (
-                  <p className="mt-3 text-xs font-medium text-[var(--ink-soft)]">
-                    Selected:{" "}
-                    {draftLangs.map((id) => languageMeta[id].label).join(", ")}
-                  </p>
-                )}
               </div>
 
-              <div className="mt-7 flex flex-wrap items-center gap-3">
+              <div className="mt-7 flex flex-wrap gap-3">
                 <button
                   type="button"
-                  disabled={!canOpen}
-                  onClick={() => {
-                    if (draftFaith && draftLangs.length) {
-                      applySelection(draftFaith, draftLangs);
-                    }
-                  }}
-                  className="pr-gradient-btn rounded-2xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
+                  onClick={applySelection}
+                  className="min-h-11 rounded-full bg-[#1A1210] px-5 py-3 text-sm font-semibold text-[#F7F4EF]"
                 >
-                  Open theme preview
+                  Apply
                 </button>
-                {draftFaith && (
-                  <button
-                    type="button"
-                    onClick={() => setDraftLangs(allLanguageIds.slice())}
-                    className="rounded-2xl border border-[var(--line)] px-4 py-3 text-sm font-semibold text-[var(--ink-soft)]"
-                  >
-                    Select all languages
-                  </button>
-                )}
-                {ready && (
-                  <button
-                    type="button"
-                    onClick={() => setSetupOpen(false)}
-                    className="rounded-2xl border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--ink-soft)]"
-                  >
-                    Cancel
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setSetupOpen(false)}
+                  className="min-h-11 rounded-full border border-[#D9CFC4] px-5 py-3 text-sm font-semibold text-[#5C4A42]"
+                >
+                  Close
+                </button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {ready ? (
+      {ready && (
         <InvitationExperience
           invite={invite}
+          hidePageHeader
           key={`${faith}-${activeLanguage}-${theme.id}`}
         />
-      ) : (
-        <div className="mx-auto flex min-h-[70svh] max-w-md flex-col items-center justify-center px-6 py-10 text-center">
-          <PhoneMockup theme={theme} />
-          <h2 className="mt-8 text-2xl font-bold text-[var(--ink)]">{theme.name}</h2>
-          <p className="mt-2 text-sm text-[var(--ink-soft)]">{theme.blurb}</p>
-          <button
-            type="button"
-            onClick={openSetup}
-            className="pr-gradient-btn mt-6 rounded-full px-5 py-3 text-sm font-semibold"
-          >
-            Choose faith & language
-          </button>
-        </div>
       )}
     </div>
   );

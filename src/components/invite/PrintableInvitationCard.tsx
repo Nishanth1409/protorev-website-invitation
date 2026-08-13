@@ -4,6 +4,8 @@ import { forwardRef } from "react";
 import type { WeddingInvite } from "@/data/types";
 import type { ExperienceKey } from "@/data/themes";
 import { getCreateTheme } from "@/data/themes";
+import { isArtDirectedTheme } from "@/data/artDirection";
+import { ArtDirectedCard } from "./art/ArtDirectedCard";
 import { FestivalArtCard, isRichFestivalCard } from "./FestivalArtCard";
 import { TraditionalIndianCard } from "./traditional/TraditionalIndianCard";
 import {
@@ -15,17 +17,34 @@ type Props = {
   invite: WeddingInvite;
   /** When true, burns PREVIEW watermark into the card (export-safe). */
   watermarked?: boolean;
+  /** Compact hero/gallery thumbnail */
+  compact?: boolean;
 };
 
 /**
- * Fixed 5×7 invitation card for PNG / PDF export.
+ * Fixed 5×7 invitation card for studio preview and print-ready delivery.
  * Wedding templates use authentic Indian regional card art by faith & language.
  * Festival / modern themes keep their own visual families.
  */
 export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
-  function PrintableInvitationCard({ invite, watermarked = false }, ref) {
+  function PrintableInvitationCard(
+    { invite, watermarked = false, compact = false },
+    ref,
+  ) {
     const theme = invite.themeId ? getCreateTheme(invite.themeId) : null;
     const experience = (theme?.experience ?? "classic-ornate") as ExperienceKey;
+
+    if (isArtDirectedTheme(invite.themeId)) {
+      return (
+        <ArtDirectedCard
+          ref={ref}
+          invite={invite}
+          watermarked={watermarked}
+          compact={compact}
+        />
+      );
+    }
+
     const rich = isRichFestivalCard(experience);
 
     if (rich) {

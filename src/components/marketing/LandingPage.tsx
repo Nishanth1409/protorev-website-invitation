@@ -1,127 +1,99 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { TemplateOrCustomize } from "./TemplateOrCustomize";
-import { CustomDesignShowcase } from "./CustomDesignShowcase";
-import { StudioTrust } from "./StudioTrust";
-import { COMPANY } from "@/data/contact";
-import { createThemes } from "@/data/themes";
-import { PhoneMockup } from "./PhoneMockup";
-import { featuredGalleryIds, galleryPresentation } from "@/data/galleryPresentation";
-import { customizeWhatsAppUrl } from "@/data/contact";
-import { formatInr, getPlan } from "@/data/pricing";
+import { COMPANY, customizeWhatsAppUrl, whatsappUrl } from "@/data/contact";
+import { handleHomeHashClick } from "@/lib/scrollToId";
+import { CustomWorkPreview } from "./CustomWorkPreview";
 
 export function LandingPage() {
-  const featured = featuredGalleryIds
-    .map((id) => createThemes.find((t) => t.id === id))
-    .filter(Boolean)
-    .slice(0, 6);
+  const wa = whatsappUrl(
+    "Hi Protorev Digital, I would like to commission a custom wedding invitation website.",
+  );
 
   return (
-    <main className="relative overflow-hidden bg-[#F7F4EF]">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
-
-      <section className="mx-auto max-w-3xl px-5 pb-10 pt-14 text-center">
-        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
-          {COMPANY.name}
-        </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
-          Invitations as graceful
-          <br />
-          as your ceremony
-        </h1>
-        <p className="mt-5 text-sm leading-relaxed text-[#5C4A42]">
-          {COMPANY.tagline}. Preview on your phone, then commission a finished
-          card or guest website — designed for your faith, language, and family.
-        </p>
-        <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
-          Browse · Commission · Celebrate
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-2">
-          <Link
-            href="/create"
-            className="rounded-full bg-[#1A1210] px-6 py-3 text-sm font-semibold text-[#F7F4EF]"
-          >
-            Explore designs
-          </Link>
-          <a
-            href={`https://wa.me/${COMPANY.whatsapp}`}
-            target="_blank"
-            rel="noreferrer"
-            className="rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
-          >
-            WhatsApp studio
-          </a>
+    <main className="bg-[#F4EFE7] text-[#1A1210]">
+      <section className="relative overflow-hidden">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 70% 20%, rgba(201,162,39,0.12), transparent 50%), linear-gradient(180deg, #F8F3EA 0%, #F4EFE7 55%, #EDE6DA 100%)",
+          }}
+        />
+        <div className="relative mx-auto max-w-3xl px-5 pb-14 pt-14 text-center lg:pb-20 lg:pt-20">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-[#8B6914]">
+            Digital wedding invitation websites
+          </p>
+          <h1 className="mt-5 font-[family-name:var(--font-display)] text-[2rem] font-semibold leading-[1.15] tracking-tight sm:text-5xl">
+            An invitation as memorable as the celebration.
+          </h1>
+          <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed text-[#5C4A42] sm:text-base">
+            Protorev Digital designs original wedding invitation websites —
+            crafted around your ceremony, culture, language and story. Every
+            project is unique.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link
+              href="/#custom-work"
+              onClick={(e) => handleHomeHashClick(e, "/#custom-work")}
+              className="inline-flex min-h-11 items-center rounded-full bg-[#1A1210] px-6 py-3 text-sm font-semibold text-[#F7F4EF]"
+            >
+              View Custom Work
+            </Link>
+            <a
+              href={wa}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center rounded-full border border-[#C4B5A0] bg-white/70 px-6 py-3 text-sm font-semibold text-[#1A1210]"
+            >
+              Request Custom Design
+            </a>
+          </div>
+          <p className="mt-6 text-xs tracking-wide text-[#8A7A70]">
+            {COMPANY.productLine}
+          </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-md space-y-14 px-5 pb-10">
-        {featured.map((theme, i) => {
-          if (!theme) return null;
-          const pres = galleryPresentation(theme);
-          const price = getPlan(
-            theme.format === "invitation-card" ? "custom-card" : "custom-website",
-          )?.priceInr;
-          return (
-            <motion.article
-              key={theme.id}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04 }}
-              className="flex flex-col items-center text-center"
-            >
-              <div className="mb-3 flex justify-center gap-2">
-                <Link
-                  href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
-                  className="rounded-full bg-[#1A1210] px-3 py-2 text-[11px] font-semibold text-[#F7F4EF]"
-                >
-                  Live preview
-                </Link>
-                <a
-                  href={customizeWhatsAppUrl({
-                    themeName: pres.title,
-                    format: theme.format,
-                  })}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full border border-[#D9CFC4] bg-white px-3 py-2 text-[11px] font-semibold"
-                >
-                  Commission design
-                </a>
-              </div>
-              <div
-                className="w-full max-w-[280px] rounded-[2rem] px-3 pb-5 pt-7"
-                style={{
-                  background: `radial-gradient(ellipse at 50% 28%, ${theme.theme.glow}, transparent 58%), linear-gradient(180deg, ${theme.theme.bgDeep}55, transparent 70%)`,
-                }}
-              >
-                <PhoneMockup theme={theme} />
-              </div>
-              <h3 className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
-                {pres.title}
-              </h3>
-              <p className="mt-1 max-w-xs text-sm text-[#5C4A42]">{pres.tagline}</p>
-              {price != null && (
-                <p className="mt-2 text-sm font-semibold text-[#1A1210]">
-                  From {formatInr(price)}
-                </p>
-              )}
-            </motion.article>
-          );
-        })}
+      <section className="border-y border-[#E4D9C8] bg-[#F8F3EA]/80">
+        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-x-10 gap-y-3 px-5 py-5 text-center text-[11px] font-medium uppercase tracking-[0.18em] text-[#7A6A60]">
+          <span>Multi-faith</span>
+          <span>Multi-language</span>
+          <span>Website invitations</span>
+          <span>Studio concierge</span>
+        </div>
       </section>
 
-      <div className="pb-4 text-center">
-        <Link href="/create" className="text-sm font-semibold text-[#4A0E18]">
-          View the full collection →
-        </Link>
-      </div>
+      <CustomWorkPreview />
 
-      <StudioTrust />
-      <CustomDesignShowcase />
-      <TemplateOrCustomize />
+      <section className="px-5 py-14 text-center">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8B6914]">
+          Concierge
+        </p>
+        <h2 className="mt-3 font-[family-name:var(--font-display)] text-2xl font-semibold">
+          Ready when you are
+        </h2>
+        <p className="mx-auto mt-3 max-w-md text-sm text-[#5C4A42]">
+          Tell us your ceremony details. We design and deliver a website
+          invitation made only for you.
+        </p>
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
+          <a
+            href={customizeWhatsAppUrl({ format: "event-page" })}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
+          >
+            WhatsApp Protorev
+          </a>
+          <a
+            href={`mailto:${COMPANY.email}`}
+            className="inline-flex min-h-11 items-center rounded-full border border-[#C4B5A0] px-6 py-3 text-sm font-semibold"
+          >
+            {COMPANY.email}
+          </a>
+        </div>
+      </section>
     </main>
   );
 }

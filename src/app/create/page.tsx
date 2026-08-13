@@ -3,9 +3,9 @@ import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
 import { CreateHub } from "@/components/marketing/CreateHub";
 
 export const metadata = {
-  title: "Theme gallery",
+  title: "Invitations",
   description:
-    "Browse multi-faith wedding invitation themes. Preview on mobile, then commission customisation via WhatsApp.",
+    "Browse Protorev Digital flagship wedding invitation designs. Live preview, then customise via WhatsApp.",
 };
 
 export default function CreatePage() {

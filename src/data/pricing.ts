@@ -1,93 +1,98 @@
 /**
- * Service pricing — enquire via WhatsApp / email.
- * No self-serve download or website checkout.
+ * Affordable studio packages — enquire via WhatsApp / email.
+ * Delivered as finished files or a live link; no self-serve checkout.
  */
 
 export type PlanId =
-  | "custom-card"
+  | "pdf-image"
   | "custom-website"
-  | "complete-custom";
+  | "animated-video";
 
 export type PlanKind = "custom";
+
+export type PlanFormat =
+  | "pdf-image"
+  | "website"
+  | "animated-video"
+  /** Legacy aliases used by older gallery flows */
+  | "invitation-card"
+  | "event-page"
+  | "both";
 
 export type PricingPlan = {
   id: PlanId;
   name: string;
   kind: PlanKind;
-  format: "invitation-card" | "event-page" | "both";
+  format: PlanFormat;
   priceInr: number;
   compareAtInr?: number;
   badge?: string;
   blurb: string;
   features: string[];
-  unlocksPng: boolean;
-  unlocksPdf: boolean;
-  unlocksWebsite: boolean;
   highlighted?: boolean;
 };
 
+/**
+ * Three clear deliverables at accessible price points:
+ * 1) Shareable PDF + image card
+ * 2) Guest invitation website
+ * 3) Short handcrafted animated invite video
+ */
 export const pricingPlans: PricingPlan[] = [
   {
-    id: "custom-card",
-    name: "Invitation card",
+    id: "pdf-image",
+    name: "PDF & Image",
     kind: "custom",
-    format: "invitation-card",
-    priceInr: 699,
-    compareAtInr: 1499,
-    badge: "Most commissioned",
-    highlighted: true,
+    format: "pdf-image",
+    priceInr: 499,
+    compareAtInr: 999,
+    badge: "Best starter",
     blurb:
-      "A finished ceremonial card from your chosen theme — names, photos, blessings and language refined by our studio.",
+      "A custom invitation card delivered as print-ready PDF and high-quality images — perfect for WhatsApp and print.",
     features: [
-      "Any theme from the gallery",
-      "Names, date, venue & photos",
-      "Faith & language customisation",
-      "Print-ready files via WhatsApp",
-      "Revisions included",
+      "Custom design for your ceremony",
+      "PDF (print-ready) + PNG / JPG",
+      "Names, date, venue & blessings",
+      "Faith & language options",
+      "Revisions via WhatsApp",
     ],
-    unlocksPng: false,
-    unlocksPdf: false,
-    unlocksWebsite: false,
   },
   {
     id: "custom-website",
-    name: "Guest website",
+    name: "Invitation website",
     kind: "custom",
-    format: "event-page",
-    priceInr: 1299,
-    compareAtInr: 2499,
+    format: "website",
+    priceInr: 999,
+    compareAtInr: 1999,
+    badge: "Most loved",
+    highlighted: true,
     blurb:
-      "A mobile invitation website — story, music, countdown, events and map — crafted for your ceremony.",
+      "A shareable wedding invitation website — story, events, venue and blessings — designed uniquely for your celebration.",
     features: [
-      "Theme-based custom design",
-      "Your photos & story",
-      "Shareable guest link",
-      "Faith-respectful copy",
+      "Original website design",
+      "Mobile-friendly guest link",
+      "Events, venue & your story",
+      "Multi-language friendly",
       "WhatsApp concierge support",
     ],
-    unlocksPng: false,
-    unlocksPdf: false,
-    unlocksWebsite: false,
   },
   {
-    id: "complete-custom",
-    name: "Card + website",
+    id: "animated-video",
+    name: "Animated invite video",
     kind: "custom",
-    format: "both",
-    priceInr: 1799,
-    compareAtInr: 2498,
-    badge: "Complete suite",
-    blurb: "Matching invitation card and guest website — one coherent celebration identity.",
+    format: "animated-video",
+    priceInr: 799,
+    compareAtInr: 1499,
+    badge: "Handcrafted motion",
+    blurb:
+      "A short handcrafted animated invitation video — ideal for WhatsApp status, Instagram reels and family shares.",
     features: [
-      "Custom invitation card files",
-      "Custom guest website",
-      "Matched visual language",
-      "Priority WhatsApp support",
-      "Ideal for full celebrations",
+      "Custom motion invite (15–30s)",
+      "Your names, date & theme art",
+      "MP4 ready for status & reels",
+      "Music-friendly export",
+      "Quick revisions included",
     ],
-    unlocksPng: false,
-    unlocksPdf: false,
-    unlocksWebsite: false,
   },
 ];
 
@@ -99,7 +104,7 @@ export function formatInr(amount: number) {
   }).format(amount);
 }
 
-export function getPlan(id: PlanId) {
+export function getPlan(id: PlanId | string) {
   return pricingPlans.find((p) => p.id === id);
 }
 
@@ -107,8 +112,12 @@ export function lowestTemplatePriceInr() {
   return Math.min(...pricingPlans.map((p) => p.priceInr));
 }
 
+/** Map older format filters to current packages. */
 export function plansForFormat(format: "invitation-card" | "event-page") {
-  return pricingPlans.filter(
-    (p) => p.format === format || p.format === "both",
-  );
+  if (format === "invitation-card") {
+    return pricingPlans.filter(
+      (p) => p.format === "pdf-image" || p.format === "animated-video",
+    );
+  }
+  return pricingPlans.filter((p) => p.format === "website");
 }

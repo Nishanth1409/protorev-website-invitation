@@ -3,11 +3,10 @@ import Link from "next/link";
 import { COMPANY } from "@/data/contact";
 
 type Props = {
-  /** light = for white/light bars; dark = for navy/black bars */
+  /** light = for cream/light bars; dark = for navy/black bars */
   variant?: "light" | "dark";
   href?: string;
   className?: string;
-  /** Header vs footer sizing */
   size?: "header" | "footer";
   external?: boolean;
 };
@@ -18,7 +17,7 @@ const SRC = {
 } as const;
 
 /**
- * Official Protorev Digital lockup.
+ * Official Protorev Digital company lockup.
  * Digital light.png → light surfaces; Digital Dark.png → dark surfaces.
  */
 export function BrandLogo({

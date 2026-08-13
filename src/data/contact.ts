@@ -3,10 +3,8 @@ export const COMPANY = {
   name: "Protorev Digital",
   site: "https://www.protorevdigital.com/",
   email: "hello@protorevdigital.com",
-  /** Concierge — WhatsApp & calls */
   whatsapp: "919019726464",
   phoneDisplay: "+91 90197 26464",
-  /** Product-facing line for the invitation studio */
   tagline: "Premium digital wedding invitations",
   productLine: "Multi-faith · Multi-language · Concierge customisation",
 } as const;
@@ -21,17 +19,16 @@ export function telUrl() {
   return `tel:+${COMPANY.whatsapp}`;
 }
 
-/**
- * Portfolio reference only — bespoke work we designed.
- * Not a ready template from the catalog.
- */
+/** Custom work showcase — live Canva invitation via same-origin proxy. */
 export const CUSTOM_SHOWCASE = {
-  title: "Shubha Vivaha — Opening Blessing",
-  subtitle: "Bespoke commission",
+  title: "Opening Blessing",
+  subtitle: "Custom Work",
   blurb:
-    "For families who want a fully original design — blessing-first cover, heirloom typography, and regional wording crafted around your story.",
-  url: "https://sample-wedding-the-invitationweb.canva.link/",
-  formatLabel: "Bespoke reference",
+    "A commissioned digital wedding website — designed uniquely for one celebration.",
+  /** Proxied live site for device frames (Canva blocks direct iframes). */
+  embedPath: "/canva-live/",
+  liveUrl: "https://sample-wedding-the-invitationweb.canva.link/",
+  formatLabel: "Custom Work",
   credit: "Designed by Protorev Digital",
 } as const;
 
@@ -43,21 +40,15 @@ export function customizeWhatsAppUrl(details: {
   bride?: string;
   groom?: string;
 }) {
-  const isCard = !details.format || details.format === "invitation-card";
+  const name = details.themeName ?? "gallery";
   const lines = [
-    `Hello Protorev Digital,`,
-    ``,
-    isCard
-      ? `I would like to commission the “${details.themeName ?? "gallery"}” invitation card.`
-      : `I would like to commission a custom wedding invitation website.`,
-    details.themeName ? `Preferred theme: ${details.themeName}` : null,
+    `Hi Protorev Digital, I am interested in the ${name} invitation. I would like to customize it.`,
     details.bride || details.groom
       ? `Names: ${[details.bride, details.groom].filter(Boolean).join(" & ")}`
       : null,
-    details.faith ? `Faith: ${details.faith}` : null,
+    details.faith ? `Faith / style: ${details.faith}` : null,
     details.languages ? `Languages: ${details.languages}` : null,
-    ``,
-    `Please share timeline, deliverables, and pricing.`,
+    details.format ? `Format: ${details.format}` : null,
   ]
     .filter(Boolean)
     .join("\n");
@@ -72,12 +63,12 @@ export function customizeEmailUrl(details: {
   groom?: string;
 }) {
   const subject = encodeURIComponent(
-    `Invitation commission${details.themeName ? ` — ${details.themeName}` : ""}`,
+    `Customize invitation${details.themeName ? ` — ${details.themeName}` : ""}`,
   );
   const body = encodeURIComponent(
-    `Hello Protorev Digital,\n\nI would like to commission a custom invitation${
-      details.themeName ? ` inspired by “${details.themeName}”` : ""
-    }.\n${
+    `Hi Protorev Digital,\n\nI am interested in the ${
+      details.themeName ?? "selected"
+    } invitation. I would like to customize it.\n${
       details.bride || details.groom
         ? `Names: ${[details.bride, details.groom].filter(Boolean).join(" & ")}\n`
         : ""

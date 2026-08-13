@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createThemes, getCreateTheme } from "@/data/themes";
 import { ThemeStudio } from "@/components/marketing/ThemeStudio";
+import { getFlagshipMeta } from "@/data/flagship";
 import type { FaithId, LanguageId } from "@/data/types";
 import { allFaithIds, allLanguageIds } from "@/lib/buildInvite";
 
@@ -21,10 +22,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props) {
   const { themeId } = await params;
   const theme = getCreateTheme(themeId);
-  if (!theme) return { title: "Theme — Protorev Digital" };
+  const flag = getFlagshipMeta(themeId);
+  if (!theme) return { title: "Invitation — Protorev Digital" };
   return {
-    title: `${theme.name} — Create Invitation | Protorev Digital`,
-    description: theme.blurb,
+    title: `${flag?.title ?? theme.name} — Live Preview`,
+    description: flag?.tagline ?? theme.blurb,
   };
 }
 
@@ -51,17 +53,16 @@ export default async function ThemePreviewPage({ params, searchParams }: Props) 
   const theme = getCreateTheme(themeId);
   if (!theme) notFound();
 
+  const flag = getFlagshipMeta(themeId);
   const hasFaith = allFaithIds.includes(sp.faith as FaithId);
-  const faith = (hasFaith ? sp.faith : "hindu") as FaithId;
+  const faith = (hasFaith
+    ? sp.faith
+    : flag?.defaultFaith ?? "hindu") as FaithId;
   const languages = parseLanguages(sp);
   const activeLanguage =
     sp.lang && languages.includes(sp.lang as LanguageId)
       ? (sp.lang as LanguageId)
       : languages[0];
-
-  // Live preview opens immediately with sample faith/language.
-  // Pass ready=0 only if you want the setup sheet first.
-  const startReady = sp.ready !== "0";
 
   return (
     <ThemeStudio
@@ -69,7 +70,7 @@ export default async function ThemePreviewPage({ params, searchParams }: Props) 
       initialFaith={faith}
       initialLanguages={languages}
       initialActiveLanguage={activeLanguage}
-      startReady={startReady}
+      startReady
     />
   );
 }

@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import { motion } from "framer-motion";
 import type { CreateTheme } from "@/data/themes";
 import { galleryPresentation } from "@/data/galleryPresentation";
+import { getFlagshipMeta } from "@/data/flagship";
 import { assembleInvite } from "@/lib/buildInvite";
 import { PrintableInvitationCard } from "@/components/invite/PrintableInvitationCard";
 
@@ -11,9 +12,10 @@ import { PrintableInvitationCard } from "@/components/invite/PrintableInvitation
  * Gallery thumbnail — real invitation design inside a floating phone frame.
  */
 export function PhoneMockup({ theme }: { theme: CreateTheme }) {
+  const flag = getFlagshipMeta(theme.id);
   const invite = useMemo(
-    () => assembleInvite(theme, "hindu", "en"),
-    [theme],
+    () => assembleInvite(theme, flag?.defaultFaith ?? "hindu", "en"),
+    [theme, flag?.defaultFaith],
   );
   const pres = galleryPresentation(theme);
   const isCard = theme.format === "invitation-card";

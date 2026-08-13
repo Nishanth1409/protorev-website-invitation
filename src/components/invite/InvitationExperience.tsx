@@ -11,6 +11,8 @@ import {
 import { languageMeta } from "@/data/types";
 import { MobilePreviewPage } from "@/components/marketing/MobilePreviewPage";
 import { CinematicExperience } from "./CinematicExperience";
+import { ArtDirectedWebsite } from "./art/ArtDirectedWebsite";
+import { getArtDirection, isArtDirectedTheme } from "@/data/artDirection";
 import { PrintableInvitationCard } from "./PrintableInvitationCard";
 import { RoyalNightStyle } from "./styles/RoyalNightStyle";
 import { GardenBloomStyle } from "./styles/GardenBloomStyle";
@@ -21,12 +23,17 @@ import { LuxeMarbleStyle } from "./styles/LuxeMarbleStyle";
 
 type Props = {
   invite: WeddingInvite;
+  /** Hide duplicate title when ThemeStudio already shows chrome */
+  hidePageHeader?: boolean;
 };
 
 /**
  * All theme previews render inside a mobile phone frame only.
  */
-export function InvitationExperience({ invite }: Props) {
+export function InvitationExperience({
+  invite,
+  hidePageHeader = false,
+}: Props) {
   const theme = invite.themeId ? getCreateTheme(invite.themeId) : null;
   const format = invite.inviteFormat ?? theme?.format;
   const pres = theme ? galleryPresentation(theme) : null;
@@ -50,8 +57,13 @@ export function InvitationExperience({ invite }: Props) {
   let inner: ReactNode;
 
   if (format === "invitation-card" && theme) {
+    const art = getArtDirection(theme.id);
+    const stageBg = art?.palette.shellDeep ?? "#1a1210";
     inner = (
-      <div className="mobile-card-stage flex min-h-full items-start justify-center bg-[#1a1210] px-2 pb-8 pt-6">
+      <div
+        className="mobile-card-stage flex min-h-full items-start justify-center px-2 pb-8 pt-6"
+        style={{ background: stageBg }}
+      >
         <div className="w-full max-w-[100%] [&_[data-invite-card]]:!max-w-none">
           <PrintableInvitationCard invite={invite} watermarked={false} />
         </div>
@@ -60,7 +72,11 @@ export function InvitationExperience({ invite }: Props) {
   } else if (theme) {
     inner = (
       <div className="invite-mobile-canvas min-h-full">
-        <CinematicExperience invite={invite} experience={theme.experience} />
+        {isArtDirectedTheme(theme.id) ? (
+          <ArtDirectedWebsite invite={invite} />
+        ) : (
+          <CinematicExperience invite={invite} experience={theme.experience} />
+        )}
       </div>
     );
   } else {
@@ -77,6 +93,7 @@ export function InvitationExperience({ invite }: Props) {
       subtitle={`${invite.faithLabel} · ${langLabel}`}
       whatsAppHref={wa}
       emailHref={mail}
+      hidePageHeader={hidePageHeader}
     >
       {inner}
     </MobilePreviewPage>

@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     template: "%s · Protorev Digital",
   },
   description:
-    "Premium multi-faith, multi-language digital wedding invitations and guest websites. Browse themes, then commission your design via WhatsApp.",
+    "Premium multi-faith, multi-language digital wedding invitations. Browse flagship designs, preview live, customise with Protorev Digital.",
   applicationName: "Protorev Digital",
   icons: {
     icon: [

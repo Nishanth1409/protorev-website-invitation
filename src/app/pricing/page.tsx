@@ -4,7 +4,7 @@ import { PricingTable } from "@/components/commerce/PricingTable";
 export const metadata = {
   title: "Packages & pricing",
   description:
-    "Invitation card and guest website packages — commission via WhatsApp with Protorev Digital.",
+    "Affordable custom wedding invitations — PDF & image, invitation website, and handcrafted animated invite videos. Commission via WhatsApp with Protorev Digital.",
 };
 
 export default function PricingPage() {

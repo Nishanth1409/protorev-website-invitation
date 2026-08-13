@@ -1,195 +1,102 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
-import { createThemes, type CreateTheme } from "@/data/themes";
-import type { InviteFormatId } from "@/data/types";
 import {
-  allLookFamilies,
-  lookFromDesignStyle,
-  lookMeta,
-  type LookFamily,
-} from "@/data/lookFamilies";
-import {
-  featuredGalleryIds,
-  galleryPresentation,
-} from "@/data/galleryPresentation";
-import { COMPANY, customizeWhatsAppUrl } from "@/data/contact";
-import { formatInr, getPlan } from "@/data/pricing";
-import { TemplateOrCustomize } from "./TemplateOrCustomize";
-import { CustomDesignShowcase } from "./CustomDesignShowcase";
-import { StudioTrust } from "./StudioTrust";
+  collectionMeta,
+  collectionOrder,
+  flagshipsByGroup,
+  getFlagshipCategory,
+  getFlagshipMeta,
+  type CollectionGroup,
+} from "@/data/flagship";
+import { getCreateTheme } from "@/data/themes";
+import { customizeWhatsAppUrl } from "@/data/contact";
+import { getArtDirection } from "@/data/artDirection";
 import { PhoneMockup } from "./PhoneMockup";
 
-type FormatFilter = InviteFormatId;
-type LookFilter = "all" | LookFamily | "custom";
-
 export function CreateHub() {
-  const searchParams = useSearchParams();
-  const initialFormat = searchParams.get("format");
-  const [format, setFormat] = useState<FormatFilter>(
-    initialFormat === "invitation-card" ? "invitation-card" : "event-page",
-  );
-  const [look, setLook] = useState<LookFilter>("all");
-
-  const themes = useMemo(() => {
-    let list = createThemes.filter((t) => t.format === format);
-
-    if (look === "custom") {
-      list = list.filter(
-        (t) =>
-          featuredGalleryIds.includes(t.id) ||
-          t.badge === "Premium" ||
-          t.badge === "Flagship",
-      );
-    } else if (look !== "all") {
-      list = list.filter((t) => lookFromDesignStyle(t.designStyle) === look);
-    }
-
-    return list;
-  }, [format, look]);
-
-  const startingPrice = getPlan("custom-card")?.priceInr ?? 699;
-
   return (
-    <main className="relative overflow-hidden bg-[#F7F4EF] pb-20">
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
-
-      <section className="mx-auto max-w-3xl px-5 pb-8 pt-14 text-center">
-        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
-          Protorev Digital
+    <main className="bg-[#F4EFE7] pb-24">
+      <section className="mx-auto max-w-3xl px-5 pb-14 pt-16 text-center">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
+          Invitation studio
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
-          A gallery of invitations
-          <br />
-          worthy of your vows
+        <h1 className="mt-4 font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.12] text-[#1A1210] sm:text-4xl">
+          Designs with distinct art direction
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#5C4A42]">
-          Curated mobile designs for cards and guest websites. Preview freely —
-          then commission the finish with our studio.
-        </p>
-        <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
-          Browse · Commission · Celebrate
-        </p>
-
-        <div className="mt-7 flex flex-wrap justify-center gap-2">
-          <button
-            type="button"
-            onClick={() => setFormat("event-page")}
-            className={`rounded-full px-5 py-2.5 text-xs font-semibold ${
-              format === "event-page"
-                ? "bg-[#1A1210] text-[#F7F4EF]"
-                : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
-            }`}
-          >
-            Wedding websites
-          </button>
-          <button
-            type="button"
-            onClick={() => setFormat("invitation-card")}
-            className={`rounded-full px-5 py-2.5 text-xs font-semibold ${
-              format === "invitation-card"
-                ? "bg-[#1A1210] text-[#F7F4EF]"
-                : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
-            }`}
-          >
-            Invitation cards
-          </button>
-          <Link
-            href="/pricing"
-            className="rounded-full border border-[#D9CFC4] bg-white px-5 py-2.5 text-xs font-semibold text-[#5C4A42]"
-          >
-            Packages & pricing →
-          </Link>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-4xl px-5">
-        <div className="flex flex-wrap justify-center gap-1.5 border-y border-[#E8DFD4] py-3">
-          {(["all", ...allLookFamilies, "custom"] as const).map((id) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setLook(id)}
-              className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                look === id ? "bg-[#4A0E18] text-[#F8F1E3]" : "text-[#7A6A60]"
-              }`}
-            >
-              {id === "all" ? "All" : id === "custom" ? "Custom" : lookMeta[id].label}
-            </button>
-          ))}
-        </div>
-        <p className="mt-2 text-center text-[10px] text-[#8A7A70]">
-          Every design · Invitation · Events · Gallery · Concierge delivery
+          Demo looks for inspiration. Preview on your phone, then commission a
+          design created uniquely for your celebration.
         </p>
       </section>
 
-      {/* Mobile-first floating phone gallery — one design per row */}
-      <section className="mx-auto mt-10 max-w-md space-y-16 px-5">
-        {themes.map((theme, i) => (
-          <TemplateMobileCard key={theme.id} theme={theme} index={i} />
+      <div id="collections" className="mx-auto max-w-xl space-y-24 px-5">
+        {collectionOrder.map((group) => (
+          <CollectionSection key={group} group={group} />
         ))}
-        {themes.length === 0 && (
-          <p className="py-16 text-center text-sm text-[#7A6A60]">
-            No designs in this collection yet.
-          </p>
-        )}
+      </div>
+
+      <section className="mx-auto mt-20 max-w-md px-5 text-center">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8B6914]">
+          Custom design
+        </p>
+        <h2 className="mt-3 font-[family-name:var(--font-display)] text-xl font-semibold">
+          Request something bespoke
+        </h2>
+        <p className="mt-2 text-sm leading-relaxed text-[#5C4A42]">
+          Share your ceremony, culture and story — we compose the invitation.
+        </p>
+        <a
+          href={customizeWhatsAppUrl({})}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 inline-flex min-h-11 items-center rounded-full bg-[#25D366] px-7 py-3 text-sm font-semibold text-white"
+        >
+          WhatsApp Protorev
+        </a>
       </section>
-
-      <section className="mx-auto mt-16 max-w-lg px-5">
-        <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#2A0810,#4A0E18)] px-5 py-8 text-center text-[#F8F1E3]">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#E8C56A]">
-            ✦ Bespoke commission ✦
-          </p>
-          <h2 className="mt-2 font-[family-name:var(--font-display)] text-2xl">
-            Designed around your story
-          </h2>
-          <p className="mt-2 text-xs text-white/75">
-            Share inspiration on WhatsApp — we craft a one-of-a-kind invitation
-            for your family and faith.
-          </p>
-          <p className="mt-3 text-base font-semibold text-[#E8C56A]">
-            Starting {formatInr(startingPrice)}
-          </p>
-          <a
-            href={customizeWhatsAppUrl({ format })}
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white"
-          >
-            Commission a design
-          </a>
-        </div>
-      </section>
-
-      <StudioTrust />
-      <CustomDesignShowcase />
-      <TemplateOrCustomize />
-
-      <p className="mx-auto mt-8 max-w-lg px-5 text-center text-[10px] text-[#8A7A70]">
-        Need guidance? WhatsApp {COMPANY.phoneDisplay}
-      </p>
     </main>
   );
 }
 
-function TemplateMobileCard({
-  theme,
-  index,
-}: {
-  theme: CreateTheme;
-  index: number;
-}) {
-  const pres = galleryPresentation(theme);
-  const isCard = theme.format === "invitation-card";
+function CollectionSection({ group }: { group: CollectionGroup }) {
+  const items = flagshipsByGroup(group);
+  const meta = collectionMeta[group];
+  if (!items.length) return null;
+
+  return (
+    <section id={group}>
+      <div className="mb-12 text-center">
+        <h2 className="font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]">
+          {meta.label}
+        </h2>
+        <p className="mt-2 text-sm text-[#5C4A42]">{meta.blurb}</p>
+      </div>
+      <div className="space-y-20">
+        {items.map((item, i) => (
+          <FlagshipCard key={item.id} id={item.id} index={i} />
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function FlagshipCard({ id, index }: { id: string; index: number }) {
+  const theme = getCreateTheme(id);
+  const meta = getFlagshipMeta(id);
+  const art = getArtDirection(id);
+  if (!theme || !meta) return null;
+
+  const category = getFlagshipCategory(id);
+  const previewHref = `/create/${theme.id}?faith=${meta.defaultFaith}&langs=en&ready=1`;
   const wa = customizeWhatsAppUrl({
-    themeName: pres.title,
+    themeName: meta.title,
     format: theme.format,
   });
-  const price = getPlan(isCard ? "custom-card" : "custom-website")?.priceInr;
-  const compareAt = price != null ? Math.round(price * 1.45) : null;
+
+  const glow = art?.palette.glow ?? theme.theme.glow;
+  const shell = art?.palette.shellDeep ?? theme.theme.bgDeep;
 
   return (
     <motion.article
@@ -199,69 +106,40 @@ function TemplateMobileCard({
       transition={{ delay: (index % 3) * 0.06 }}
       className="flex flex-col items-center text-center"
     >
-      <div className="mb-4 flex flex-wrap justify-center gap-2">
-        <Link
-          href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
-          className="rounded-full bg-[#1A1210] px-4 py-2 text-[11px] font-semibold text-[#F7F4EF]"
-        >
-          Live preview
-        </Link>
-        <a
-          href={wa}
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-[11px] font-semibold text-[#1A1210]"
-        >
-          Customize design
-        </a>
-      </div>
-
-      {/* Soft floating stage behind the phone */}
       <div
-        className="relative w-full max-w-[300px] rounded-[2rem] px-4 pb-6 pt-8"
+        className="w-full max-w-[320px] rounded-[2rem] px-3 pb-8 pt-10"
         style={{
-          background: `radial-gradient(ellipse at 50% 30%, ${theme.theme.glow}, transparent 60%), linear-gradient(180deg, ${theme.theme.bgDeep}66 0%, transparent 75%)`,
+          background: `radial-gradient(ellipse at 50% 22%, ${glow}, transparent 55%), linear-gradient(180deg, ${shell}18, transparent 70%)`,
         }}
       >
-        {(pres.featured || theme.badge === "Premium") && (
-          <span className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full bg-[#E8C56A] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2A0810]">
-            {theme.badge === "Premium" ? "Luxe" : "Featured"}
-          </span>
-        )}
         <PhoneMockup theme={theme} />
       </div>
 
-      <h3 className="mt-5 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
-        {pres.title}
+      <p className="mt-6 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#8B6914]">
+        {category}
+      </p>
+      <h3 className="mt-2 font-[family-name:var(--font-display)] text-2xl font-semibold text-[#1A1210]">
+        {meta.title}
       </h3>
-      <p className="mt-2 max-w-xs text-sm leading-relaxed text-[#5C4A42]">
-        {pres.tagline}
+      <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-[#5C4A42]">
+        {meta.tagline}
       </p>
 
-      {price != null && (
-        <div className="mt-3 flex items-center justify-center gap-2 text-sm">
-          {compareAt != null && (
-            <span className="text-[#8A7A70] line-through">{formatInr(compareAt)}</span>
-          )}
-          <span className="font-bold text-[#1A1210]">{formatInr(price)}</span>
-        </div>
-      )}
-
-      <div className="mt-4 flex flex-wrap justify-center gap-2">
+      <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <Link
+          href={previewHref}
+          className="inline-flex min-h-11 items-center rounded-full bg-[#1A1210] px-6 py-2.5 text-xs font-semibold text-[#F7F4EF]"
+        >
+          Live Preview
+        </Link>
         <a
           href={wa}
           target="_blank"
           rel="noreferrer"
-          className="rounded-full bg-[#1A1210] px-4 py-2.5 text-xs font-semibold text-[#F7F4EF]"
+          className="inline-flex min-h-11 items-center rounded-full border border-[#C4B5A0] bg-white/90 px-6 py-2.5 text-xs font-semibold text-[#1A1210]"
         >
-          Commission design
+          Customize This Design
         </a>
-        <Link
-          href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
-          className="rounded-full border border-[#D9CFC4] px-4 py-2.5 text-xs font-semibold text-[#1A1210]"
-        >
-          Preview design
-        </Link>
       </div>
     </motion.article>
   );
