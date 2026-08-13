@@ -4,7 +4,7 @@ import { PricingTable } from "@/components/commerce/PricingTable";
 export const metadata = {
   title: "Pricing — Protorev Digital Invitations",
   description:
-    "Transparent pricing for invitation cards and event websites. Templates stay affordable; custom work is valued higher.",
+    "Startup-friendly pricing for invitation cards and event websites. Templates from ₹99 — made for every family.",
 };
 
 export default function PricingPage() {

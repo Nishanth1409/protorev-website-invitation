@@ -10,7 +10,7 @@ import { TemplateOrCustomize } from "@/components/marketing/TemplateOrCustomize"
 import { languageMeta } from "@/data/types";
 import { AuthPaywallModal } from "@/components/commerce/AuthPaywallModal";
 import { useCommerce } from "@/lib/commerce";
-import { formatInr } from "@/data/pricing";
+import { formatInr, getPlan } from "@/data/pricing";
 import Link from "next/link";
 
 type Props = {
@@ -191,7 +191,8 @@ export function InvitationCardExperience({ invite }: Props) {
             </p>
           ) : (
             <p className="mt-3 text-xs text-[var(--ink-mute)]">
-              Not signed in · From {formatInr(799)} for PNG unlock
+              Not signed in · From{" "}
+              {formatInr(getPlan("card-png")?.priceInr ?? 99)} for PNG unlock
             </p>
           )}
 
@@ -234,8 +235,8 @@ export function InvitationCardExperience({ invite }: Props) {
 
           <ul className="mt-6 space-y-2 text-xs text-[var(--ink-soft)]">
             <li>• Free: watermarked preview only</li>
-            <li>• Paid: clean PNG / PDF after sign-in</li>
-            <li>• Custom design costs more — and looks uniquely yours</li>
+            <li>• Paid from ₹99: clean PNG after sign-in</li>
+            <li>• Custom stays budget-friendly — uniquely yours</li>
           </ul>
 
           <div className="mt-5">

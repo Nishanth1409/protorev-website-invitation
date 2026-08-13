@@ -1,7 +1,6 @@
 /**
- * Protorev invitation pricing — aligned to India digital wedding invite market (2025–26):
- * template e-cards ~₹500–1,500 · custom static ~₹1,500–4,000 · websites/custom higher.
- * Custom tiers intentionally earn more than ready templates.
+ * Startup-friendly India pricing — pocket-friendly for local families.
+ * Templates stay very low so everyone can buy; custom is still reachable.
  */
 
 export type PlanId =
@@ -39,9 +38,9 @@ export const pricingPlans: PricingPlan[] = [
     name: "Card · PNG",
     kind: "template",
     format: "invitation-card",
-    priceInr: 799,
-    compareAtInr: 999,
-    blurb: "One invitation card theme — clean PNG for WhatsApp & Instagram.",
+    priceInr: 99,
+    compareAtInr: 249,
+    blurb: "Clean PNG for WhatsApp & Instagram — priced for every family.",
     features: [
       "Sign in required",
       "1 theme unlock",
@@ -58,11 +57,11 @@ export const pricingPlans: PricingPlan[] = [
     name: "Card · PNG + PDF",
     kind: "template",
     format: "invitation-card",
-    priceInr: 1299,
-    compareAtInr: 1799,
+    priceInr: 199,
+    compareAtInr: 399,
     badge: "Most chosen",
     highlighted: true,
-    blurb: "Print-ready PDF (5×7) plus PNG — best for family & print shops.",
+    blurb: "Print-ready PDF (5×7) plus PNG — still under ₹200.",
     features: [
       "Everything in Card · PNG",
       "Print-ready PDF (5×7)",
@@ -79,9 +78,9 @@ export const pricingPlans: PricingPlan[] = [
     name: "Event website",
     kind: "template",
     format: "event-page",
-    priceInr: 2499,
-    compareAtInr: 3499,
-    blurb: "Full guest invitation website — music, countdown, map & share link.",
+    priceInr: 349,
+    compareAtInr: 699,
+    blurb: "Full guest invite site — music, countdown, map & share link.",
     features: [
       "1 event-page theme",
       "Unwatermarked guest experience",
@@ -98,9 +97,10 @@ export const pricingPlans: PricingPlan[] = [
     name: "Custom card design",
     kind: "custom",
     format: "invitation-card",
-    priceInr: 4999,
-    badge: "Higher earning",
-    blurb: "We design your ceremonial card with photos, blessing cover & family details.",
+    priceInr: 699,
+    compareAtInr: 1499,
+    badge: "Personal touch",
+    blurb: "We design your card with photos & family details — startup-friendly rate.",
     features: [
       "Personal designer attention",
       "Your photos & colours",
@@ -117,8 +117,9 @@ export const pricingPlans: PricingPlan[] = [
     name: "Custom invite website",
     kind: "custom",
     format: "event-page",
-    priceInr: 9999,
-    blurb: "Fully customised invitation website — story, gallery cues, music & RSVP flow.",
+    priceInr: 1299,
+    compareAtInr: 2499,
+    blurb: "Custom guest website — your story, photos & music, still affordable.",
     features: [
       "Bespoke layout & motion",
       "Your photos & story chapters",
@@ -135,17 +136,17 @@ export const pricingPlans: PricingPlan[] = [
     name: "Complete custom bundle",
     kind: "custom",
     format: "both",
-    priceInr: 12999,
-    compareAtInr: 14998,
-    badge: "Best value custom",
+    priceInr: 1799,
+    compareAtInr: 2498,
+    badge: "Best value",
     highlighted: true,
-    blurb: "Custom card + custom website together — maximum polish, one package.",
+    blurb: "Custom card + website together — one package, one low price.",
     features: [
       "Custom card (PNG + PDF)",
       "Custom event website",
       "Matched visual language",
-      "Priority support",
-      "Ideal for grand celebrations",
+      "Priority WhatsApp support",
+      "Ideal for any celebration size",
     ],
     unlocksPng: true,
     unlocksPdf: true,
@@ -163,6 +164,12 @@ export function formatInr(amount: number) {
 
 export function getPlan(id: PlanId) {
   return pricingPlans.find((p) => p.id === id);
+}
+
+export function lowestTemplatePriceInr() {
+  return Math.min(
+    ...pricingPlans.filter((p) => p.kind === "template").map((p) => p.priceInr),
+  );
 }
 
 export function plansForFormat(format: "invitation-card" | "event-page") {

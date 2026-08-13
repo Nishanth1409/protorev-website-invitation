@@ -52,10 +52,11 @@ export function CreateHub() {
           <span className="pr-gradient-text italic">make it yours</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)] md:text-lg">
-          Use a ready template — or ask us to customise. Cards: sign in, pay, then
-          download PNG/PDF. Event pages are full guest websites. See{" "}
+          Use a ready template from ₹99 — or ask us to customise. Cards: sign
+          in, pay, then download PNG/PDF. Event pages are full guest websites.
+          See{" "}
           <Link href="/pricing" className="pr-gradient-text font-semibold">
-            pricing
+            budget pricing
           </Link>
           .
         </p>

@@ -18,12 +18,12 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
             Simple pricing
           </p>
           <h1 className="mt-3 text-4xl font-bold tracking-tight text-[var(--ink)] md:text-5xl">
-            Fair for templates.{" "}
-            <span className="pr-gradient-text">Better for custom work.</span>
+            Startup prices.{" "}
+            <span className="pr-gradient-text">Made for every family.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)]">
-            Market-aligned for India digital invites: ready templates stay
-            affordable; custom design earns more because it takes real craft.
+            We keep costs low on purpose — local couples, small towns, big
+            celebrations. Templates from ₹99. Custom work stays reachable.
             Sign in + pay before clean PNG/PDF downloads.
           </p>
         </div>
@@ -79,12 +79,11 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
 
       <section className="mx-auto mt-14 max-w-6xl px-6">
         <h2 className="mb-2 text-xl font-bold text-[var(--ink)]">
-          Customisation (higher value)
+          Customisation (still budget-friendly)
         </h2>
         <p className="mb-4 max-w-2xl text-sm text-[var(--ink-soft)]">
-          Custom work is priced higher on purpose — more design time, more
-          revisions, more personal ceremony. See our live custom sample first, then
-          message us for yours.
+          Need something uniquely yours? Custom stays within reach for local
+          families — see our live sample, then message us.
         </p>
         <div className="mb-6">
           <a
