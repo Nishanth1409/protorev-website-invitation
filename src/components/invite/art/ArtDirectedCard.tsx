@@ -287,7 +287,7 @@ export const ArtDirectedCard = forwardRef<HTMLDivElement, Props>(
                 }}
               >
                 <p
-                  className={`invite-name tracking-[0.1em] ${
+                  className={`invite-name tracking-widest ${
                     compact ? "text-[11px]" : "text-[13px]"
                   }`}
                   style={{ color: palette.accentDeep }}

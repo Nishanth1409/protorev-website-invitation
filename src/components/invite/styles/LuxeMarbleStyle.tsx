@@ -19,7 +19,7 @@ export function LuxeMarbleStyle({ invite }: { invite: WeddingInvite }) {
       particleMode="sparks"
       cover={(onOpen) => (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center px-6"
+          className="fixed inset-0 z-60 flex items-center justify-center px-6"
           style={{
             background: `linear-gradient(135deg, #f7f4ef 0%, #ebe4d8 40%, #d9cfc0 100%)`,
           }}

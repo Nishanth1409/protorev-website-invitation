@@ -18,7 +18,7 @@ export function FestivalBrightStyle({ invite }: { invite: WeddingInvite }) {
       invite={invite}
       cover={(onOpen) => (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center px-5"
+          className="fixed inset-0 z-60 flex items-center justify-center px-5"
           style={{ background: t.bgDeep }}
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.04 }}
@@ -52,7 +52,7 @@ export function FestivalBrightStyle({ invite }: { invite: WeddingInvite }) {
         <div style={{ background: t.surface, color: t.ink }}>
           <section className="relative z-20 px-5 py-14 text-center">
             <div
-              className="mx-auto max-w-md rounded-[2rem] px-6 py-10"
+              className="mx-auto max-w-md rounded-4xl px-6 py-10"
               style={{ background: t.card, border: `3px solid ${t.accent}` }}
             >
               <p className="invite-meta" style={{ color: t.accent }}>

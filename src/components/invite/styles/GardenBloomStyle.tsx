@@ -18,7 +18,7 @@ export function GardenBloomStyle({ invite }: { invite: WeddingInvite }) {
       invite={invite}
       cover={(onOpen) => (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-end justify-center px-5 pb-16"
+          className="fixed inset-0 z-60 flex items-end justify-center px-5 pb-16"
           style={{
             background: `linear-gradient(180deg, ${t.bg} 0%, ${t.surface} 55%, ${t.bgDeep} 100%)`,
           }}

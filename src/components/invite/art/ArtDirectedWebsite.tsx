@@ -50,7 +50,7 @@ function ArtHero({
 
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex flex-col"
+      className="absolute inset-0 z-60 flex flex-col"
       style={{ background: palette.shellDeep }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, transition: { duration: 0.7 } }}

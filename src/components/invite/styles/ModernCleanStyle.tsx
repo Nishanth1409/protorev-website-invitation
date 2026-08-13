@@ -19,7 +19,7 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
       particleMode="sparks"
       cover={(onOpen) => (
         <motion.div
-          className="fixed inset-0 z-[60] grid place-items-center bg-white px-6"
+          className="fixed inset-0 z-60 grid place-items-center bg-white px-6"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
@@ -29,7 +29,7 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
             </p>
             <h1 className="mt-6 invite-name text-5xl leading-[1.05] tracking-tight md:text-6xl">
               {invite.bride}
-              <span className="invite-script block text-[var(--ink-mute)]">&</span>
+              <span className="invite-script block text-(--ink-mute)">&</span>
               {invite.groom}
             </h1>
             <p className="mt-6 text-sm" style={{ color: t.inkSoft }}>

@@ -13,7 +13,7 @@ function Cover({ invite, onOpen }: { invite: WeddingInvite; onOpen: () => void }
   const t = invite.theme;
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex items-center justify-center px-6"
+      className="fixed inset-0 z-60 flex items-center justify-center px-6"
       style={{ background: `radial-gradient(circle at 30% 20%, ${t.glow}, transparent 45%), ${t.bgDeep}` }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}

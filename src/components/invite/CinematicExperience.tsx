@@ -51,7 +51,7 @@ function RibbonCover({
   const t = invite.theme;
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center px-4 sm:px-6"
+      className="absolute inset-0 z-60 flex items-center justify-center px-4 sm:px-6"
       style={{
         background: `radial-gradient(circle at 50% 30%, ${t.glow}, transparent 50%), ${t.bgDeep}`,
       }}
@@ -104,7 +104,7 @@ function CurtainCover({
   const t = invite.theme;
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center overflow-hidden px-4"
+      className="absolute inset-0 z-60 flex items-center justify-center overflow-hidden px-4"
       style={{ background: t.bgDeep }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -163,7 +163,7 @@ function CyberCover({
   const t = invite.theme;
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center px-4 font-mono"
+      className="absolute inset-0 z-60 flex items-center justify-center px-4 font-mono"
       style={{ background: "#050505", color: t.accent }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -198,7 +198,7 @@ function AuroraCover({
   const t = invite.theme;
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center px-4"
+      className="absolute inset-0 z-60 flex items-center justify-center px-4"
       style={{
         background: `
           radial-gradient(ellipse at 20% 30%, rgba(52,211,153,0.35), transparent 40%),
@@ -252,7 +252,7 @@ function DefaultCover({
   const t = invite.theme;
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center px-4 sm:px-6"
+      className="absolute inset-0 z-60 flex items-center justify-center px-4 sm:px-6"
       style={{
         background: `radial-gradient(circle at 30% 20%, ${t.glow}, transparent 45%), ${t.bgDeep}`,
       }}
@@ -312,7 +312,7 @@ function PhysicalCardCover({
 
   return (
     <motion.div
-      className="absolute inset-0 z-[60] flex items-center justify-center px-4 sm:px-6"
+      className="absolute inset-0 z-60 flex items-center justify-center px-4 sm:px-6"
       style={{
         background:
           "radial-gradient(circle at 50% 30%, rgba(184,134,11,0.28), transparent 50%), #1A0A0E",

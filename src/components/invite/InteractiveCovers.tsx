@@ -161,7 +161,7 @@ export function MistRevealCover({ invite, onOpen }: CoverProps) {
 
   return (
     <div
-      className="absolute inset-0 z-[60] flex flex-col"
+      className="absolute inset-0 z-60 flex flex-col"
       style={{ background: t.bgDeep, color: t.text }}
     >
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-6 text-center">
@@ -216,7 +216,7 @@ export function LanternRopeCover({ invite, onOpen }: CoverProps) {
 
   return (
     <div
-      className="absolute inset-0 z-[60] flex flex-col items-center justify-center px-6 text-center"
+      className="absolute inset-0 z-60 flex flex-col items-center justify-center px-6 text-center"
       style={{
         background: lit
           ? `radial-gradient(circle at 50% 30%, ${t.glow}, transparent 50%), ${t.bgDeep}`
@@ -272,7 +272,7 @@ export function FoilScratchCover({ invite, onOpen }: CoverProps) {
 
   return (
     <div
-      className="absolute inset-0 z-[60] flex flex-col items-center justify-center px-6 text-center"
+      className="absolute inset-0 z-60 flex flex-col items-center justify-center px-6 text-center"
       style={{ background: `radial-gradient(circle at 50% 20%, ${t.glow}, ${t.bgDeep})`, color: t.text }}
     >
       <p className="text-[0.65rem] uppercase tracking-[0.3em]" style={{ color: t.accent }}>
@@ -313,5 +313,5 @@ export function FoilScratchCover({ invite, onOpen }: CoverProps) {
 }
 
 export function InteractiveCoverShell({ children }: { children: ReactNode }) {
-  return <div className="absolute inset-0 z-[60]">{children}</div>;
+  return <div className="absolute inset-0 z-60">{children}</div>;
 }

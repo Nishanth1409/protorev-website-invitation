@@ -18,7 +18,7 @@ export function CoastalMistStyle({ invite }: { invite: WeddingInvite }) {
       invite={invite}
       cover={(onOpen) => (
         <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center px-6"
+          className="fixed inset-0 z-60 flex items-center justify-center px-6"
           style={{
             background: `linear-gradient(160deg, ${t.bg} 0%, ${t.surface} 50%, #dff3f0 100%)`,
           }}
