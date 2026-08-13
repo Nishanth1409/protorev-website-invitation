@@ -60,7 +60,7 @@ function RibbonCover({
           className="relative mx-auto w-full max-w-md overflow-hidden rounded-2xl border px-6 py-14 sm:px-10"
           style={{ borderColor: t.border, background: t.card, color: t.text }}
         >
-          <p className="mb-2 font-[family-name:var(--font-script)] text-2xl" style={{ color: t.accentSoft }}>
+          <p className="mb-2 invite-script text-2xl" style={{ color: t.accentSoft }}>
             With Love
           </p>
           <p className="mb-8 text-xs uppercase tracking-[0.25em]" style={{ color: t.inkSoft }}>
@@ -121,13 +121,13 @@ function CurtainCover({
         <p className="mb-3 text-xs tracking-[0.35em]" style={{ color: t.accent }}>
           An Evening of Gold
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl" style={{ color: t.text }}>
+        <h1 className="invite-name text-4xl sm:text-5xl" style={{ color: t.text }}>
           {invite.bride}
         </h1>
-        <p className="my-2 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accent }}>
+        <p className="my-2 invite-script text-3xl" style={{ color: t.accent }}>
           &
         </p>
-        <h1 className="mb-8 font-[family-name:var(--font-display)] text-4xl sm:text-5xl" style={{ color: t.text }}>
+        <h1 className="mb-8 invite-name text-4xl sm:text-5xl" style={{ color: t.text }}>
           {invite.groom}
         </h1>
         <button
@@ -210,7 +210,7 @@ function AuroraCover({
           style={{ borderColor: t.accent, boxShadow: `0 0 60px ${t.glow}` }}
         >
           <div className="text-center">
-            <p className="font-[family-name:var(--font-display)] text-2xl" style={{ color: t.text }}>
+            <p className="invite-name text-2xl" style={{ color: t.text }}>
               {invite.monogram}
             </p>
             <p className="mt-1 text-[0.65rem] tracking-[0.3em]" style={{ color: t.accentSoft }}>
@@ -218,7 +218,7 @@ function AuroraCover({
             </p>
           </div>
         </div>
-        <h1 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl" style={{ color: t.text }}>
+        <h1 className="invite-name text-4xl sm:text-5xl" style={{ color: t.text }}>
           {invite.bride} & {invite.groom}
         </h1>
         <button
@@ -264,16 +264,16 @@ function DefaultCover({
           <p className="mb-2 text-3xl" aria-hidden>
             {invite.emblem}
           </p>
-          <p className="mb-2 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accentSoft }}>
+          <p className="mb-2 invite-script text-3xl" style={{ color: t.accentSoft }}>
             {invite.copy.weddingOf}
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-3xl sm:text-4xl">{invite.bride}</h1>
+          <h1 className="invite-name text-3xl sm:text-4xl">{invite.bride}</h1>
           {invite.groom?.trim() ? (
             <>
               <p className="my-2" style={{ color: t.accent }}>
                 &
               </p>
-              <h1 className="mb-8 font-[family-name:var(--font-display)] text-3xl sm:text-4xl">{invite.groom}</h1>
+              <h1 className="mb-8 invite-name text-3xl sm:text-4xl">{invite.groom}</h1>
             </>
           ) : (
             <div className="mb-8" />
@@ -330,24 +330,22 @@ function PhysicalCardCover({
               "linear-gradient(180deg, rgba(252,247,236,0.95), rgba(247,240,228,0.96))",
             color: "#3D2415",
           }}
+          lang={invite.language}
         >
           <div>
-            <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+            <p className="invite-blessing text-sm" style={{ color: "#6B1E2A" }}>
               {style.openingLine}
             </p>
-            <p className="mt-1 text-[10px] tracking-[0.18em]" style={{ color: "#B8860B" }}>
+            <p className="invite-meta mt-1" style={{ color: "#B8860B" }}>
               {style.subOpening}
             </p>
           </div>
           <div>
-            <p
-              className="font-[family-name:var(--font-script)] text-xl"
-              style={{ color: "#B8860B" }}
-            >
+            <p className="invite-script text-2xl leading-none" style={{ color: "#B8860B" }}>
               {invite.ofLabel ?? invite.copy.weddingOf}
             </p>
             <h1
-              className="mt-2 font-[family-name:var(--font-display)] text-3xl leading-tight"
+              className="invite-name mt-2 text-3xl leading-tight"
               style={{ color: "#6B1E2A" }}
               lang={invite.language}
             >
@@ -355,11 +353,11 @@ function PhysicalCardCover({
             </h1>
             {!single && (
               <>
-                <p className="my-1 text-xs uppercase tracking-[0.35em]" style={{ color: "#B8860B" }}>
+                <p className="invite-script my-1 text-xl leading-none" style={{ color: "#B8860B" }}>
                   {style.wedsWord}
                 </p>
                 <h1
-                  className="font-[family-name:var(--font-display)] text-3xl leading-tight"
+                  className="invite-name text-3xl leading-tight"
                   style={{ color: "#6B1E2A" }}
                   lang={invite.language}
                 >
@@ -369,7 +367,7 @@ function PhysicalCardCover({
             )}
           </div>
           <div>
-            <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+            <p className="invite-name text-sm" style={{ color: "#6B1E2A" }}>
               {invite.weddingDateLabel}
             </p>
             <p
@@ -464,7 +462,7 @@ function StoryStrip({ invite }: { invite: WeddingInvite }) {
     <section className="relative z-20 px-4 py-12 sm:px-6 sm:py-16">
       <Stage>
         <h2
-          className="mb-8 text-center font-[family-name:var(--font-display)] text-2xl sm:text-3xl"
+          className="mb-8 text-center invite-name text-2xl sm:text-3xl"
           style={{ color: t.ink }}
         >
           Chapters of Our Story
@@ -476,7 +474,7 @@ function StoryStrip({ invite }: { invite: WeddingInvite }) {
               className="rounded-2xl border px-5 py-6"
               style={{ borderColor: t.border, background: t.card, color: t.ink }}
             >
-              <h3 className="mb-2 font-[family-name:var(--font-display)] text-xl">{b.title}</h3>
+              <h3 className="mb-2 invite-name text-xl">{b.title}</h3>
               <p className="text-sm leading-relaxed" style={{ color: t.inkSoft }}>
                 {b.body}
               </p>
@@ -514,15 +512,15 @@ function HeroBlock({ invite, cinematic }: { invite: WeddingInvite; cinematic?: b
           <p className="mb-3 text-[0.65rem] tracking-[0.35em] sm:text-xs" style={{ color: t.inkSoft }}>
             {c.saveTheDate}
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="invite-name text-4xl leading-tight sm:text-5xl lg:text-6xl">
             {invite.bride}
           </h1>
           {invite.groom?.trim() ? (
             <>
-              <p className="my-2 font-[family-name:var(--font-script)] text-2xl sm:text-3xl" style={{ color: t.accent }}>
+              <p className="invite-script my-2 text-3xl leading-none sm:text-4xl" style={{ color: t.accent }}>
                 &
               </p>
-              <h1 className="mb-5 font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
+              <h1 className="invite-name mb-5 text-4xl leading-tight sm:text-5xl lg:text-6xl">
                 {invite.groom}
               </h1>
             </>

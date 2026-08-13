@@ -23,7 +23,7 @@ function Watermark() {
       aria-hidden
     >
       <div className="rotate-[-28deg] text-center">
-        <p className="text-3xl font-bold tracking-[0.18em] text-[#4A0E18]/35">PREVIEW</p>
+        <p className="invite-name text-3xl tracking-[0.18em] text-[#4A0E18]/35">PREVIEW</p>
         <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#4A0E18]/40">
           Unlock to download
         </p>
@@ -33,8 +33,7 @@ function Watermark() {
 }
 
 /**
- * Physical-print Indian wedding card look:
- * cream paper, foil frame photograph, print-shop hierarchy.
+ * Physical-print Indian wedding card — ceremonial multi-language typography.
  */
 export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
   function TraditionalIndianCard({ invite, watermarked = false }, ref) {
@@ -42,6 +41,7 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
     const c = invite.copy;
     const single = !invite.groom?.trim();
     const frame = frameFor(invite.faith, style.border);
+    const lang = invite.language;
 
     const ink = "#3D2415";
     const inkSoft = "#6B4E3D";
@@ -53,29 +53,19 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
         ref={ref}
         data-invite-card
         className="invite-print-card physical-invite-card relative overflow-hidden"
+        lang={lang}
         style={{
           width: "100%",
           maxWidth: 420,
           aspectRatio: "5 / 7",
           background: "#F7F0E4",
           color: ink,
-          fontFamily:
-            "Georgia, 'Times New Roman', 'Noto Sans Kannada', 'Noto Sans Devanagari', serif",
           boxShadow:
             "0 18px 40px rgba(40,20,10,0.28), 0 2px 0 rgba(255,255,255,0.55) inset",
         }}
       >
-        {/* Photoreal foil frame */}
-        <Image
-          src={frame}
-          alt=""
-          fill
-          priority
-          className="object-cover"
-          sizes="420px"
-        />
+        <Image src={frame} alt="" fill priority className="object-cover" sizes="420px" />
 
-        {/* Soft paper wash so text stays readable over frame art */}
         <div
           className="absolute inset-[11%] rounded-sm"
           style={{
@@ -85,7 +75,6 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
           }}
         />
 
-        {/* Paper grain */}
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.12] mix-blend-multiply"
           style={{
@@ -94,7 +83,6 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
           }}
         />
 
-        {/* Foil corners overlay */}
         {(
           [
             ["left-3 top-3", ""],
@@ -118,16 +106,19 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
         ))}
 
         <div className="relative z-10 flex h-full flex-col px-[14%] py-[13%] text-center">
-          {/* Top — auspicious header like print cards */}
           <div className="shrink-0">
             <p
-              className="text-[13px] font-semibold leading-snug"
+              className="invite-blessing text-[15px] leading-snug sm:text-[16px]"
               style={{ color: maroon }}
-              lang={invite.language}
+              lang={lang}
             >
               {style.openingLine}
             </p>
-            <p className="mt-1 text-[9px] tracking-[0.18em]" style={{ color: gold }}>
+            <p
+              className="invite-meta mt-1.5"
+              style={{ color: gold, letterSpacing: "0.2em" }}
+              lang={lang === "en" ? "en" : lang}
+            >
               {style.subOpening}
             </p>
 
@@ -150,29 +141,25 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
 
             <div className="mx-auto mt-3 flex items-center justify-center gap-2">
               <span className="h-px w-10" style={{ background: gold }} />
-              <span className="text-[8px] uppercase tracking-[0.28em]" style={{ color: maroon }}>
+              <span className="invite-meta" style={{ color: maroon }}>
                 {invite.emblem} {c.openingTitle}
               </span>
               <span className="h-px w-10" style={{ background: gold }} />
             </div>
           </div>
 
-          {/* Middle — hosts + names */}
           <div className="my-auto flex min-h-0 flex-col items-center justify-center px-1">
-            <p className="text-[9px] leading-relaxed" style={{ color: inkSoft }}>
+            <p className="invite-body-copy text-[10px] leading-relaxed" style={{ color: inkSoft }} lang={lang}>
               {invite.hosts}
             </p>
-            <p
-              className="mt-2 font-[family-name:var(--font-script)] text-lg"
-              style={{ color: gold }}
-            >
+            <p className="invite-script mt-2 text-[1.65rem] leading-none" style={{ color: gold }}>
               {invite.ofLabel ?? c.weddingOf}
             </p>
 
             <h1
-              className="mt-1 font-[family-name:var(--font-display)] text-[1.55rem] leading-[1.15] sm:text-[1.75rem]"
+              className="invite-name mt-2 text-[1.7rem] sm:text-[1.9rem]"
               style={{ color: maroon }}
-              lang={invite.language}
+              lang={lang}
             >
               {invite.bride}
             </h1>
@@ -180,15 +167,15 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
             {!single && (
               <>
                 <p
-                  className="my-1.5 text-[11px] font-semibold uppercase tracking-[0.4em]"
+                  className="invite-script my-1 text-[1.35rem] leading-none"
                   style={{ color: gold }}
                 >
-                  {style.wedsWord}
+                  {style.wedsWord === "weds" ? "weds" : style.wedsWord}
                 </p>
                 <h1
-                  className="font-[family-name:var(--font-display)] text-[1.55rem] leading-[1.15] sm:text-[1.75rem]"
+                  className="invite-name text-[1.7rem] sm:text-[1.9rem]"
                   style={{ color: maroon }}
-                  lang={invite.language}
+                  lang={lang}
                 >
                   {invite.groom}
                 </h1>
@@ -203,18 +190,21 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
             />
 
             <p
-              className="mt-3 text-[15px] font-medium leading-relaxed"
+              className="invite-blessing mt-3 text-[16px] leading-relaxed"
               style={{ color: maroon }}
-              lang={invite.language}
+              lang={lang}
             >
               {invite.blessingNative}
             </p>
-            <p className="mt-1.5 text-[10px] leading-relaxed" style={{ color: inkSoft }}>
+            <p
+              className="invite-body-copy mt-1.5 text-[11px] leading-relaxed"
+              style={{ color: inkSoft }}
+              lang={lang}
+            >
               {invite.tagline}
             </p>
           </div>
 
-          {/* Bottom — date plate like engraved print cards */}
           <div className="shrink-0">
             <div
               className="mx-auto rounded-md border px-3 py-2.5"
@@ -225,16 +215,13 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
                 boxShadow: "0 1px 0 rgba(184,134,11,0.25)",
               }}
             >
-              <p
-                className="text-[13px] font-semibold tracking-[0.14em]"
-                style={{ color: maroon }}
-              >
+              <p className="invite-name text-[14px] tracking-[0.12em]" style={{ color: maroon }}>
                 {invite.weddingDateLabel}
               </p>
-              <p className="mt-1 text-[10px]" style={{ color: ink }}>
+              <p className="invite-body-copy mt-1 text-[11px]" style={{ color: ink }} lang={lang}>
                 {invite.location.name}
               </p>
-              <p className="text-[9px]" style={{ color: inkSoft }}>
+              <p className="invite-body-copy text-[9px]" style={{ color: inkSoft }}>
                 {invite.regionLabel}
               </p>
             </div>
@@ -244,7 +231,7 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
                 {invite.events.slice(0, 3).map((e) => (
                   <div
                     key={e.id}
-                    className="flex items-center justify-between border-b px-1 py-0.5 text-[8px]"
+                    className="invite-body-copy flex items-center justify-between border-b px-1 py-0.5 text-[8px]"
                     style={{ borderColor: `${gold}40`, color: inkSoft }}
                   >
                     <span>
@@ -256,10 +243,7 @@ export const TraditionalIndianCard = forwardRef<HTMLDivElement, Props>(
               </div>
             )}
 
-            <p
-              className="mt-2 text-[7px] uppercase tracking-[0.22em]"
-              style={{ color: `${inkSoft}99` }}
-            >
+            <p className="invite-meta mt-2" style={{ color: `${inkSoft}99` }}>
               {invite.faithLabel} · {invite.languageLabel}
             </p>
           </div>

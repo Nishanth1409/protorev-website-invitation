@@ -83,7 +83,7 @@ export function SharedEvents({ invite }: { invite: WeddingInvite }) {
   return (
     <section className="relative z-20 px-5 py-14">
       <h2
-        className="mb-8 text-center font-[family-name:var(--font-display)] text-3xl"
+        className="mb-8 text-center invite-name text-3xl"
         style={{ color: t.ink }}
       >
         {c.eventsTitle}
@@ -101,7 +101,7 @@ export function SharedEvents({ invite }: { invite: WeddingInvite }) {
             }}
           >
             <div className="mb-2 text-2xl">{event.emoji}</div>
-            <h3 className="mb-2 font-[family-name:var(--font-display)] text-2xl">
+            <h3 className="mb-2 invite-name text-2xl">
               {event.title}
             </h3>
             <p className="text-sm">{event.dateLabel}</p>
@@ -111,7 +111,7 @@ export function SharedEvents({ invite }: { invite: WeddingInvite }) {
             <p className="mt-2 text-lg" style={{ color: t.accent }}>
               {event.time}
             </p>
-            <p className="mt-3 font-[family-name:var(--font-display)] text-lg">{event.venue}</p>
+            <p className="mt-3 invite-name text-lg">{event.venue}</p>
             <p className="text-sm" style={{ color: t.inkSoft }}>
               {event.city}
             </p>
@@ -128,14 +128,14 @@ export function SharedLocationClosing({ invite }: { invite: WeddingInvite }) {
   return (
     <>
       <section className="relative z-20 mx-auto max-w-lg px-5 py-10 text-center">
-        <h2 className="mb-5 font-[family-name:var(--font-display)] text-3xl" style={{ color: t.ink }}>
+        <h2 className="mb-5 invite-name text-3xl" style={{ color: t.ink }}>
           {c.locationTitle}
         </h2>
         <div
           className="rounded-2xl px-6 py-8"
           style={{ background: t.card, border: `1px solid ${t.border}`, color: t.ink }}
         >
-          <h3 className="mb-2 font-[family-name:var(--font-display)] text-xl">{invite.location.name}</h3>
+          <h3 className="mb-2 invite-name text-xl">{invite.location.name}</h3>
           <p className="mb-6 text-sm" style={{ color: t.inkSoft }}>
             {invite.location.address}
           </p>
@@ -152,18 +152,18 @@ export function SharedLocationClosing({ invite }: { invite: WeddingInvite }) {
       </section>
 
       <section className="relative z-20 mx-auto max-w-xl px-6 py-16 text-center" style={{ color: t.ink }}>
-        <p className="mb-3 font-[family-name:var(--font-script)] text-4xl" style={{ color: t.accent }}>
+        <p className="mb-3 invite-script text-4xl" style={{ color: t.accent }}>
           {c.thankYou}
         </p>
-        <h2 className="mb-4 font-[family-name:var(--font-display)] text-3xl">{c.presence}</h2>
+        <h2 className="mb-4 invite-name text-3xl">{c.presence}</h2>
         <p className="mb-8 text-sm leading-7" style={{ color: t.inkSoft }}>
           {invite.closingCopy}
         </p>
-        <p className="font-[family-name:var(--font-display)] text-2xl">{invite.bride}</p>
+        <p className="invite-name text-2xl">{invite.bride}</p>
         <p className="my-1" style={{ color: t.accent }}>
           &
         </p>
-        <p className="mb-10 font-[family-name:var(--font-display)] text-2xl">{invite.groom}</p>
+        <p className="mb-10 invite-name text-2xl">{invite.groom}</p>
         <div className="mb-8 flex justify-center gap-5 text-sm" style={{ color: t.inkSoft }}>
           {invite.socials.whatsapp && (
             <a href={invite.socials.whatsapp} target="_blank" rel="noreferrer">

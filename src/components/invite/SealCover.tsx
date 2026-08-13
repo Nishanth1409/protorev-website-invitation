@@ -54,7 +54,7 @@ export function SealCover({ invite, onOpen }: Props) {
           </p>
 
           <h1
-            className="mb-3 font-[family-name:var(--font-display)] text-4xl font-semibold tracking-wide md:text-5xl"
+            className="mb-3 invite-name text-4xl font-semibold tracking-wide md:text-5xl"
             style={{ color: t.accentSoft }}
             lang={invite.language}
           >
@@ -62,7 +62,7 @@ export function SealCover({ invite, onOpen }: Props) {
           </h1>
 
           <p
-            className="mb-2 font-[family-name:var(--font-display)] text-lg leading-relaxed"
+            className="mb-2 invite-blessing text-lg leading-relaxed"
             style={{ color: t.accent }}
             dir="auto"
             lang={invite.language}

@@ -25,14 +25,14 @@ function Cover({ invite, onOpen }: { invite: WeddingInvite; onOpen: () => void }
         <p className="mb-3 text-xs tracking-[0.35em]" style={{ color: t.accent }}>
           {invite.styleLabel.toUpperCase()}
         </p>
-        <p className="mb-2 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accentSoft }}>
+        <p className="mb-2 invite-script text-3xl" style={{ color: t.accentSoft }}>
           {invite.copy.weddingOf}
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-4xl">{invite.bride}</h1>
+        <h1 className="invite-name text-4xl">{invite.bride}</h1>
         <p className="my-2" style={{ color: t.accent }}>
           &
         </p>
-        <h1 className="mb-8 font-[family-name:var(--font-display)] text-4xl">{invite.groom}</h1>
+        <h1 className="mb-8 invite-name text-4xl">{invite.groom}</h1>
         <button
           type="button"
           onClick={onOpen}
@@ -71,11 +71,11 @@ export function RoyalNightStyle({ invite }: { invite: WeddingInvite }) {
               <p className="mb-4 text-xs tracking-[0.35em]" style={{ color: t.inkSoft }}>
                 {c.saveTheDate}
               </p>
-              <h1 className="font-[family-name:var(--font-display)] text-5xl">{invite.bride}</h1>
-              <p className="my-3 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accent }}>
+              <h1 className="invite-name text-5xl">{invite.bride}</h1>
+              <p className="my-3 invite-script text-3xl" style={{ color: t.accent }}>
                 &
               </p>
-              <h1 className="mb-6 font-[family-name:var(--font-display)] text-5xl">{invite.groom}</h1>
+              <h1 className="mb-6 invite-name text-5xl">{invite.groom}</h1>
               <p className="tracking-[0.25em]" style={{ color: t.accentSoft }}>
                 {invite.weddingDateLabel}
               </p>

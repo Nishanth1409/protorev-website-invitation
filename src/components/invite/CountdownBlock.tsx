@@ -57,7 +57,7 @@ export function CountdownBlock({
         {copy.counting}
       </p>
       <h2
-        className="mb-8 font-[family-name:var(--font-display)] text-3xl md:text-4xl"
+        className="mb-8 invite-name text-3xl md:text-4xl"
         style={{ color: text }}
       >
         {copy.untilWedding}
@@ -74,7 +74,7 @@ export function CountdownBlock({
             }}
           >
             <div
-              className="font-[family-name:var(--font-display)] text-2xl md:text-3xl"
+              className="invite-name text-2xl md:text-3xl"
               style={{ color: accentSoft }}
             >
               {pad2(u.value)}

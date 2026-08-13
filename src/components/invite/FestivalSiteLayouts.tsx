@@ -35,21 +35,24 @@ export function isFestivalWebExperience(experience: ExperienceKey) {
 function Names({ invite }: { invite: WeddingInvite }) {
   const single = !invite.groom?.trim();
   return (
-    <>
-      <h1 className="font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
+    <div lang={invite.language}>
+      <h1 className="invite-name text-4xl leading-tight sm:text-5xl lg:text-6xl">
         {invite.bride}
       </h1>
       {!single && (
         <>
-          <p className="my-2 font-[family-name:var(--font-script)] text-2xl sm:text-3xl" style={{ color: invite.theme.accent }}>
+          <p
+            className="invite-script my-2 text-3xl leading-none sm:text-4xl"
+            style={{ color: invite.theme.accent }}
+          >
             &
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl leading-tight sm:text-5xl lg:text-6xl">
+          <h1 className="invite-name text-4xl leading-tight sm:text-5xl lg:text-6xl">
             {invite.groom}
           </h1>
         </>
       )}
-    </>
+    </div>
   );
 }
 
@@ -117,7 +120,7 @@ export function FestivalSiteBody({
                 <p className="text-2xl" aria-hidden>
                   {["🪔", "🌼", "🍽️"][i]}
                 </p>
-                <h3 className="mt-3 font-[family-name:var(--font-display)] text-xl">{label}</h3>
+                <h3 className="mt-3 invite-name text-xl">{label}</h3>
                 <p className="mt-2 text-sm" style={{ color: t.inkSoft }}>
                   A festive stop on your celebration lane.
                 </p>

@@ -218,60 +218,57 @@ const ModernStudioCard = forwardRef<
         aspectRatio: "5 / 7",
         background: cardBackground(experience, t.bg, t.bgDeep, t.glow),
         color: t.ink,
-        fontFamily: "Georgia, 'Times New Roman', serif",
       }}
+      lang={invite.language}
     >
       <CardChrome experience={experience} accent={t.accent} border={t.border} />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-between px-[8%] py-[9%] text-center">
         <div>
-          <p
-            className="text-[10px] font-semibold uppercase tracking-[0.35em]"
-            style={{ color: t.accent }}
-          >
+          <p className="invite-meta" style={{ color: t.accent }}>
             {invite.faithLabel} · {invite.languageLabel}
           </p>
           <p className="mt-3 text-3xl leading-none" aria-hidden>
             {invite.emblem}
           </p>
-          <p className="mt-3 text-xs tracking-[0.28em]" style={{ color: t.inkSoft }}>
+          <p className="invite-script mt-3 text-xl" style={{ color: t.inkSoft }}>
             {c.youAreInvited}
           </p>
         </div>
 
         <div className="my-4 w-full">
-          <p className="mb-2 text-sm italic" style={{ color: t.accentSoft || t.accent }}>
+          <p className="invite-script mb-2 text-xl" style={{ color: t.accentSoft || t.accent }}>
             {c.weddingOf}
           </p>
-          <h1 className="text-[1.65rem] leading-tight sm:text-[1.85rem]" style={{ color: t.ink }}>
+          <h1 className="invite-name text-[1.75rem] sm:text-[1.95rem]" style={{ color: t.ink }} lang={invite.language}>
             {invite.bride}
           </h1>
-          <p className="my-2 text-2xl italic" style={{ color: t.accent }}>
+          <p className="invite-script my-2 text-3xl leading-none" style={{ color: t.accent }}>
             &
           </p>
-          <h1 className="text-[1.65rem] leading-tight sm:text-[1.85rem]" style={{ color: t.ink }}>
+          <h1 className="invite-name text-[1.75rem] sm:text-[1.95rem]" style={{ color: t.ink }} lang={invite.language}>
             {invite.groom}
           </h1>
           <div className="mx-auto mt-5 h-px w-24" style={{ background: t.accent }} />
-          <p className="mt-5 text-xs leading-relaxed" style={{ color: t.inkSoft }}>
+          <p className="invite-blessing mt-5 text-sm leading-relaxed" style={{ color: t.inkSoft }} lang={invite.language}>
             {invite.blessingNative}
           </p>
-          <p className="mt-2 text-[11px] leading-relaxed" style={{ color: t.inkSoft }}>
+          <p className="invite-body-copy mt-2 text-[11px] leading-relaxed" style={{ color: t.inkSoft }}>
             {invite.tagline}
           </p>
         </div>
 
         <div className="w-full">
-          <p className="text-sm font-semibold tracking-[0.2em]" style={{ color: t.accent }}>
+          <p className="invite-name text-sm tracking-[0.16em]" style={{ color: t.accent }}>
             {invite.weddingDateLabel}
           </p>
-          <p className="mt-2 text-xs" style={{ color: t.ink }}>
+          <p className="invite-body-copy mt-2 text-xs" style={{ color: t.ink }}>
             {invite.location.name}
           </p>
-          <p className="mt-1 text-[10px]" style={{ color: t.inkSoft }}>
+          <p className="invite-body-copy mt-1 text-[10px]" style={{ color: t.inkSoft }}>
             {invite.location.address}
           </p>
-          <p className="mt-4 text-[9px] uppercase tracking-[0.25em]" style={{ color: t.inkSoft }}>
+          <p className="invite-meta mt-4" style={{ color: t.inkSoft }}>
             {invite.styleLabel} · Protorev Digital
           </p>
         </div>

@@ -1,9 +1,24 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit, Great_Vibes, DM_Sans } from "next/font/google";
+import {
+  Cinzel,
+  Cormorant_Garamond,
+  DM_Sans,
+  Great_Vibes,
+  Italianno,
+  Outfit,
+} from "next/font/google";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+/** Ceremonial English display — classic wedding card titles */
+const display = Cinzel({
   variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+/** Soft editorial for long English lines */
+const displaySoft = Cormorant_Garamond({
+  variable: "--font-display-soft",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
@@ -20,8 +35,15 @@ const brand = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const script = Great_Vibes({
+/** Flourished English script — “the wedding of”, & */
+const script = Italianno({
   variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
+});
+
+const scriptAlt = Great_Vibes({
+  variable: "--font-script-alt",
   subsets: ["latin"],
   weight: "400",
 });
@@ -49,13 +71,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${display.variable} ${body.variable} ${brand.variable} ${script.variable} h-full antialiased`}
+      className={`${display.variable} ${displaySoft.variable} ${body.variable} ${brand.variable} ${script.variable} ${scriptAlt.variable} h-full antialiased`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Ceremonial Indic serifs + classical Tiro — Illustrator-grade invitation type */}
         <link
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Noto+Sans+Kannada:wght@400;500;600;700&family=Noto+Sans+Malayalam:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&family=Noto+Sans+Telugu:wght@400;500;600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;500;600;700&family=Noto+Serif+Kannada:wght@400;500;600;700&family=Noto+Serif+Malayalam:wght@400;500;600;700&family=Noto+Serif+Tamil:wght@400;500;600;700&family=Noto+Serif+Telugu:wght@400;500;600;700&family=Tiro+Devanagari+Hindi&family=Tiro+Kannada&family=Tiro+Tamil&family=Tiro+Telugu&display=swap"
           rel="stylesheet"
         />
       </head>

@@ -48,19 +48,19 @@ function Names({ invite, accent, ink }: { invite: WeddingInvite; accent: string;
   const ofLabel = invite.ofLabel ?? invite.copy.weddingOf;
   const single = !invite.groom?.trim();
   return (
-    <div className="w-full">
-      <p className="mb-2 text-sm italic" style={{ color: accent }}>
+    <div className="w-full" lang={invite.language}>
+      <p className="invite-script mb-2 text-xl leading-none" style={{ color: accent }}>
         {ofLabel}
       </p>
-      <h1 className="text-[1.55rem] leading-tight sm:text-[1.75rem]" style={{ color: ink }}>
+      <h1 className="invite-name text-[1.65rem] sm:text-[1.85rem]" style={{ color: ink }}>
         {invite.bride}
       </h1>
       {!single && (
         <>
-          <p className="my-1.5 text-xl italic" style={{ color: accent }}>
+          <p className="invite-script my-1 text-2xl leading-none" style={{ color: accent }}>
             &
           </p>
-          <h1 className="text-[1.55rem] leading-tight sm:text-[1.75rem]" style={{ color: ink }}>
+          <h1 className="invite-name text-[1.65rem] sm:text-[1.85rem]" style={{ color: ink }}>
             {invite.groom}
           </h1>
         </>

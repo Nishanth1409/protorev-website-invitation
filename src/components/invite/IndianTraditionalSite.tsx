@@ -39,12 +39,13 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
                   "linear-gradient(180deg, rgba(252,247,236,0.94), rgba(247,240,228,0.96))",
                 color: "#3D2415",
               }}
+              lang={invite.language}
             >
               <div>
-                <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+                <p className="invite-blessing text-base" style={{ color: "#6B1E2A" }}>
                   {style.openingLine}
                 </p>
-                <p className="mt-1 text-[10px] tracking-[0.2em]" style={{ color: "#B8860B" }}>
+                <p className="invite-meta mt-1" style={{ color: "#B8860B" }}>
                   {style.subOpening}
                 </p>
                 <div className="relative mx-auto mt-4 h-16 w-32 overflow-hidden rounded-2xl">
@@ -59,17 +60,14 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
               </div>
 
               <div>
-                <p className="text-xs" style={{ color: "#6B4E3D" }}>
+                <p className="invite-body-copy text-xs" style={{ color: "#6B4E3D" }}>
                   {invite.hosts}
                 </p>
-                <p
-                  className="mt-2 font-[family-name:var(--font-script)] text-xl"
-                  style={{ color: "#B8860B" }}
-                >
+                <p className="invite-script mt-2 text-2xl" style={{ color: "#B8860B" }}>
                   {invite.ofLabel ?? invite.copy.weddingOf}
                 </p>
                 <h1
-                  className="mt-2 font-[family-name:var(--font-display)] text-3xl"
+                  className="invite-name mt-2 text-3xl"
                   style={{ color: "#6B1E2A" }}
                   lang={invite.language}
                 >
@@ -77,11 +75,11 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
                 </h1>
                 {!single && (
                   <>
-                    <p className="my-1 text-xs uppercase tracking-[0.35em]" style={{ color: "#B8860B" }}>
+                    <p className="invite-script my-1 text-xl" style={{ color: "#B8860B" }}>
                       {style.wedsWord}
                     </p>
                     <h1
-                      className="font-[family-name:var(--font-display)] text-3xl"
+                      className="invite-name text-3xl"
                       style={{ color: "#6B1E2A" }}
                       lang={invite.language}
                     >
@@ -89,7 +87,7 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
                     </h1>
                   </>
                 )}
-                <p className="mt-4 text-base" style={{ color: "#6B1E2A" }}>
+                <p className="invite-blessing mt-4 text-lg" style={{ color: "#6B1E2A" }}>
                   {invite.blessingNative}
                 </p>
               </div>
@@ -98,10 +96,10 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
                 className="w-full rounded border px-3 py-2"
                 style={{ borderColor: "rgba(184,134,11,0.45)", background: "rgba(255,250,240,0.9)" }}
               >
-                <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+                <p className="invite-name text-sm" style={{ color: "#6B1E2A" }}>
                   {invite.weddingDateLabel}
                 </p>
-                <p className="mt-1 text-xs">{invite.location.name}</p>
+                <p className="invite-body-copy mt-1 text-xs">{invite.location.name}</p>
               </div>
             </div>
           </div>
@@ -115,7 +113,7 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
       <section className="px-4 py-12 sm:px-6" style={{ background: "#4A0E18" }}>
         <div className="invite-stage mx-auto max-w-3xl">
           <h2
-            className="mb-6 text-center font-[family-name:var(--font-display)] text-2xl"
+            className="mb-6 text-center invite-name text-2xl"
             style={{ color: "#E8C56A" }}
           >
             {invite.copy.eventsTitle}

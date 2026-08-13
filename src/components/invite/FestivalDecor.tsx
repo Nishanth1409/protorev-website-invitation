@@ -164,13 +164,13 @@ export function MonogramSeal({
       className="relative mx-auto my-6 flex h-28 w-28 items-center justify-center rounded-full"
       style={{ border: `2px solid ${ink}`, boxShadow: `0 0 0 6px ${accent}22` }}
     >
-      <span className="font-[family-name:var(--font-script)] text-4xl" style={{ color: accent }}>
+      <span className="invite-script text-4xl" style={{ color: accent }}>
         {letters[0]}
       </span>
       <span className="mx-1 text-lg" style={{ color: ink }}>
         ❤
       </span>
-      <span className="font-[family-name:var(--font-script)] text-4xl" style={{ color: accent }}>
+      <span className="invite-script text-4xl" style={{ color: accent }}>
         {letters[1] || letters[0]}
       </span>
       <svg

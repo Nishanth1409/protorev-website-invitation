@@ -33,11 +33,11 @@ export function LuxeMarbleStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-[0.65rem] tracking-[0.4em]" style={{ color: t.inkSoft }}>
               {invite.styleLabel.toUpperCase()}
             </p>
-            <h1 className="mt-6 font-[family-name:var(--font-display)] text-4xl">{invite.bride}</h1>
-            <p className="my-3 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accent }}>
+            <h1 className="mt-6 invite-name text-4xl">{invite.bride}</h1>
+            <p className="my-3 invite-script text-3xl" style={{ color: t.accent }}>
               and
             </p>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl">{invite.groom}</h1>
+            <h1 className="invite-name text-4xl">{invite.groom}</h1>
             <button
               type="button"
               onClick={onOpen}
@@ -57,11 +57,11 @@ export function LuxeMarbleStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-xs tracking-[0.35em]" style={{ color: t.inkSoft }}>
               {c.weddingOf}
             </p>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-5xl">{invite.bride}</h1>
-            <p className="my-3 font-[family-name:var(--font-script)] text-3xl" style={{ color: t.accent }}>
+            <h1 className="mt-5 invite-name text-5xl">{invite.bride}</h1>
+            <p className="my-3 invite-script text-3xl" style={{ color: t.accent }}>
               &
             </p>
-            <h1 className="font-[family-name:var(--font-display)] text-5xl">{invite.groom}</h1>
+            <h1 className="invite-name text-5xl">{invite.groom}</h1>
             <p className="mt-8 tracking-[0.25em]">{invite.weddingDateLabel}</p>
             <p className="mx-auto mt-6 max-w-md text-sm leading-7" style={{ color: t.inkSoft }}>
               {invite.invitationCopy}

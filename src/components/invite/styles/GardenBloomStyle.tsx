@@ -29,7 +29,7 @@ export function GardenBloomStyle({ invite }: { invite: WeddingInvite }) {
             <p className="mb-3 text-5xl" aria-hidden>
               🌸
             </p>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl leading-tight">
+            <h1 className="invite-name text-4xl leading-tight">
               {invite.copy.openingTitle}
             </h1>
             <p className="mt-3 text-sm" style={{ color: t.inkSoft }}>
@@ -60,11 +60,11 @@ export function GardenBloomStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-xs tracking-[0.3em]" style={{ color: t.inkSoft }}>
               {c.weddingOf}
             </p>
-            <h1 className="mt-4 font-[family-name:var(--font-script)] text-5xl" style={{ color: t.accent }}>
+            <h1 className="mt-4 invite-script text-5xl" style={{ color: t.accent }}>
               {invite.bride}
             </h1>
             <p className="my-2 text-2xl">♡</p>
-            <h1 className="font-[family-name:var(--font-script)] text-5xl" style={{ color: t.accent }}>
+            <h1 className="invite-script text-5xl" style={{ color: t.accent }}>
               {invite.groom}
             </h1>
             <p className="mt-6 tracking-widest">{invite.weddingDateLabel}</p>
@@ -73,7 +73,7 @@ export function GardenBloomStyle({ invite }: { invite: WeddingInvite }) {
             </p>
           </section>
           <section className="relative z-20 mx-auto max-w-lg px-6 py-10 text-center">
-            <h2 className="font-[family-name:var(--font-display)] text-3xl">{c.youAreInvited}</h2>
+            <h2 className="invite-name text-3xl">{c.youAreInvited}</h2>
             <p className="mt-4 text-sm leading-7" style={{ color: t.inkSoft }}>
               {invite.invitationCopy}
             </p>

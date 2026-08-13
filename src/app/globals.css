@@ -18,6 +18,15 @@
   --brand-gradient: linear-gradient(135deg, #5b4aff 0%, #8b5cf6 50%, #06b6d4 100%);
   --shadow-soft: 0 10px 40px rgba(91, 74, 255, 0.08);
   --shadow-card: 0 8px 30px rgba(15, 15, 26, 0.06);
+  /* Invitation ceremonial type stacks */
+  --font-invite-en: var(--font-display), "Cinzel", "Times New Roman", serif;
+  --font-invite-en-soft: var(--font-display-soft), "Cormorant Garamond", Georgia, serif;
+  --font-invite-script: var(--font-script), "Italianno", "Great Vibes", cursive;
+  --font-invite-kn: "Tiro Kannada", "Noto Serif Kannada", "Noto Sans Kannada", serif;
+  --font-invite-ta: "Tiro Tamil", "Noto Serif Tamil", "Noto Sans Tamil", serif;
+  --font-invite-te: "Tiro Telugu", "Noto Serif Telugu", "Noto Sans Telugu", serif;
+  --font-invite-hi: "Tiro Devanagari Hindi", "Noto Serif Devanagari", "Noto Sans Devanagari", serif;
+  --font-invite-ml: "Noto Serif Malayalam", "Noto Sans Malayalam", serif;
 }
 
 @theme inline {
@@ -25,7 +34,9 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
   --font-display: var(--font-display);
+  --font-display-soft: var(--font-display-soft);
   --font-script: var(--font-script);
+  --font-script-alt: var(--font-script-alt);
   --font-brand: var(--font-brand);
 }
 
@@ -44,20 +55,174 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-:lang(kn) {
-  font-family: "Noto Sans Kannada", var(--font-brand), sans-serif;
+/* ——— Invitation typography (print / Illustrator feel) ——— */
+:lang(kn),
+[lang="kn"] {
+  font-family: var(--font-invite-kn);
 }
-:lang(ta) {
-  font-family: "Noto Sans Tamil", var(--font-brand), sans-serif;
+:lang(ta),
+[lang="ta"] {
+  font-family: var(--font-invite-ta);
 }
-:lang(te) {
-  font-family: "Noto Sans Telugu", var(--font-brand), sans-serif;
+:lang(te),
+[lang="te"] {
+  font-family: var(--font-invite-te);
 }
-:lang(hi) {
-  font-family: "Noto Sans Devanagari", var(--font-brand), sans-serif;
+:lang(hi),
+[lang="hi"] {
+  font-family: var(--font-invite-hi);
 }
-:lang(ml) {
-  font-family: "Noto Sans Malayalam", var(--font-brand), sans-serif;
+:lang(ml),
+[lang="ml"] {
+  font-family: var(--font-invite-ml);
+}
+:lang(en),
+[lang="en"] {
+  font-family: var(--font-invite-en-soft);
+}
+
+.invite-print-card,
+.physical-invite-card,
+[data-invite-card] {
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.invite-name {
+  font-family: var(--font-invite-en);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+.invite-name:lang(kn),
+.invite-name[lang="kn"] {
+  font-family: var(--font-invite-kn);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.invite-name:lang(ta),
+.invite-name[lang="ta"] {
+  font-family: var(--font-invite-ta);
+  font-weight: 600;
+}
+.invite-name:lang(te),
+.invite-name[lang="te"] {
+  font-family: var(--font-invite-te);
+  font-weight: 600;
+}
+.invite-name:lang(hi),
+.invite-name[lang="hi"] {
+  font-family: var(--font-invite-hi);
+  font-weight: 600;
+}
+.invite-name:lang(ml),
+.invite-name[lang="ml"] {
+  font-family: var(--font-invite-ml);
+  font-weight: 600;
+}
+
+.invite-blessing {
+  font-family: var(--font-invite-en-soft);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  font-style: italic;
+  line-height: 1.45;
+}
+.invite-blessing:lang(kn),
+.invite-blessing[lang="kn"] {
+  font-family: var(--font-invite-kn);
+  font-style: normal;
+  letter-spacing: 0.02em;
+}
+.invite-blessing:lang(ta),
+.invite-blessing[lang="ta"] {
+  font-family: var(--font-invite-ta);
+  font-style: normal;
+}
+.invite-blessing:lang(te),
+.invite-blessing[lang="te"] {
+  font-family: var(--font-invite-te);
+  font-style: normal;
+}
+.invite-blessing:lang(hi),
+.invite-blessing[lang="hi"] {
+  font-family: var(--font-invite-hi);
+  font-style: normal;
+}
+.invite-blessing:lang(ml),
+.invite-blessing[lang="ml"] {
+  font-family: var(--font-invite-ml);
+  font-style: normal;
+}
+
+.invite-script {
+  font-family: var(--font-invite-script);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+/* Latin script flourishes do not cover Indic — use ceremonial serifs */
+.invite-script:lang(kn),
+.invite-script[lang="kn"] {
+  font-family: var(--font-invite-kn);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+.invite-script:lang(ta),
+.invite-script[lang="ta"] {
+  font-family: var(--font-invite-ta);
+  font-style: italic;
+}
+.invite-script:lang(te),
+.invite-script[lang="te"] {
+  font-family: var(--font-invite-te);
+  font-style: italic;
+}
+.invite-script:lang(hi),
+.invite-script[lang="hi"] {
+  font-family: var(--font-invite-hi);
+  font-style: italic;
+}
+.invite-script:lang(ml),
+.invite-script[lang="ml"] {
+  font-family: var(--font-invite-ml);
+  font-style: italic;
+}
+
+.invite-meta {
+  font-family: var(--font-invite-en-soft);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  font-weight: 600;
+}
+
+.invite-body-copy {
+  font-family: var(--font-invite-en-soft);
+  line-height: 1.55;
+}
+.invite-body-copy:lang(kn),
+.invite-body-copy[lang="kn"] {
+  font-family: var(--font-invite-kn);
+}
+.invite-body-copy:lang(ta),
+.invite-body-copy[lang="ta"] {
+  font-family: var(--font-invite-ta);
+}
+.invite-body-copy:lang(te),
+.invite-body-copy[lang="te"] {
+  font-family: var(--font-invite-te);
+}
+.invite-body-copy:lang(hi),
+.invite-body-copy[lang="hi"] {
+  font-family: var(--font-invite-hi);
+}
+.invite-body-copy:lang(ml),
+.invite-body-copy[lang="ml"] {
+  font-family: var(--font-invite-ml);
 }
 
 ::selection {

@@ -29,13 +29,13 @@ export function CoastalMistStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-xs tracking-[0.3em]" style={{ color: t.inkSoft }}>
               {invite.regionLabel.toUpperCase()}
             </p>
-            <h1 className="mt-5 font-[family-name:var(--font-display)] text-4xl" style={{ color: t.ink }}>
+            <h1 className="mt-5 invite-name text-4xl" style={{ color: t.ink }}>
               {invite.bride}
             </h1>
             <p className="my-2" style={{ color: t.accent }}>
               ✦
             </p>
-            <h1 className="font-[family-name:var(--font-display)] text-4xl" style={{ color: t.ink }}>
+            <h1 className="invite-name text-4xl" style={{ color: t.ink }}>
               {invite.groom}
             </h1>
             <button
@@ -56,11 +56,11 @@ export function CoastalMistStyle({ invite }: { invite: WeddingInvite }) {
             <p className="text-xs tracking-[0.3em]" style={{ color: t.inkSoft }}>
               {c.weddingOf}
             </p>
-            <h1 className="mt-4 font-[family-name:var(--font-display)] text-5xl">{invite.bride}</h1>
+            <h1 className="mt-4 invite-name text-5xl">{invite.bride}</h1>
             <p className="my-3 text-2xl" style={{ color: t.accent }}>
               &
             </p>
-            <h1 className="font-[family-name:var(--font-display)] text-5xl">{invite.groom}</h1>
+            <h1 className="invite-name text-5xl">{invite.groom}</h1>
             <p className="mt-6 tracking-[0.2em]">{invite.weddingDateLabel}</p>
             <p className="mx-auto mt-6 max-w-md text-sm leading-7" style={{ color: t.inkSoft }}>
               {invite.tagline}
