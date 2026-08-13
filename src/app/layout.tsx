@@ -27,9 +27,22 @@ const script = Great_Vibes({
 });
 
 export const metadata: Metadata = {
-  title: "Protorev Digital — Multi-faith Wedding Invitations",
+  title: {
+    default: "Where Creativity Meets Code · Protorev Digital",
+    template: "%s · Where Creativity Meets Code",
+  },
   description:
-    "Multi-faith, multi-language digital wedding invitations by Protorev Digital — English, Kannada, Tamil, Telugu, Hindi, Malayalam.",
+    "Where creativity meets code — multi-faith, multi-language digital wedding invitations by Protorev Digital.",
+  applicationName: "Protorev Digital",
+  icons: {
+    icon: [
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
