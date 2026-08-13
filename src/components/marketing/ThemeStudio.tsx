@@ -76,32 +76,10 @@ export function ThemeStudio({
   const [setupOpen, setSetupOpen] = useState(!startReady);
   const [ready, setReady] = useState(startReady);
 
-  const [editBride, setEditBride] = useState("");
-  const [editGroom, setEditGroom] = useState("");
-  const [editDate, setEditDate] = useState("");
-  const [editVenue, setEditVenue] = useState("");
-  const [editAddress, setEditAddress] = useState("");
-  const [editsApplied, setEditsApplied] = useState(false);
-
-  const baseInvite = useMemo(
+  const invite = useMemo(
     () => assembleInvite(theme, faith, activeLanguage),
     [theme, faith, activeLanguage],
   );
-
-  const invite = useMemo(() => {
-    if (!editsApplied) return baseInvite;
-    return {
-      ...baseInvite,
-      bride: editBride.trim() || baseInvite.bride,
-      groom: editGroom.trim() || baseInvite.groom,
-      weddingDateLabel: editDate.trim() || baseInvite.weddingDateLabel,
-      location: {
-        ...baseInvite.location,
-        name: editVenue.trim() || baseInvite.location.name,
-        address: editAddress.trim() || baseInvite.location.address,
-      },
-    };
-  }, [baseInvite, editsApplied, editBride, editGroom, editDate, editVenue, editAddress]);
 
   const format = formatMeta[theme.format];
 
@@ -130,7 +108,6 @@ export function ThemeStudio({
     setActiveLanguage(active);
     setReady(true);
     setSetupOpen(false);
-    setEditsApplied(false);
     persistUrl(f, clean, active);
   };
 
@@ -257,11 +234,12 @@ export function ThemeStudio({
                 id="setup-title"
                 className="mt-2 text-2xl font-bold tracking-tight text-[var(--ink)]"
               >
-                Faith & languages
+                Preview this theme
               </h2>
               <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-                Choose one faith. Select one or more languages — guests can
-                switch between them on the invitation.
+                See how this design looks for your faith and language.
+                When you like a theme, WhatsApp us — we customise it with your
+                names, photos, and details.
               </p>
 
               <div className="mt-6">
@@ -378,7 +356,7 @@ export function ThemeStudio({
                   }}
                   className="pr-gradient-btn rounded-2xl px-5 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  Open invitation
+                  Open theme preview
                 </button>
                 {draftFaith && (
                   <button
@@ -406,85 +384,9 @@ export function ThemeStudio({
 
       {ready ? (
         <>
-          {theme.format === "invitation-card" && (
-            <div className="border-b border-[var(--line)] bg-white">
-              <div className="mx-auto grid max-w-6xl gap-3 px-4 py-4 sm:grid-cols-2 lg:grid-cols-5 sm:px-6">
-                <label className="block text-left">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    Name 1
-                  </span>
-                  <input
-                    value={editBride}
-                    onChange={(e) => {
-                      setEditBride(e.target.value);
-                      setEditsApplied(true);
-                    }}
-                    placeholder={baseInvite.bride}
-                    className="mt-1 w-full rounded-xl border border-[var(--line)] px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="block text-left">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    Name 2
-                  </span>
-                  <input
-                    value={editGroom}
-                    onChange={(e) => {
-                      setEditGroom(e.target.value);
-                      setEditsApplied(true);
-                    }}
-                    placeholder={baseInvite.groom}
-                    className="mt-1 w-full rounded-xl border border-[var(--line)] px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="block text-left">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    Date
-                  </span>
-                  <input
-                    value={editDate}
-                    onChange={(e) => {
-                      setEditDate(e.target.value);
-                      setEditsApplied(true);
-                    }}
-                    placeholder={baseInvite.weddingDateLabel}
-                    className="mt-1 w-full rounded-xl border border-[var(--line)] px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="block text-left">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    Venue
-                  </span>
-                  <input
-                    value={editVenue}
-                    onChange={(e) => {
-                      setEditVenue(e.target.value);
-                      setEditsApplied(true);
-                    }}
-                    placeholder={baseInvite.location.name}
-                    className="mt-1 w-full rounded-xl border border-[var(--line)] px-3 py-2 text-sm"
-                  />
-                </label>
-                <label className="block text-left sm:col-span-2 lg:col-span-1">
-                  <span className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                    Address
-                  </span>
-                  <input
-                    value={editAddress}
-                    onChange={(e) => {
-                      setEditAddress(e.target.value);
-                      setEditsApplied(true);
-                    }}
-                    placeholder={baseInvite.location.address}
-                    className="mt-1 w-full rounded-xl border border-[var(--line)] px-3 py-2 text-sm"
-                  />
-                </label>
-              </div>
-            </div>
-          )}
           <InvitationExperience
             invite={invite}
-            key={`${faith}-${activeLanguage}-${theme.id}-${editsApplied}`}
+            key={`${faith}-${activeLanguage}-${theme.id}`}
           />
           {theme.format === "event-page" && (
             <div className="border-t border-[var(--line)] bg-[var(--background)] px-4 py-8 sm:px-6">

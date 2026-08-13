@@ -9,15 +9,15 @@ const SITE = COMPANY.site;
 const WA = whatsappUrl();
 
 const nav = [
-  { href: "/create", label: "Example cards" },
+  { href: "/create", label: "Themes" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/#customise", label: "Custom order" },
+  { href: "/#customise", label: "Order" },
 ] as const;
 
 const footerInvites = [
-  { href: "/create", label: "Example cards" },
+  { href: "/create", label: "Theme gallery" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/#customise", label: "Custom order" },
+  { href: "/#customise", label: "Order via WhatsApp" },
 ] as const;
 
 const footerCompany = [

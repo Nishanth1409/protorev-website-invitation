@@ -63,13 +63,14 @@ export function CreateHub() {
           Create with Protorev
         </p>
         <h1 className="text-4xl font-bold tracking-tight text-[var(--ink)] md:text-5xl">
-          Example invitation cards —{" "}
-          <span className="pr-gradient-text italic">edit & download</span>
+          Theme gallery —{" "}
+          <span className="pr-gradient-text italic">we customise for you</span>
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)] md:text-lg">
-          Pick a design, set faith & language, edit names and date, then download
-          PNG or PDF from ₹99. Need fully custom work? WhatsApp us at{" "}
-          <strong className="text-[var(--ink)]">+91 90197 26464</strong>.
+          Preview invitation themes. Tell us which one you like on WhatsApp —
+          we customise names, photos, faith & language and deliver the finished
+          invite. No login. No website payment. No self-download.{" "}
+          <strong className="text-[var(--ink)]">+91 90197 26464</strong>
         </p>
         <p className="mt-4 text-sm font-medium text-[var(--ink-mute)]">
           {createThemes.length} designs · {allCeremonyIds.length} ceremony types · 6
@@ -303,7 +304,7 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
       </div>
       <div className="p-5">
         <p className="mb-1 text-xs font-medium" style={{ color: theme.previewAccent }}>
-          {cMeta.label} · {isCard ? "PNG + PDF" : "Guest website"}
+          {cMeta.label} · {isCard ? "Theme example" : "Website example"}
         </p>
         <h3 className="text-lg font-bold text-[var(--ink)]">{theme.name}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[var(--ink-soft)]">
@@ -314,13 +315,13 @@ function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
             href={`/create/${theme.id}?ready=1`}
             className="pr-gradient-btn rounded-xl px-4 py-2 text-xs font-semibold"
           >
-            {isCard ? "Customise & download" : "Open website theme"}
+            {isCard ? "Preview & enquire" : "Preview theme"}
           </Link>
           <Link
             href={`/create/${theme.id}?ready=1`}
             className="rounded-xl border border-[var(--line)] px-4 py-2 text-xs font-semibold text-[var(--ink-soft)] transition hover:text-[var(--ink)]"
           >
-            Preview
+            Open preview
           </Link>
         </div>
       </div>

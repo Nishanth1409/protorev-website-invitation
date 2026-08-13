@@ -1,16 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
 import type { WeddingInvite } from "@/data/types";
 import { MusicToggle } from "./MusicToggle";
 import { PrintableInvitationCard } from "./PrintableInvitationCard";
 import { defaultMusic, musicByMood } from "@/data/music";
 import { getCreateTheme } from "@/data/themes";
-import { TemplateOrCustomize } from "@/components/marketing/TemplateOrCustomize";
+import {
+  COMPANY,
+  customizeEmailUrl,
+  customizeWhatsAppUrl,
+} from "@/data/contact";
 import { languageMeta } from "@/data/types";
-import { AuthPaywallModal } from "@/components/commerce/AuthPaywallModal";
-import { useCommerce } from "@/lib/commerce";
-import { formatInr, getPlan } from "@/data/pricing";
 import Link from "next/link";
 
 type Props = {
@@ -27,99 +27,29 @@ function resolveMusic(invite: WeddingInvite) {
 }
 
 /**
- * Invitation card studio with:
- * - Watermarked preview until purchase
- * - Sign-in (email + phone) then pay to unlock PNG/PDF
- * - Soft anti-capture on unpaid preview
+ * Theme example preview only.
+ * Customers do not edit, pay, or download here —
+ * they pick a theme and WhatsApp us to customise.
  */
 export function InvitationCardExperience({ invite }: Props) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const protectRef = useRef<HTMLDivElement>(null);
-  const [busy, setBusy] = useState<"png" | "pdf" | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [paywall, setPaywall] = useState(false);
-  const [intent, setIntent] = useState<"png" | "pdf" | "custom">("png");
-  const { user, entitlementsForTheme, logout } = useCommerce();
-
-  const themeId = invite.themeId ?? invite.slug;
-  const entitlements = entitlementsForTheme(themeId);
-  const unlockedPng = entitlements.png;
-  const unlockedPdf = entitlements.pdf;
-  const isUnlocked = unlockedPng || unlockedPdf;
-
   const t = invite.theme;
   const music = resolveMusic(invite);
-  const fileBase = `${invite.bride.split(" ")[0]}-${invite.groom.split(" ")[0]}-invite`
-    .toLowerCase()
-    .replace(/[^a-z0-9\-]+/gi, "-");
+  const langLabel = languageMeta[invite.language].label;
 
-  const openGate = (next: "png" | "pdf" | "custom") => {
-    setIntent(next);
-    setPaywall(true);
-  };
-
-  const captureClean = async () => {
-    const el = cardRef.current;
-    if (!el) throw new Error("Card not ready");
-    // Temporarily hide watermark for export only when unlocked
-    const marks = el.querySelectorAll("[data-preview-mark]");
-    marks.forEach((n) => ((n as HTMLElement).style.visibility = "hidden"));
-    try {
-      const html2canvas = (await import("html2canvas")).default;
-      return await html2canvas(el, {
-        scale: 3,
-        useCORS: true,
-        backgroundColor: null,
-        logging: false,
-      });
-    } finally {
-      marks.forEach((n) => ((n as HTMLElement).style.visibility = "visible"));
-    }
-  };
-
-  const downloadPng = async () => {
-    if (!unlockedPng) {
-      openGate("png");
-      return;
-    }
-    setError(null);
-    setBusy("png");
-    try {
-      const canvas = await captureClean();
-      const link = document.createElement("a");
-      link.download = `${fileBase}.png`;
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    } catch {
-      setError("Could not export PNG. Try again.");
-    } finally {
-      setBusy(null);
-    }
-  };
-
-  const downloadPdf = async () => {
-    if (!unlockedPdf) {
-      openGate("pdf");
-      return;
-    }
-    setError(null);
-    setBusy("pdf");
-    try {
-      const canvas = await captureClean();
-      const { jsPDF } = await import("jspdf");
-      const pdf = new jsPDF({
-        orientation: "portrait",
-        unit: "in",
-        format: [5, 7],
-      });
-      pdf.addImage(canvas.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, 5, 7);
-      pdf.save(`${fileBase}.pdf`);
-    } catch {
-      setError("Could not export PDF. Try again.");
-    } finally {
-      setBusy(null);
-    }
-  };
+  const wa = customizeWhatsAppUrl({
+    themeName: invite.styleLabel,
+    format: "invitation-card",
+    faith: invite.faithLabel,
+    languages: langLabel,
+    bride: invite.bride,
+    groom: invite.groom,
+  });
+  const mail = customizeEmailUrl({
+    themeName: invite.styleLabel,
+    format: "invitation-card",
+    bride: invite.bride,
+    groom: invite.groom,
+  });
 
   return (
     <div
@@ -131,135 +61,82 @@ export function InvitationCardExperience({ invite }: Props) {
     >
       <MusicToggle music={music} accent={t.accent} enabled />
 
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 lg:grid-cols-[1fr_340px] lg:items-start lg:px-6 lg:py-12">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 lg:grid-cols-[1fr_360px] lg:items-start lg:px-6 lg:py-12">
         <div className="flex justify-center">
           <div
-            ref={protectRef}
-            className="invite-protect relative w-full max-w-[420px] select-none rounded-[1.5rem] p-3 sm:p-5"
+            className="relative w-full max-w-[420px] rounded-[1.5rem] p-3 sm:p-5"
             style={{
               background: "rgba(255,255,255,0.06)",
               border: `1px solid ${t.border}`,
             }}
-            onContextMenu={(e) => {
-              if (!isUnlocked) e.preventDefault();
-            }}
-            onDragStart={(e) => {
-              if (!isUnlocked) e.preventDefault();
-            }}
           >
-            <PrintableInvitationCard
-              ref={cardRef}
-              invite={invite}
-              watermarked={!isUnlocked}
-            />
-
-            {/* Extra click shield for unpaid previews */}
-            {!isUnlocked && (
-              <div
-                className="absolute inset-0 z-30 cursor-not-allowed"
-                title="Preview only — purchase to download"
-                onClick={() => openGate("png")}
-                onContextMenu={(e) => e.preventDefault()}
-              />
-            )}
+            <PrintableInvitationCard invite={invite} watermarked={false} />
+            <p className="mt-3 text-center text-[11px] text-white/55">
+              Example preview · Sample names for display only
+            </p>
           </div>
         </div>
 
         <aside className="rounded-[1.5rem] border border-[var(--line)] bg-white/95 p-5 shadow-[var(--shadow-soft)] backdrop-blur sm:p-6">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
-            Invitation card
+            Like this theme?
           </p>
           <h2 className="mt-2 text-2xl font-bold text-[var(--ink)]">
-            {isUnlocked ? "Your files are unlocked" : "Preview locked for download"}
+            We customise it for you
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-            {isUnlocked
-              ? "Clean PNG/PDF available for this theme on this account."
-              : "Sign in with email & phone, then pay to download. Screenshots of the preview stay watermarked."}
+            Tell us this theme name and your details (names, date, venue, faith,
+            language, photos). Our team designs your invitation and delivers the
+            finished files — no login or payment on this website.
           </p>
 
-          {user ? (
-            <p className="mt-3 rounded-xl bg-[var(--background)] px-3 py-2 text-xs text-[var(--ink-soft)]">
-              Signed in: <strong className="text-[var(--ink)]">{user.name}</strong>
-              <button
-                type="button"
-                onClick={logout}
-                className="ml-2 text-[var(--grad-a)]"
-              >
-                Log out
-              </button>
+          <div className="mt-4 rounded-2xl bg-[var(--background)] px-4 py-3 text-sm">
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
+              Theme selected
             </p>
-          ) : (
-            <p className="mt-3 text-xs text-[var(--ink-mute)]">
-              Not signed in · From{" "}
-              {formatInr(getPlan("card-png")?.priceInr ?? 99)} for PNG unlock
+            <p className="font-bold text-[var(--ink)]">{invite.styleLabel}</p>
+            <p className="mt-1 text-xs text-[var(--ink-soft)]">
+              {invite.faithLabel} · {langLabel}
             </p>
-          )}
+          </div>
 
           <div className="mt-5 space-y-3">
-            <button
-              type="button"
-              disabled={!!busy}
-              onClick={() => void downloadPng()}
-              className="pr-gradient-btn flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-3.5 text-sm font-semibold disabled:opacity-60"
+            <a
+              href={wa}
+              target="_blank"
+              rel="noreferrer"
+              className="flex w-full items-center justify-center rounded-2xl bg-[#25D366] px-4 py-3.5 text-sm font-semibold text-white"
             >
-              {busy === "png"
-                ? "Preparing PNG…"
-                : unlockedPng
-                  ? "Download PNG photo"
-                  : "Sign in & pay · PNG"}
-            </button>
-            <button
-              type="button"
-              disabled={!!busy}
-              onClick={() => void downloadPdf()}
-              className="flex w-full items-center justify-center gap-2 rounded-2xl border border-[var(--line)] bg-white px-4 py-3.5 text-sm font-semibold text-[var(--ink)] transition hover:border-[var(--grad-a)] disabled:opacity-60"
+              WhatsApp — customise this theme
+            </a>
+            <a
+              href={mail}
+              className="flex w-full items-center justify-center rounded-2xl border border-[var(--line)] bg-white px-4 py-3.5 text-sm font-semibold text-[var(--ink)]"
             >
-              {busy === "pdf"
-                ? "Preparing PDF…"
-                : unlockedPdf
-                  ? "Download PDF"
-                  : "Sign in & pay · PDF"}
-            </button>
-            <Link
-              href="/pricing"
+              Email your details
+            </a>
+            <a
+              href={`tel:+${COMPANY.whatsapp}`}
               className="flex w-full items-center justify-center rounded-2xl border border-[var(--line)] px-4 py-3 text-sm font-semibold text-[var(--ink-soft)]"
             >
-              View full price table
-            </Link>
+              Call {COMPANY.phoneDisplay}
+            </a>
           </div>
-
-          {error && (
-            <p className="mt-3 text-xs font-medium text-red-600">{error}</p>
-          )}
 
           <ul className="mt-6 space-y-2 text-xs text-[var(--ink-soft)]">
-            <li>• Free: watermarked preview only</li>
-            <li>• Paid from ₹99: clean PNG after sign-in</li>
-            <li>• Custom stays budget-friendly — uniquely yours</li>
+            <li>1. Choose a theme you like</li>
+            <li>2. WhatsApp or email your names, date & photos</li>
+            <li>3. We design & deliver your finished invitation</li>
           </ul>
 
-          <div className="mt-5">
-            <TemplateOrCustomize
-              compact
-              themeName={invite.styleLabel}
-              format="invitation-card"
-              faith={invite.faithLabel}
-              languages={languageMeta[invite.language].label}
-            />
-          </div>
+          <Link
+            href="/create"
+            className="mt-5 inline-block text-sm font-semibold text-[var(--grad-a)]"
+          >
+            ← Browse more themes
+          </Link>
         </aside>
       </div>
-
-      <AuthPaywallModal
-        open={paywall}
-        onClose={() => setPaywall(false)}
-        themeId={themeId}
-        themeName={invite.styleLabel}
-        format="invitation-card"
-        initialIntent={intent}
-        onUnlocked={() => setError(null)}
-      />
     </div>
   );
 }

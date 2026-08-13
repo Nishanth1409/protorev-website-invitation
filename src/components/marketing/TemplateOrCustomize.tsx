@@ -17,7 +17,7 @@ type Props = {
 };
 
 /**
- * Two clear paths: edit a template card yourself, or order custom via WhatsApp.
+ * Gallery browse + WhatsApp order — no self-serve edit/pay/download.
  */
 export function TemplateOrCustomize({
   themeName,
@@ -45,32 +45,31 @@ export function TemplateOrCustomize({
       <div className="grid gap-4 md:grid-cols-2">
         <div className="rounded-[1.75rem] border border-[var(--line)] bg-white p-6 shadow-[var(--shadow-card)] sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
-            Do it yourself
+            Step 1
           </p>
           <h3 className="mt-2 text-2xl font-bold text-[var(--ink)]">
-            Edit an example card
+            Browse theme examples
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-            Choose a design, set faith & languages, edit names and date, preview
-            instantly, then sign in and download clean PNG or PDF for WhatsApp
-            and print.
+            Preview invitation designs by faith and language. Sample names are
+            for display only — your details are added when we customise.
           </p>
           <Link
             href="/create"
             className="pr-gradient-btn mt-5 inline-flex rounded-2xl px-5 py-3 text-sm font-semibold"
           >
-            Browse example cards
+            Open theme gallery
           </Link>
         </div>
 
         <div className="rounded-[1.75rem] border border-transparent bg-[linear-gradient(135deg,#0f0f1a,#1e1b4b)] p-6 text-white shadow-[var(--shadow-soft)] sm:p-8">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
-            We design for you
+            Step 2
           </p>
-          <h3 className="mt-2 text-2xl font-bold">Custom invitation order</h3>
+          <h3 className="mt-2 text-2xl font-bold">Order customisation</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
-            Need photos, family wording, or a unique layout? Message our customer
-            service — we craft print-ready invitation cards for your ceremony.
+            Message customer service with the theme you liked. We customise and
+            deliver — no login, no online payment, no DIY download.
           </p>
           <p className="mt-4 text-lg font-bold text-[#25D366]">
             {COMPANY.phoneDisplay}

@@ -7,7 +7,7 @@ export const COMPANY = {
   whatsapp: "919019726464",
   phoneDisplay: "+91 90197 26464",
   tagline: "Where creativity meets code",
-  productLine: "Invitation cards · Edit, preview, download PNG/PDF",
+  productLine: "Theme gallery · We customise your invitation",
 } as const;
 
 export function whatsappUrl(text?: string) {
@@ -47,7 +47,7 @@ export function customizeWhatsAppUrl(details: {
     `Hello Protorev Digital,`,
     ``,
     isCard
-      ? `I want a custom wedding invitation *card* (PNG/PDF for WhatsApp & print).`
+      ? `I like the theme “${details.themeName ?? "from your gallery"}”. Please customise an invitation card for me.`
       : `I want a custom wedding invitation.`,
     details.themeName ? `Template I liked: ${details.themeName}` : null,
     details.bride || details.groom

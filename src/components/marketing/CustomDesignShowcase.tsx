@@ -15,8 +15,7 @@ type Props = {
 };
 
 /**
- * Custom invitation orders — WhatsApp / email / phone.
- * Ready templates are in /create; this is for fully bespoke card work.
+ * Order path: pick a theme example → WhatsApp / email for customisation.
  */
 export function CustomDesignShowcase({
   compact = false,
@@ -37,14 +36,16 @@ export function CustomDesignShowcase({
       <div className="overflow-hidden rounded-2xl border border-[var(--line)] bg-[#0f0f1a] text-white">
         <div className="border-b border-white/10 px-4 py-3">
           <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
-            Need it fully custom?
+            Order this theme
           </p>
-          <p className="mt-1 text-sm font-semibold">We design your card for you</p>
+          <p className="mt-1 text-sm font-semibold">
+            {themeName ? `“${themeName}”` : "We customise for you"}
+          </p>
         </div>
         <div className="space-y-3 px-4 py-3">
           <p className="text-xs leading-relaxed text-white/70">
-            Photos, family wording, regional blessings — message our team. Same
-            quality as a print-shop invite.
+            Send theme name + your details on WhatsApp. No website payment or
+            download — we design and deliver.
           </p>
           <p className="text-sm font-bold text-[#25D366]">{COMPANY.phoneDisplay}</p>
           <div className="flex flex-wrap gap-2">
@@ -74,15 +75,15 @@ export function CustomDesignShowcase({
         <div className="grid gap-0 lg:grid-cols-2">
           <div className="p-6 sm:p-8 lg:p-10">
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-              Custom invitation cards
+              How to order
             </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-[var(--ink)] sm:text-4xl">
-              Want us to design it for you?
+              You choose the theme. We customise it.
             </h2>
             <p className="mt-4 max-w-lg text-sm leading-relaxed text-[var(--ink-soft)] sm:text-base">
-              Pick a template above to edit and download yourself — or contact
-              our customer service for a fully customised invitation card. We
-              handle photos, blessings, languages, and print-ready PNG/PDF files.
+              This website is our theme gallery — not a self-serve editor.
+              Tell us which design you like and your ceremony details. Customer
+              service customises and delivers your invitation files.
             </p>
             <p className="mt-4 text-lg font-bold text-[var(--ink)]">
               {COMPANY.phoneDisplay}
@@ -95,21 +96,13 @@ export function CustomDesignShowcase({
                 rel="noreferrer"
                 className="inline-flex rounded-2xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
               >
-                WhatsApp — order custom card
+                WhatsApp to order
               </a>
               <a
                 href={mail}
                 className="inline-flex rounded-2xl border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--ink)]"
               >
                 Email us
-              </a>
-              <a
-                href={COMPANY.site}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex rounded-2xl border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--ink-soft)]"
-              >
-                protorevdigital.com
               </a>
             </div>
           </div>
@@ -122,7 +115,7 @@ export function CustomDesignShowcase({
             }}
           >
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#E8C56A]">
-              How it works
+              Simple process
             </p>
             <ol className="mt-4 space-y-4 text-sm text-[#F8F1E3]/90">
               <li className="flex gap-3">
@@ -130,8 +123,8 @@ export function CustomDesignShowcase({
                   1
                 </span>
                 <span>
-                  <strong className="text-white">Use a template</strong> — choose
-                  a design, set faith & language, edit names, download PNG/PDF.
+                  <strong className="text-white">Browse themes</strong> — preview
+                  sample invitation designs.
                 </span>
               </li>
               <li className="flex gap-3">
@@ -139,8 +132,8 @@ export function CustomDesignShowcase({
                   2
                 </span>
                 <span>
-                  <strong className="text-white">Or message us</strong> — share
-                  your details on WhatsApp. We design and deliver print-ready files.
+                  <strong className="text-white">WhatsApp us</strong> — theme
+                  name + names, date, venue, photos, language.
                 </span>
               </li>
               <li className="flex gap-3">
@@ -148,8 +141,8 @@ export function CustomDesignShowcase({
                   3
                 </span>
                 <span>
-                  Share on WhatsApp, print at a local shop, or send to family —
-                  your choice.
+                  <strong className="text-white">Receive your invite</strong> —
+                  we design and send finished files to you.
                 </span>
               </li>
             </ol>
@@ -157,7 +150,7 @@ export function CustomDesignShowcase({
               href="/create"
               className="mt-6 inline-flex w-fit rounded-2xl bg-[#E8C56A] px-5 py-3 text-sm font-semibold text-[#2A0810]"
             >
-              Browse example cards →
+              Browse theme gallery →
             </Link>
           </div>
         </div>

@@ -22,7 +22,7 @@ const featuredCards = [
   {
     id: "palace-envelope",
     label: "Palace Envelope",
-    faith: "Muslim · Urdu style",
+    faith: "Muslim style",
     accent: "#0B3D2E",
   },
   {
@@ -60,7 +60,7 @@ export function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
         >
           <span className="h-2 w-2 rounded-full bg-[var(--mint)]" />
-          Edit · Preview · Download PNG/PDF
+          Browse themes · We customise for you
         </motion.div>
 
         <motion.h1
@@ -69,8 +69,8 @@ export function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
         >
-          Professional wedding invitation{" "}
-          <span className="pr-gradient-text">cards for every faith</span>
+          Choose a theme.{" "}
+          <span className="pr-gradient-text">We design your invitation.</span>
         </motion.h1>
 
         <motion.p
@@ -79,10 +79,10 @@ export function LandingPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12 }}
         >
-          Pick an example design, edit names and date, choose your language —
-          then download a print-ready PNG or PDF for WhatsApp and local print
-          shops. Custom designs? Message us at{" "}
-          <strong className="text-[var(--ink)]">{COMPANY.phoneDisplay}</strong>.
+          Browse our invitation examples. Tell us which theme you like and your
+          details — names, date, faith, language, photos. Our team customises it
+          and delivers the finished invitation. No login. No online payment. No
+          self-download.
         </motion.p>
 
         <motion.div
@@ -95,28 +95,30 @@ export function LandingPage() {
             href="/create"
             className="pr-gradient-btn rounded-2xl px-7 py-3.5 text-sm font-semibold"
           >
-            Browse example cards
+            Browse themes
           </Link>
-          <Link
-            href="/pricing"
-            className="pr-ghost-btn rounded-2xl px-7 py-3.5 text-sm font-semibold"
+          <a
+            href={`https://wa.me/${COMPANY.whatsapp}`}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex rounded-2xl bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white"
           >
-            Pricing from ₹99
-          </Link>
+            WhatsApp {COMPANY.phoneDisplay}
+          </a>
         </motion.div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-12">
         <div className="mb-8 max-w-2xl">
           <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-            Example invitations
+            Theme gallery
           </p>
           <h2 className="text-3xl font-bold text-[var(--ink)]">
-            Choose one — customise — download
+            Pick a look — we make it yours
           </h2>
           <p className="mt-2 text-sm text-[var(--ink-soft)]">
-            Each card opens in our studio. Edit details, preview in your language,
-            then unlock PNG/PDF download.
+            Preview sample designs. When you find one you like, message us with
+            the theme name and your details.
           </p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -140,13 +142,13 @@ export function LandingPage() {
                 >
                   <div className="rounded-2xl border border-[#E8C56A]/40 bg-[#F8F1E3]/95 px-6 py-8 text-center shadow-lg transition group-hover:scale-[1.02]">
                     <p className="text-[10px] tracking-[0.25em] text-[#4A0E18]/60">
-                      INVITATION
+                      THEME EXAMPLE
                     </p>
                     <p className="invite-name mt-2 text-xl text-[#4A0E18]">
                       {card.label}
                     </p>
                     <p className="mt-2 text-[10px] text-[#4A0E18]/55">
-                      Tap to customise →
+                      Preview & enquire →
                     </p>
                   </div>
                 </div>
@@ -161,11 +163,8 @@ export function LandingPage() {
           ))}
         </div>
         <div className="mt-6 text-center">
-          <Link
-            href="/create"
-            className="pr-gradient-text text-sm font-semibold"
-          >
-            See all {">"} 25 card designs →
+          <Link href="/create" className="pr-gradient-text text-sm font-semibold">
+            See all themes →
           </Link>
         </div>
       </section>
@@ -174,16 +173,16 @@ export function LandingPage() {
         <div className="grid gap-3 sm:grid-cols-3">
           {[
             {
-              title: "1 · Pick an example",
-              body: "Browse ceremonial card designs for Hindu, Muslim, Christian, Sikh, Jain & interfaith.",
+              title: "1 · Choose a theme",
+              body: "Browse ceremonial designs for every faith and language.",
             },
             {
-              title: "2 · Edit & preview",
-              body: "Set faith, language, names, and date. Preview exactly what you will share.",
+              title: "2 · Message us",
+              body: "WhatsApp or email the theme name + your names, date, photos.",
             },
             {
-              title: "3 · Download PNG/PDF",
-              body: "Sign in, pay from ₹99, get clean files for WhatsApp groups and print shops.",
+              title: "3 · We deliver",
+              body: "Our team customises and sends your finished invitation files.",
             },
           ].map((item) => (
             <article
@@ -202,68 +201,19 @@ export function LandingPage() {
       <CustomDesignShowcase />
       <TemplateOrCustomize />
 
-      <section className="mx-auto max-w-6xl px-6 py-16">
-        <div className="mb-10 max-w-2xl">
-          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-            All faiths & languages
-          </p>
-          <h2 className="text-3xl font-bold tracking-tight text-[var(--ink)] md:text-4xl">
-            Built for Indian families
-          </h2>
-          <p className="mt-4 text-[var(--ink-soft)]">
-            English, Kannada, Tamil, Telugu, Hindi, and Malayalam — with respectful
-            blessings and regional styling.
-          </p>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { key: "hindu", label: "Hindu", icon: "🪔", card: "diya-vivah-card" },
-            { key: "muslim", label: "Muslim", icon: "☪", card: "palace-envelope" },
-            { key: "christian", label: "Christian", icon: "✝", card: "classic-ornate" },
-            { key: "sikh", label: "Sikh", icon: "☬", card: "temple-dawn" },
-            { key: "jain", label: "Jain", icon: "🕉", card: "peacock-palace-card" },
-            { key: "interfaith", label: "Interfaith", icon: "🤝", card: "watercolour-shaadi-card" },
-          ].map((meta, i) => (
-            <motion.article
-              key={meta.key}
-              className="group rounded-3xl border border-[var(--line)] bg-white p-6 shadow-[var(--shadow-card)] transition hover:-translate-y-1"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <div
-                className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl text-xl text-white"
-                style={{ background: "var(--brand-gradient)" }}
-              >
-                {meta.icon}
-              </div>
-              <h3 className="text-xl font-bold text-[var(--ink)]">{meta.label}</h3>
-              <Link
-                href={`/create/${meta.card}?faith=${meta.key}&ready=1`}
-                className="pr-gradient-text mt-6 inline-flex text-sm font-semibold transition group-hover:translate-x-1"
-              >
-                Customise {meta.label} card →
-              </Link>
-            </motion.article>
-          ))}
-        </div>
-      </section>
-
       <section className="mx-auto max-w-6xl px-6 pb-24 pt-8 text-center">
         <h2 className="text-3xl font-bold tracking-tight text-[var(--ink)] md:text-4xl">
-          Ready to share your invitation?
+          Ready to order your invitation?
         </h2>
         <p className="mx-auto mt-3 max-w-lg text-[var(--ink-soft)]">
-          Start with an example card today — or WhatsApp us for a fully custom design.
+          Browse themes, then contact customer service. We handle the rest.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/create"
             className="pr-gradient-btn inline-flex rounded-2xl px-8 py-3.5 text-sm font-semibold"
           >
-            Browse example cards
+            Browse themes
           </Link>
           <a
             href={`https://wa.me/${COMPANY.whatsapp}`}

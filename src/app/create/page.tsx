@@ -3,9 +3,9 @@ import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
 import { CreateHub } from "@/components/marketing/CreateHub";
 
 export const metadata = {
-  title: "Example invitation cards — Protorev Digital",
+  title: "Theme gallery — Protorev Digital",
   description:
-    "Browse wedding invitation card examples. Edit names, faith & language, download PNG/PDF.",
+    "Browse wedding invitation themes. WhatsApp us to customise — we design and deliver. No login or self-download.",
 };
 
 export default function CreatePage() {
