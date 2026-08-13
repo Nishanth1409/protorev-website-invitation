@@ -67,16 +67,16 @@ export const formatMeta: Record<
   { label: string; short: string; description: string }
 > = {
   "invitation-card": {
-    label: "Invitation card",
+    label: "Invitation cards",
     short: "Card",
     description:
-      "A beautiful printable card — preview live, then download as PNG photo or PDF (5×7). Perfect for WhatsApp and print.",
+      "Beautiful ceremonial cards — preview live, then WhatsApp us to customise names, photos & language. We deliver finished files.",
   },
   "event-page": {
-    label: "Event page website",
+    label: "Wedding websites",
     short: "Website",
     description:
-      "A full scrolling guest website — story, countdown, music, events, map & share. Different from cards.",
+      "Full guest invitation websites — story, countdown, events & map. Pick a look; we personalise and host your shareable link.",
   },
 };
 

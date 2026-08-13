@@ -124,9 +124,9 @@ export function InvitationCardExperience({ invite }: Props) {
           </div>
 
           <ul className="mt-6 space-y-2 text-xs text-[var(--ink-soft)]">
-            <li>1. Choose a theme you like</li>
-            <li>2. WhatsApp or email your names, date & photos</li>
-            <li>3. We design & deliver your finished invitation</li>
+            <li>• Live preview on mobile & desktop</li>
+            <li>• We customise names, photos, faith & language</li>
+            <li>• Finished files delivered on WhatsApp</li>
           </ul>
 
           <Link

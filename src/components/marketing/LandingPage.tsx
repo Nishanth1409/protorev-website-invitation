@@ -5,192 +5,183 @@ import { motion } from "framer-motion";
 import { TemplateOrCustomize } from "./TemplateOrCustomize";
 import { CustomDesignShowcase } from "./CustomDesignShowcase";
 import { COMPANY } from "@/data/contact";
+import { createThemes } from "@/data/themes";
+import { PhoneMockup } from "./PhoneMockup";
+import { lookFromDesignStyle, lookMeta } from "@/data/lookFamilies";
 
-const featuredCards = [
-  {
-    id: "diya-vivah-card",
-    label: "Diya Vivah",
-    faith: "Hindu · Kannada",
-    accent: "#C2410C",
-  },
-  {
-    id: "peacock-palace-card",
-    label: "Peacock Palace",
-    faith: "Hindu · Tamil",
-    accent: "#7C3AED",
-  },
-  {
-    id: "palace-envelope",
-    label: "Palace Envelope",
-    faith: "Muslim style",
-    accent: "#0B3D2E",
-  },
-  {
-    id: "temple-dawn",
-    label: "Temple Dawn",
-    faith: "Hindu · Telugu",
-    accent: "#B45309",
-  },
-  {
-    id: "mehendi-mandala-card",
-    label: "Mehendi Mandala",
-    faith: "Hindu · Hindi",
-    accent: "#BE185D",
-  },
-  {
-    id: "classic-ornate",
-    label: "Classic Ornate",
-    faith: "Christian · English",
-    accent: "#5C2430",
-  },
+const featuredIds = [
+  "velvet-soiree",
+  "heritage-arch",
+  "ivory-edit",
+  "diya-vivah-card",
+  "mehendi-mandala-card",
+  "palace-envelope",
 ];
 
 export function LandingPage() {
+  const featured = featuredIds
+    .map((id) => createThemes.find((t) => t.id === id))
+    .filter(Boolean);
+
   return (
-    <main className="relative overflow-hidden bg-[var(--background)]">
+    <main className="relative overflow-hidden bg-[#F7F4EF]">
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-24 top-0 h-[28rem] w-[28rem] rounded-full bg-[rgba(91,74,255,0.12)] blur-3xl" />
-        <div className="absolute -right-16 top-24 h-[24rem] w-[24rem] rounded-full bg-[rgba(6,182,212,0.12)] blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
+        <div className="absolute -right-20 top-20 h-[26rem] w-[26rem] rounded-full bg-[rgba(196,154,74,0.14)] blur-3xl" />
       </div>
 
-      <section className="relative mx-auto flex min-h-[85svh] max-w-5xl flex-col items-center justify-center px-6 pb-14 pt-16 text-center">
-        <motion.div
-          className="mb-7 inline-flex items-center gap-2 rounded-full border border-[var(--line)] bg-white px-4 py-1.5 text-xs font-medium text-[var(--ink-soft)] shadow-[var(--shadow-card)]"
-          initial={{ opacity: 0, y: 10 }}
+      <section className="relative mx-auto flex min-h-[88svh] max-w-4xl flex-col items-center justify-center px-6 pb-14 pt-16 text-center">
+        <motion.p
+          className="mb-5 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]"
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          <span className="h-2 w-2 rounded-full bg-[var(--mint)]" />
-          Browse themes · We customise for you
-        </motion.div>
+          Protorev Digital · Invitation studio
+        </motion.p>
 
         <motion.h1
-          className="max-w-4xl text-4xl font-bold leading-[1.12] tracking-tight text-[var(--ink)] md:text-6xl"
+          className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.12] tracking-tight text-[#1A1210] sm:text-5xl md:text-6xl"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
         >
-          Choose a theme.{" "}
-          <span className="pr-gradient-text">We design your invitation.</span>
+          A website as beautiful
+          <br className="hidden sm:block" /> as your wedding day
         </motion.h1>
 
         <motion.p
-          className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--ink-soft)] md:text-lg"
+          className="mt-6 max-w-xl text-base leading-relaxed text-[#5C4A42] sm:text-lg"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.12 }}
         >
-          Browse our invitation examples. Tell us which theme you like and your
-          details — names, date, faith, language, photos. Our team customises it
-          and delivers the finished invitation. No login. No online payment. No
-          self-download.
+          Your guests will feel it before they even arrive. Browse premium
+          invitation websites & cards — we customise every detail and deliver
+          via WhatsApp.
+        </motion.p>
+
+        <motion.p
+          className="mt-4 text-sm font-medium tracking-wide text-[#8B6914]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.18 }}
+        >
+          Design · Personalise · Share
         </motion.p>
 
         <motion.div
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center justify-center gap-3"
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.18 }}
+          transition={{ delay: 0.22 }}
         >
           <Link
             href="/create"
-            className="pr-gradient-btn rounded-2xl px-7 py-3.5 text-sm font-semibold"
+            className="rounded-full bg-[#1A1210] px-7 py-3.5 text-sm font-semibold text-[#F7F4EF]"
           >
-            Browse themes
+            Browse designs
           </Link>
           <a
             href={`https://wa.me/${COMPANY.whatsapp}`}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex rounded-2xl bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white"
+            className="rounded-full bg-[#25D366] px-7 py-3.5 text-sm font-semibold text-white"
           >
             WhatsApp {COMPANY.phoneDisplay}
           </a>
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-12">
-        <div className="mb-8 max-w-2xl">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-            Theme gallery
+      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6">
+        <div className="mb-8 text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[#8B6914]">
+            Featured designs
           </p>
-          <h2 className="text-3xl font-bold text-[var(--ink)]">
-            Pick a look — we make it yours
+          <h2 className="mt-2 font-[family-name:var(--font-display)] text-3xl text-[#1A1210] sm:text-4xl">
+            Beautiful on every phone
           </h2>
-          <p className="mt-2 text-sm text-[var(--ink-soft)]">
-            Preview sample designs. When you find one you like, message us with
-            the theme name and your details.
+          <p className="mx-auto mt-2 max-w-lg text-sm text-[#5C4A42]">
+            Live previews in an elegant gallery — tap a design, then enquire so
+            we can customise it for your ceremony.
           </p>
         </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredCards.map((card, i) => (
-            <motion.article
-              key={card.id}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04 }}
-            >
-              <Link
-                href={`/create/${card.id}?ready=1`}
-                className="group block overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {featured.map((theme, i) => {
+            if (!theme) return null;
+            const look = lookFromDesignStyle(theme.designStyle);
+            return (
+              <motion.article
+                key={theme.id}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="overflow-hidden rounded-[1.5rem] border border-[#E8DFD4] bg-white shadow-[0_12px_40px_rgba(26,18,16,0.06)]"
               >
                 <div
-                  className="relative flex h-48 items-center justify-center"
+                  className="relative flex justify-center px-4 pb-2 pt-8"
                   style={{
-                    background: `radial-gradient(circle at 50% 30%, ${card.accent}33, transparent 55%), linear-gradient(145deg,#2A0810,#4A0E18)`,
+                    background: `linear-gradient(180deg, ${theme.theme.bgDeep} 0%, #F7F4EF 100%)`,
+                    minHeight: 300,
                   }}
                 >
-                  <div className="rounded-2xl border border-[#E8C56A]/40 bg-[#F8F1E3]/95 px-6 py-8 text-center shadow-lg transition group-hover:scale-[1.02]">
-                    <p className="text-[10px] tracking-[0.25em] text-[#4A0E18]/60">
-                      THEME EXAMPLE
-                    </p>
-                    <p className="invite-name mt-2 text-xl text-[#4A0E18]">
-                      {card.label}
-                    </p>
-                    <p className="mt-2 text-[10px] text-[#4A0E18]/55">
-                      Preview & enquire →
-                    </p>
-                  </div>
+                  <span className="absolute left-3 top-3 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white">
+                    {lookMeta[look].label}
+                  </span>
+                  <PhoneMockup theme={theme} />
                 </div>
-                <div className="p-4">
-                  <p className="text-xs font-medium text-[var(--ink-mute)]">
-                    {card.faith}
+                <div className="p-5">
+                  <h3 className="font-[family-name:var(--font-display)] text-xl text-[#1A1210]">
+                    {theme.name}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm text-[#5C4A42]">
+                    {theme.blurb}
                   </p>
-                  <h3 className="font-bold text-[var(--ink)]">{card.label}</h3>
+                  <Link
+                    href={`/create/${theme.id}?ready=1`}
+                    className="mt-4 inline-flex rounded-full bg-[#1A1210] px-4 py-2.5 text-xs font-semibold text-[#F7F4EF]"
+                  >
+                    Live preview
+                  </Link>
                 </div>
-              </Link>
-            </motion.article>
-          ))}
+              </motion.article>
+            );
+          })}
         </div>
-        <div className="mt-6 text-center">
-          <Link href="/create" className="pr-gradient-text text-sm font-semibold">
-            See all themes →
+
+        <div className="mt-10 text-center">
+          <Link
+            href="/create"
+            className="text-sm font-semibold text-[#4A0E18] underline-offset-4 hover:underline"
+          >
+            View all designs →
           </Link>
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-8">
+      <section className="mx-auto max-w-6xl px-5 pb-10 sm:px-6">
         <div className="grid gap-3 sm:grid-cols-3">
           {[
             {
-              title: "1 · Choose a theme",
-              body: "Browse ceremonial designs for every faith and language.",
+              title: "Choose your design",
+              body: "Browse Luxe, Royal, Festive & Minimal looks — websites and cards.",
             },
             {
-              title: "2 · Message us",
-              body: "WhatsApp or email the theme name + your names, date, photos.",
+              title: "Tell us your story",
+              body: "WhatsApp theme name + names, date, photos, faith & language.",
             },
             {
-              title: "3 · We deliver",
-              body: "Our team customises and sends your finished invitation files.",
+              title: "Share with guests",
+              body: "We customise and deliver your finished invitation for WhatsApp.",
             },
           ].map((item) => (
             <article
               key={item.title}
-              className="rounded-3xl border border-[var(--line)] bg-white/90 p-5 shadow-[var(--shadow-card)]"
+              className="rounded-3xl border border-[#E8DFD4] bg-white/90 p-5"
             >
-              <h3 className="text-base font-bold text-[var(--ink)]">{item.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+              <h3 className="font-bold text-[#1A1210]">{item.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#5C4A42]">
                 {item.body}
               </p>
             </article>
@@ -202,28 +193,21 @@ export function LandingPage() {
       <TemplateOrCustomize />
 
       <section className="mx-auto max-w-6xl px-6 pb-24 pt-8 text-center">
-        <h2 className="text-3xl font-bold tracking-tight text-[var(--ink)] md:text-4xl">
-          Ready to order your invitation?
+        <h2 className="font-[family-name:var(--font-display)] text-3xl text-[#1A1210] sm:text-4xl">
+          Need help choosing?
         </h2>
-        <p className="mx-auto mt-3 max-w-lg text-[var(--ink-soft)]">
-          Browse themes, then contact customer service. We handle the rest.
+        <p className="mx-auto mt-3 max-w-lg text-[#5C4A42]">
+          Chat with us on WhatsApp — we&apos;ll recommend the right design for
+          your ceremony.
         </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link
-            href="/create"
-            className="pr-gradient-btn inline-flex rounded-2xl px-8 py-3.5 text-sm font-semibold"
-          >
-            Browse themes
-          </Link>
-          <a
-            href={`https://wa.me/${COMPANY.whatsapp}`}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex rounded-2xl bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white"
-          >
-            WhatsApp {COMPANY.phoneDisplay}
-          </a>
-        </div>
+        <a
+          href={`https://wa.me/${COMPANY.whatsapp}`}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-8 inline-flex rounded-full bg-[#25D366] px-8 py-3.5 text-sm font-semibold text-white"
+        >
+          WhatsApp {COMPANY.phoneDisplay}
+        </a>
       </section>
     </main>
   );

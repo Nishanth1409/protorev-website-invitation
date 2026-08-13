@@ -15,24 +15,46 @@ import {
   ceremonyMeta,
   type CeremonyCategoryId,
 } from "@/data/ceremony";
+import {
+  allLookFamilies,
+  lookFromDesignStyle,
+  lookMeta,
+  type LookFamily,
+} from "@/data/lookFamilies";
+import { COMPANY, customizeWhatsAppUrl } from "@/data/contact";
+import { formatInr, getPlan } from "@/data/pricing";
 import { TemplateOrCustomize } from "./TemplateOrCustomize";
 import { CustomDesignShowcase } from "./CustomDesignShowcase";
+import { PhoneMockup } from "./PhoneMockup";
 
-type Filter = "all" | InviteFormatId;
+type FormatFilter = "all" | InviteFormatId;
+type LookFilter = "all" | LookFamily;
 
+/**
+ * Premium theme gallery inspired by ShaadiPath-style showcase:
+ * phone mockups, look filters, Live Preview + WhatsApp enquire.
+ */
 export function CreateHub() {
   const searchParams = useSearchParams();
   const initialFormat = searchParams.get("format");
-  const [filter, setFilter] = useState<Filter>(
-    initialFormat === "event-page" ? "event-page" : "invitation-card",
+  const [format, setFormat] = useState<FormatFilter>(
+    initialFormat === "invitation-card"
+      ? "invitation-card"
+      : initialFormat === "event-page"
+        ? "event-page"
+        : "event-page",
   );
+  const [look, setLook] = useState<LookFilter>("all");
   const [ceremony, setCeremony] = useState<CeremonyCategoryId | "all">("all");
   const [query, setQuery] = useState("");
 
   const themes = useMemo(() => {
     const q = query.trim().toLowerCase();
     return createThemes.filter((t) => {
-      if (filter !== "all" && t.format !== filter) return false;
+      if (format !== "all" && t.format !== format) return false;
+      if (look !== "all" && lookFromDesignStyle(t.designStyle) !== look) {
+        return false;
+      }
       const cat = t.ceremony ?? "wedding";
       if (ceremony !== "all" && cat !== ceremony) return false;
       if (!q) return true;
@@ -45,179 +67,185 @@ export function CreateHub() {
         meta.label.toLowerCase().includes(q)
       );
     });
-  }, [filter, ceremony, query]);
+  }, [format, look, ceremony, query]);
 
-  const cards = themes.filter((t) => t.format === "invitation-card");
-  const pages = themes.filter((t) => t.format === "event-page");
-  const totalCombos = createThemes.length * 6 * 6;
+  const startingPrice = getPlan("custom-card")?.priceInr ?? 699;
 
   return (
-    <main className="relative overflow-hidden bg-[var(--background)]">
+    <main className="relative overflow-hidden bg-[#F7F4EF]">
+      {/* Atmosphere — warm paper, not purple SaaS */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -left-20 top-10 h-[22rem] w-[22rem] rounded-full bg-[rgba(91,74,255,0.1)] blur-3xl" />
-        <div className="absolute right-0 top-40 h-[20rem] w-[20rem] rounded-full bg-[rgba(6,182,212,0.1)] blur-3xl" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
+        <div className="absolute -right-20 top-40 h-[28rem] w-[28rem] rounded-full bg-[rgba(196,154,74,0.12)] blur-3xl" />
+        <div className="absolute -left-16 bottom-20 h-[22rem] w-[22rem] rounded-full bg-[rgba(74,14,24,0.06)] blur-3xl" />
       </div>
 
-      <section className="mx-auto max-w-6xl px-6 pb-8 pt-14 text-center sm:pt-16">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-          Create with Protorev
+      {/* Hero */}
+      <section className="mx-auto max-w-4xl px-5 pb-10 pt-14 text-center sm:px-6 sm:pt-20">
+        <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
+          Protorev Digital · Invitation studio
         </p>
-        <h1 className="text-4xl font-bold tracking-tight text-[var(--ink)] md:text-5xl">
-          Theme gallery —{" "}
-          <span className="pr-gradient-text italic">we customise for you</span>
+        <h1 className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.15] tracking-tight text-[#1A1210] sm:text-5xl md:text-6xl">
+          A website as beautiful
+          <br className="hidden sm:block" /> as your wedding day
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)] md:text-lg">
-          Preview invitation themes. Tell us which one you like on WhatsApp —
-          we customise names, photos, faith & language and deliver the finished
-          invite. No login. No website payment. No self-download.{" "}
-          <strong className="text-[var(--ink)]">+91 90197 26464</strong>
+        <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[#5C4A42] sm:text-lg">
+          Your guests will feel it before they even arrive. Browse designs —
+          we customise and deliver. WhatsApp{" "}
+          <strong className="text-[#1A1210]">{COMPANY.phoneDisplay}</strong>
         </p>
-        <p className="mt-4 text-sm font-medium text-[var(--ink-mute)]">
-          {createThemes.length} designs · {allCeremonyIds.length} ceremony types · 6
-          faiths · 6 languages · {totalCombos.toLocaleString()} preview combinations
+        <p className="mt-4 text-sm font-medium tracking-wide text-[#8B6914]">
+          Design · Personalise · Share
         </p>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setFormat("event-page")}
+            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+              format === "event-page"
+                ? "bg-[#1A1210] text-[#F7F4EF]"
+                : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
+            }`}
+          >
+            Wedding websites
+          </button>
+          <button
+            type="button"
+            onClick={() => setFormat("invitation-card")}
+            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+              format === "invitation-card"
+                ? "bg-[#1A1210] text-[#F7F4EF]"
+                : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
+            }`}
+          >
+            Invitation cards
+          </button>
+          <Link
+            href="/pricing"
+            className="rounded-full border border-[#D9CFC4] bg-white px-5 py-2.5 text-sm font-semibold text-[#5C4A42]"
+          >
+            View packages & pricing →
+          </Link>
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-4 px-6 pb-8 md:grid-cols-2">
-        {(
-          [
-            "invitation-card",
-            "event-page",
-          ] as const
-        ).map((id) => {
-          const meta = formatMeta[id];
-          const count = createThemes.filter((t) => t.format === id).length;
-          return (
+      {/* Look filters — ALL / LUXE / ROYAL / FESTIVE / MINIMAL */}
+      <section className="mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="flex flex-wrap items-center justify-center gap-2 border-y border-[#E8DFD4] py-4">
+          <button
+            type="button"
+            onClick={() => setLook("all")}
+            className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] transition ${
+              look === "all"
+                ? "bg-[#4A0E18] text-[#F8F1E3]"
+                : "text-[#7A6A60] hover:text-[#1A1210]"
+            }`}
+          >
+            All
+          </button>
+          {allLookFamilies.map((id) => (
             <button
               key={id}
               type="button"
-              onClick={() => setFilter(id)}
-              className={`rounded-3xl border p-6 text-left transition ${
-                filter === id
-                  ? "border-transparent shadow-[var(--shadow-soft)]"
-                  : "border-[var(--line)] bg-white hover:-translate-y-0.5"
+              onClick={() => setLook(id)}
+              className={`rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] transition ${
+                look === id
+                  ? "bg-[#4A0E18] text-[#F8F1E3]"
+                  : "text-[#7A6A60] hover:text-[#1A1210]"
               }`}
-              style={
-                filter === id
-                  ? {
-                      background:
-                        id === "invitation-card"
-                          ? "linear-gradient(135deg,#fff7ed,#fff)"
-                          : "linear-gradient(135deg,#eff6ff,#fff)",
-                    }
-                  : undefined
-              }
             >
-              <div className="flex items-center justify-between gap-3">
-                <p
-                  className="text-sm font-semibold"
-                  style={{
-                    color: id === "invitation-card" ? "#C2410C" : "#1D4ED8",
-                  }}
-                >
-                  {meta.label}
-                </p>
-                <span className="rounded-full bg-black/5 px-2.5 py-1 text-[11px] font-semibold text-[var(--ink-soft)]">
-                  {count} themes
-                </span>
-              </div>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-                {meta.description}
-              </p>
+              {lookMeta[id].label}
             </button>
-          );
-        })}
+          ))}
+        </div>
+        <p className="mt-3 text-center text-xs text-[#8A7A70]">
+          Every design includes · Invitation · Events · Gallery-ready layout ·
+          WhatsApp delivery
+        </p>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-4">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ink-mute)]">
-          Ceremony type
-        </p>
-        <div className="flex flex-wrap gap-2">
+      {/* Ceremony + search */}
+      <section className="mx-auto flex max-w-6xl flex-col gap-4 px-5 py-6 sm:flex-row sm:items-center sm:px-6">
+        <div className="flex flex-1 flex-wrap gap-2">
           <button
             type="button"
             onClick={() => setCeremony("all")}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+            className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
               ceremony === "all"
-                ? "pr-gradient-btn"
-                : "border border-[var(--line)] bg-white text-[var(--ink-soft)]"
+                ? "bg-[#C9A227]/25 text-[#4A0E18]"
+                : "bg-white text-[#7A6A60] ring-1 ring-[#E8DFD4]"
             }`}
           >
             All ceremonies
           </button>
-          {allCeremonyIds.map((id) => (
+          {allCeremonyIds.slice(0, 6).map((id) => (
             <button
               key={id}
               type="button"
               onClick={() => setCeremony(id)}
-              className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition ${
+              className={`rounded-full px-3 py-1.5 text-xs font-semibold ${
                 ceremony === id
-                  ? "pr-gradient-btn"
-                  : "border border-[var(--line)] bg-white text-[var(--ink-soft)]"
+                  ? "bg-[#C9A227]/25 text-[#4A0E18]"
+                  : "bg-white text-[#7A6A60] ring-1 ring-[#E8DFD4]"
               }`}
             >
               {ceremonyMeta[id].emoji} {ceremonyMeta[id].short}
             </button>
           ))}
         </div>
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search designs…"
+          className="w-full rounded-full border border-[#E8DFD4] bg-white px-4 py-2.5 text-sm text-[#1A1210] outline-none focus:border-[#C9A227] sm:w-56"
+        />
       </section>
 
-      <section className="mx-auto flex max-w-6xl flex-wrap items-center gap-3 px-6 pb-8">
-        {(
-          [
-            ["all", "All designs"],
-            ["invitation-card", "Invitation cards"],
-            ["event-page", "Event page websites"],
-          ] as const
-        ).map(([id, label]) => (
-          <button
-            key={id}
-            type="button"
-            onClick={() => setFilter(id)}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition ${
-              filter === id
-                ? "pr-gradient-btn"
-                : "border border-[var(--line)] bg-white text-[var(--ink-soft)] hover:text-[var(--ink)]"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
-        <div className="ml-auto w-full sm:w-64">
-          <input
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search designs..."
-            className="w-full rounded-full border border-[var(--line)] bg-white px-4 py-2.5 text-sm text-[var(--ink)] outline-none focus:border-[var(--grad-a)]"
-          />
+      {/* Theme grid */}
+      <section className="mx-auto max-w-6xl px-5 pb-16 sm:px-6">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {themes.map((theme, i) => (
+            <ThemeShowcaseCard key={theme.id} theme={theme} index={i} />
+          ))}
         </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        {filter === "all" ? (
-          <>
-            <ThemeGroup title="Invitation cards" themes={cards} />
-            <ThemeGroup
-              title="Event page websites"
-              themes={pages}
-              className="mt-14"
-            />
-          </>
-        ) : (
-          <ThemeGroup
-            title={
-              filter === "invitation-card"
-                ? "Invitation cards"
-                : "Event page websites"
-            }
-            themes={themes}
-          />
-        )}
         {themes.length === 0 && (
-          <p className="py-16 text-center text-[var(--ink-soft)]">
-            No designs match your search.
+          <p className="py-20 text-center text-[#7A6A60]">
+            No designs match your filters.
           </p>
         )}
+
+        {/* Custom banner */}
+        <div className="mt-14 overflow-hidden rounded-[1.75rem] bg-[linear-gradient(135deg,#2A0810,#4A0E18)] px-6 py-10 text-center text-[#F8F1E3] sm:px-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#E8C56A]">
+            ✦ Custom design ✦
+          </p>
+          <h2 className="mt-3 font-[family-name:var(--font-display)] text-3xl sm:text-4xl">
+            Fully bespoke — designed around your story
+          </h2>
+          <p className="mx-auto mt-3 max-w-lg text-sm text-white/75">
+            Not seeing the exact vibe? Message us with inspiration photos. We
+            craft a one-of-a-kind invitation website or card for your family.
+          </p>
+          <p className="mt-4 text-lg font-semibold text-[#E8C56A]">
+            Starting {formatInr(startingPrice)}
+          </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <a
+              href={customizeWhatsAppUrl({ format: "invitation-card" })}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
+            >
+              WhatsApp custom order
+            </a>
+            <Link
+              href="/pricing"
+              className="rounded-full border border-[#E8C56A]/50 px-6 py-3 text-sm font-semibold text-[#E8C56A]"
+            >
+              View packages
+            </Link>
+          </div>
+        </div>
       </section>
 
       <CustomDesignShowcase />
@@ -226,103 +254,83 @@ export function CreateHub() {
   );
 }
 
-function ThemeGroup({
-  title,
-  themes,
-  className = "",
+function ThemeShowcaseCard({
+  theme,
+  index,
 }: {
-  title: string;
-  themes: CreateTheme[];
-  className?: string;
+  theme: CreateTheme;
+  index: number;
 }) {
-  if (themes.length === 0) return null;
-  return (
-    <div className={className}>
-      <h2 className="mb-6 text-2xl font-bold text-[var(--ink)]">{title}</h2>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {themes.map((theme, i) => (
-          <ThemeCard key={theme.id} theme={theme} index={i} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ThemeCard({ theme, index }: { theme: CreateTheme; index: number }) {
+  const look = lookFromDesignStyle(theme.designStyle);
   const isCard = theme.format === "invitation-card";
-  const t = theme.theme;
   const cat = theme.ceremony ?? "wedding";
-  const cMeta = ceremonyMeta[cat];
+  const wa = customizeWhatsAppUrl({
+    themeName: theme.name,
+    format: theme.format,
+  });
+  const price = getPlan(
+    isCard ? "custom-card" : "custom-website",
+  )?.priceInr;
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-30px" }}
-      transition={{ delay: (index % 6) * 0.04 }}
-      className="group overflow-hidden rounded-3xl border border-[var(--line)] bg-white shadow-[var(--shadow-card)] transition hover:-translate-y-1 hover:shadow-[var(--shadow-soft)]"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: (index % 6) * 0.05 }}
+      className="group flex flex-col overflow-hidden rounded-[1.5rem] border border-[#E8DFD4] bg-white shadow-[0_12px_40px_rgba(26,18,16,0.06)] transition hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(26,18,16,0.1)]"
     >
+      {/* Phone stage */}
       <div
-        className="relative h-44 overflow-hidden"
+        className="relative flex justify-center px-4 pb-2 pt-8"
         style={{
-          background: `radial-gradient(circle at 30% 20%, ${t.glow}, transparent 45%), linear-gradient(145deg, ${t.bgDeep}, ${t.bg})`,
+          background: `linear-gradient(180deg, ${theme.theme.bgDeep} 0%, #F7F4EF 100%)`,
+          minHeight: 320,
         }}
       >
-        <span className="absolute left-3 top-3 rounded-full bg-black/35 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur">
-          {cMeta.emoji} {isCard ? "Card" : "Website"}
+        <span className="absolute left-3 top-3 rounded-full bg-black/40 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white backdrop-blur">
+          {lookMeta[look].label}
+          {theme.badge ? ` · ${theme.badge}` : ""}
         </span>
-        {theme.badge && (
-          <span className="absolute right-3 top-3 rounded-full bg-[rgba(250,204,21,0.92)] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-black">
-            {theme.badge}
-          </span>
-        )}
-
-        <div
-          className="absolute inset-x-8 bottom-5 top-12 rounded-2xl border px-4 py-5 text-center backdrop-blur-sm transition duration-300 group-hover:scale-[1.02]"
-          style={{
-            borderColor: t.border,
-            background: t.card,
-            boxShadow: `0 16px 40px ${t.glow}`,
-            color: t.text,
-          }}
-        >
-          <p className="text-[10px] tracking-[0.28em]" style={{ color: t.accent }}>
-            {cMeta.short.toUpperCase()}
-          </p>
-          <p
-            className="mt-2 font-[family-name:var(--font-script)] text-xl"
-            style={{ color: t.accentSoft || t.accent }}
-          >
-            {theme.name.split(" ")[0]}
-          </p>
-          <div
-            className="mx-auto mt-3 h-8 w-8 rounded-full border text-xs leading-8"
-            style={{ borderColor: t.accent, color: t.accent }}
-          >
-            ✦
-          </div>
-        </div>
+        <span className="absolute right-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold text-[#4A0E18]">
+          {ceremonyMeta[cat].emoji} {isCard ? "Card" : "Website"}
+        </span>
+        <PhoneMockup theme={theme} />
       </div>
-      <div className="p-5">
-        <p className="mb-1 text-xs font-medium" style={{ color: theme.previewAccent }}>
-          {cMeta.label} · {isCard ? "Theme example" : "Website example"}
+
+      <div className="flex flex-1 flex-col p-5">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8B6914]">
+          {lookMeta[look].label} · {formatMeta[theme.format].short}
         </p>
-        <h3 className="text-lg font-bold text-[var(--ink)]">{theme.name}</h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-[var(--ink-soft)]">
+        <h3 className="mt-1 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
+          {theme.name}
+        </h3>
+        <p className="mt-2 line-clamp-2 flex-1 text-sm leading-relaxed text-[#5C4A42]">
           {theme.blurb}
         </p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        {price != null && (
+          <p className="mt-3 text-sm font-semibold text-[#1A1210]">
+            From {formatInr(price)}
+            <span className="ml-2 text-xs font-normal text-[#8A7A70]">
+              · customised for you
+            </span>
+          </p>
+        )}
+        <div className="mt-4 flex flex-wrap gap-2">
           <Link
             href={`/create/${theme.id}?ready=1`}
-            className="pr-gradient-btn rounded-xl px-4 py-2 text-xs font-semibold"
+            className="rounded-full bg-[#1A1210] px-4 py-2.5 text-xs font-semibold text-[#F7F4EF] transition group-hover:bg-[#4A0E18]"
           >
-            {isCard ? "Preview & enquire" : "Preview theme"}
+            Live preview
           </Link>
-          <Link
-            href={`/create/${theme.id}?ready=1`}
-            className="rounded-xl border border-[var(--line)] px-4 py-2 text-xs font-semibold text-[var(--ink-soft)] transition hover:text-[var(--ink)]"
+          <a
+            href={wa}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-[#D9CFC4] px-4 py-2.5 text-xs font-semibold text-[#1A1210] transition hover:border-[#25D366] hover:text-[#128C7E]"
           >
-            Open preview
-          </Link>
+            Enquire on WhatsApp
+          </a>
         </div>
       </div>
     </motion.article>
