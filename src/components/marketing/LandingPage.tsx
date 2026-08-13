@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { TemplateOrCustomize } from "./TemplateOrCustomize";
 import { CustomDesignShowcase } from "./CustomDesignShowcase";
+import { StudioTrust } from "./StudioTrust";
 import { COMPANY } from "@/data/contact";
 import { createThemes } from "@/data/themes";
 import { PhoneMockup } from "./PhoneMockup";
@@ -23,26 +24,26 @@ export function LandingPage() {
 
       <section className="mx-auto max-w-3xl px-5 pb-10 pt-14 text-center">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
-          Protorev Digital
+          {COMPANY.name}
         </p>
         <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
-          A website as beautiful
+          Invitations as graceful
           <br />
-          as your wedding day
+          as your ceremony
         </h1>
         <p className="mt-5 text-sm leading-relaxed text-[#5C4A42]">
-          Floating mobile invitation designs — preview on phone, customise on
-          WhatsApp. We deliver the finished invite for your family.
+          {COMPANY.tagline}. Preview on your phone, then commission a finished
+          card or guest website — designed for your faith, language, and family.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
-          Design · Personalise · Share
+          Browse · Commission · Celebrate
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-2">
           <Link
             href="/create"
             className="rounded-full bg-[#1A1210] px-6 py-3 text-sm font-semibold text-[#F7F4EF]"
           >
-            Browse designs
+            Explore designs
           </Link>
           <a
             href={`https://wa.me/${COMPANY.whatsapp}`}
@@ -50,12 +51,12 @@ export function LandingPage() {
             rel="noreferrer"
             className="rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
           >
-            WhatsApp us
+            WhatsApp studio
           </a>
         </div>
       </section>
 
-      <section className="mx-auto max-w-md space-y-14 px-5 pb-14">
+      <section className="mx-auto max-w-md space-y-14 px-5 pb-10">
         {featured.map((theme, i) => {
           if (!theme) return null;
           const pres = galleryPresentation(theme);
@@ -87,7 +88,7 @@ export function LandingPage() {
                   rel="noreferrer"
                   className="rounded-full border border-[#D9CFC4] bg-white px-3 py-2 text-[11px] font-semibold"
                 >
-                  Customize design
+                  Commission design
                 </a>
               </div>
               <div
@@ -112,12 +113,13 @@ export function LandingPage() {
         })}
       </section>
 
-      <div className="pb-6 text-center">
+      <div className="pb-4 text-center">
         <Link href="/create" className="text-sm font-semibold text-[#4A0E18]">
-          View all floating designs →
+          View the full collection →
         </Link>
       </div>
 
+      <StudioTrust />
       <CustomDesignShowcase />
       <TemplateOrCustomize />
     </main>

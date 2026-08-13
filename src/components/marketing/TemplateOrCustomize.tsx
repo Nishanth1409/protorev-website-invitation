@@ -16,9 +16,6 @@ type Props = {
   compact?: boolean;
 };
 
-/**
- * Gallery browse + WhatsApp order — no self-serve edit/pay/download.
- */
 export function TemplateOrCustomize({
   themeName,
   format = "invitation-card",
@@ -48,11 +45,12 @@ export function TemplateOrCustomize({
             Step 1
           </p>
           <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">
-            Browse theme examples
+            Browse the gallery
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
-            Preview invitation designs by faith and language. Sample names are
-            for display only — your details are added when we customise.
+            Preview invitation cards and guest websites by faith and language.
+            Sample names are illustrative — your details are set when we
+            customise.
           </p>
           <Link
             href="/create"
@@ -66,10 +64,10 @@ export function TemplateOrCustomize({
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
             Step 2
           </p>
-          <h3 className="mt-2 text-xl font-bold">Order customisation</h3>
+          <h3 className="mt-2 text-xl font-bold">Commission your design</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
-            Message us with the theme you liked. We customise and deliver — no
-            login, no online payment, no DIY download.
+            Message our studio with the theme you loved. We customise typography,
+            photos and blessings — then deliver finished files.
           </p>
           <p className="mt-3 text-base font-bold text-[#25D366]">
             {COMPANY.phoneDisplay}
@@ -81,7 +79,7 @@ export function TemplateOrCustomize({
               rel="noreferrer"
               className="inline-flex justify-center rounded-2xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
             >
-              WhatsApp us
+              WhatsApp studio
             </a>
             <a
               href={mail}

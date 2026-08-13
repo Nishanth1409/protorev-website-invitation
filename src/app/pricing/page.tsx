@@ -2,9 +2,9 @@ import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
 import { PricingTable } from "@/components/commerce/PricingTable";
 
 export const metadata = {
-  title: "Pricing — Protorev Digital Invitations",
+  title: "Packages & pricing",
   description:
-    "Custom invitation packages — browse themes, WhatsApp us to order. We design and deliver.",
+    "Invitation card and guest website packages — commission via WhatsApp with Protorev Digital.",
 };
 
 export default function PricingPage() {

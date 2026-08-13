@@ -52,7 +52,7 @@ export function MobilePreviewPage({
         </div>
 
         <p className="mt-4 text-center text-[11px] text-[#8A7A70]">
-          Sample preview · We customise names, photos & language for you
+          Sample preview · Names & photos customised by our studio
         </p>
       </div>
 
@@ -71,11 +71,11 @@ export function MobilePreviewPage({
               href={emailHref}
               className="flex w-full items-center justify-center rounded-full border border-[#D9CFC4] py-3 text-sm font-semibold text-[#1A1210]"
             >
-              Email details
+              Email the studio
             </a>
           )}
           <p className="text-center text-[10px] text-[#8A7A70]">
-            {COMPANY.phoneDisplay} · Protorev Digital
+            Concierge · {COMPANY.phoneDisplay}
           </p>
         </div>
       </div>

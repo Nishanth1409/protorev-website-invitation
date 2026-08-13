@@ -97,10 +97,10 @@ function WatermarkLayer() {
     >
       <div className="rotate-[-28deg] text-center">
         <p className="text-3xl font-bold tracking-[0.18em] text-white/40 sm:text-4xl">
-          PREVIEW
+          SAMPLE
         </p>
         <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
-          Unlock to download
+          Studio preview
         </p>
       </div>
       <div

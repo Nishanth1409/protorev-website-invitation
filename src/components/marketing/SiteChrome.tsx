@@ -9,28 +9,28 @@ const SITE = COMPANY.site;
 const WA = whatsappUrl();
 
 const nav = [
-  { href: "/create", label: "Themes" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/#customise", label: "Order" },
+  { href: "/create", label: "Gallery" },
+  { href: "/pricing", label: "Packages" },
+  { href: "/#customise", label: "Commission" },
 ] as const;
 
 const footerInvites = [
   { href: "/create", label: "Theme gallery" },
-  { href: "/pricing", label: "Pricing" },
-  { href: "/#customise", label: "Order via WhatsApp" },
+  { href: "/pricing", label: "Packages & pricing" },
+  { href: "/#customise", label: "Commission via WhatsApp" },
 ] as const;
 
 const footerCompany = [
-  { href: `${SITE}#about`, label: "About Us", external: true },
-  { href: `${SITE}#work`, label: "Our Work", external: true },
-  { href: SITE, label: "Company site", external: true },
+  { href: `${SITE}#about`, label: "About", external: true },
+  { href: `${SITE}#work`, label: "Portfolio", external: true },
+  { href: SITE, label: "protorevdigital.com", external: true },
 ] as const;
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[#E8DFD4] bg-[#F7F4EF]/92 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-[#E8DFD4] bg-[#F7F4EF]/94 backdrop-blur-xl">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-5 py-3">
         <BrandLogo variant="light" size="header" />
 
@@ -102,12 +102,15 @@ export function SiteFooter() {
         <div>
           <BrandLogo variant="dark" size="footer" href={SITE} external />
           <p className="mt-4 text-sm leading-relaxed text-white/65">
-            Floating mobile invitation experiences — choose a theme, WhatsApp us,
-            we customise and deliver.
+            {COMPANY.tagline}. Multi-faith invitation cards and guest websites,
+            customised by our studio and delivered on WhatsApp.
+          </p>
+          <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#C9A227]">
+            {COMPANY.productLine}
           </p>
         </div>
         <div>
-          <h4 className="text-sm font-semibold">Invitations</h4>
+          <h4 className="text-sm font-semibold">Studio</h4>
           <ul className="mt-3 space-y-2 text-sm text-white/65">
             {footerInvites.map((item) => (
               <li key={item.href}>
@@ -131,7 +134,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h4 className="text-sm font-semibold">Get in touch</h4>
+          <h4 className="text-sm font-semibold">Concierge</h4>
           <ul className="mt-3 space-y-2 text-sm text-white/65">
             <li>
               <a href={WA} target="_blank" rel="noreferrer" className="hover:text-white">

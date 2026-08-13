@@ -50,11 +50,11 @@ const scriptAlt = Great_Vibes({
 
 export const metadata: Metadata = {
   title: {
-    default: "Where Creativity Meets Code · Protorev Digital",
-    template: "%s · Where Creativity Meets Code",
+    default: "Digital Wedding Invitations · Protorev Digital",
+    template: "%s · Protorev Digital",
   },
   description:
-    "Where creativity meets code — multi-faith, multi-language digital wedding invitations by Protorev Digital.",
+    "Premium multi-faith, multi-language digital wedding invitations and guest websites. Browse themes, then commission your design via WhatsApp.",
   applicationName: "Protorev Digital",
   icons: {
     icon: [

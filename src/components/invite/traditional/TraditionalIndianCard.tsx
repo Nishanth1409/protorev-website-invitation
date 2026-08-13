@@ -24,9 +24,9 @@ function Watermark() {
       aria-hidden
     >
       <div className="rotate-[-28deg] text-center">
-        <p className="invite-name text-3xl tracking-[0.18em] text-[#4A0E18]/35">PREVIEW</p>
+        <p className="invite-name text-3xl tracking-[0.18em] text-[#4A0E18]/35">SAMPLE</p>
         <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#4A0E18]/40">
-          Unlock to download
+          Studio preview
         </p>
       </div>
     </div>

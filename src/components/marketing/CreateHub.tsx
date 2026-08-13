@@ -20,6 +20,7 @@ import { COMPANY, customizeWhatsAppUrl } from "@/data/contact";
 import { formatInr, getPlan } from "@/data/pricing";
 import { TemplateOrCustomize } from "./TemplateOrCustomize";
 import { CustomDesignShowcase } from "./CustomDesignShowcase";
+import { StudioTrust } from "./StudioTrust";
 import { PhoneMockup } from "./PhoneMockup";
 
 type FormatFilter = InviteFormatId;
@@ -61,15 +62,16 @@ export function CreateHub() {
           Protorev Digital
         </p>
         <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
-          A website as beautiful
+          A gallery of invitations
           <br />
-          as your wedding day
+          worthy of your vows
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#5C4A42]">
-          Your guests will feel it before they even arrive.
+          Curated mobile designs for cards and guest websites. Preview freely —
+          then commission the finish with our studio.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
-          Design · Personalise · Share
+          Browse · Commission · Celebrate
         </p>
 
         <div className="mt-7 flex flex-wrap justify-center gap-2">
@@ -120,7 +122,7 @@ export function CreateHub() {
           ))}
         </div>
         <p className="mt-2 text-center text-[10px] text-[#8A7A70]">
-          Every design includes · Invitation · Events · Gallery · WhatsApp delivery
+          Every design · Invitation · Events · Gallery · Concierge delivery
         </p>
       </section>
 
@@ -139,14 +141,14 @@ export function CreateHub() {
       <section className="mx-auto mt-16 max-w-lg px-5">
         <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#2A0810,#4A0E18)] px-5 py-8 text-center text-[#F8F1E3]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#E8C56A]">
-            ✦ Custom design ✦
+            ✦ Bespoke commission ✦
           </p>
           <h2 className="mt-2 font-[family-name:var(--font-display)] text-2xl">
-            Fully bespoke for your story
+            Designed around your story
           </h2>
           <p className="mt-2 text-xs text-white/75">
-            Share inspiration on WhatsApp — we craft a one-of-a-kind floating
-            invitation experience.
+            Share inspiration on WhatsApp — we craft a one-of-a-kind invitation
+            for your family and faith.
           </p>
           <p className="mt-3 text-base font-semibold text-[#E8C56A]">
             Starting {formatInr(startingPrice)}
@@ -157,16 +159,17 @@ export function CreateHub() {
             rel="noreferrer"
             className="mt-4 inline-flex rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-white"
           >
-            Customize design
+            Commission a design
           </a>
         </div>
       </section>
 
+      <StudioTrust />
       <CustomDesignShowcase />
       <TemplateOrCustomize />
 
       <p className="mx-auto mt-8 max-w-lg px-5 text-center text-[10px] text-[#8A7A70]">
-        Need help choosing? WhatsApp {COMPANY.phoneDisplay}
+        Need guidance? WhatsApp {COMPANY.phoneDisplay}
       </p>
     </main>
   );
@@ -251,13 +254,13 @@ function TemplateMobileCard({
           rel="noreferrer"
           className="rounded-full bg-[#1A1210] px-4 py-2.5 text-xs font-semibold text-[#F7F4EF]"
         >
-          Customize design
+          Commission design
         </a>
         <Link
           href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
           className="rounded-full border border-[#D9CFC4] px-4 py-2.5 text-xs font-semibold text-[#1A1210]"
         >
-          Try this design
+          Preview design
         </Link>
       </div>
     </motion.article>

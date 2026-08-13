@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
 
 export const metadata = {
-  title: "Example cards — Protorev Digital",
-  description: "Browse wedding invitation card examples — edit and download PNG/PDF.",
+  title: "Invitation gallery",
+  description:
+    "Browse premium wedding invitation cards and guest websites by Protorev Digital.",
 };
 
 export default function TemplatesPage() {

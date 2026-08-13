@@ -73,9 +73,9 @@ function Watermark() {
   return (
     <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center overflow-hidden" aria-hidden>
       <div className="rotate-[-28deg] text-center">
-        <p className="text-3xl font-bold tracking-[0.18em] text-white/40 sm:text-4xl">PREVIEW</p>
+        <p className="text-3xl font-bold tracking-[0.18em] text-white/40 sm:text-4xl">SAMPLE</p>
         <p className="mt-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">
-          Unlock to download
+          Studio preview
         </p>
       </div>
     </div>

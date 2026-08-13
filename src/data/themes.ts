@@ -70,13 +70,13 @@ export const formatMeta: Record<
     label: "Invitation cards",
     short: "Card",
     description:
-      "Beautiful ceremonial cards — preview live, then WhatsApp us to customise names, photos & language. We deliver finished files.",
+      "Ceremonial cards for WhatsApp and print — preview live, then commission names, photos and language with our studio.",
   },
   "event-page": {
     label: "Wedding websites",
     short: "Website",
     description:
-      "Full guest invitation websites — story, countdown, events & map. Pick a look; we personalise and host your shareable link.",
+      "Guest invitation websites with story, countdown, events and map — personalised and delivered as a shareable link.",
   },
 };
 

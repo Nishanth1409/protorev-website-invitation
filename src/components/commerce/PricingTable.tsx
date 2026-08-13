@@ -5,22 +5,23 @@ import { formatInr, pricingPlans } from "@/data/pricing";
 import { COMPANY, customizeWhatsAppUrl } from "@/data/contact";
 import { TemplateOrCustomize } from "@/components/marketing/TemplateOrCustomize";
 import { CustomDesignShowcase } from "@/components/marketing/CustomDesignShowcase";
+import { StudioTrust } from "@/components/marketing/StudioTrust";
 
 export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <div>
       {showHeader && (
-        <div className="px-5 pb-8 pt-2 text-center">
+        <div className="mx-auto max-w-3xl px-5 pb-8 pt-2 text-center">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
-            How pricing works
+            Studio packages
           </p>
-          <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)]">
-            Browse themes.{" "}
-            <span className="pr-gradient-text">We customise for you.</span>
+          <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)] sm:text-3xl">
+            Clear pricing.{" "}
+            <span className="pr-gradient-text">Concierge delivery.</span>
           </h1>
           <p className="mx-auto mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
-            No login. No payment on this website. Choose a theme, WhatsApp us —
-            we design and deliver. From {formatInr(pricingPlans[0].priceInr)}.
+            Browse themes free. When you are ready, WhatsApp us — we customise
+            and deliver. Packages from {formatInr(pricingPlans[0].priceInr)}.
           </p>
           <p className="mt-3 text-base font-bold text-[#25D366]">
             {COMPANY.phoneDisplay}
@@ -75,7 +76,7 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
                 rel="noreferrer"
                 className="mt-5 inline-flex w-full justify-center rounded-2xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
               >
-                WhatsApp to order
+                WhatsApp to commission
               </a>
             </article>
           ))}
@@ -95,7 +96,9 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
         </p>
       </section>
 
-      <div className="mt-8">
+      <StudioTrust />
+
+      <div className="mt-2">
         <CustomDesignShowcase />
       </div>
 
