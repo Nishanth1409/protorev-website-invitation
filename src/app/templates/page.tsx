@@ -3,9 +3,9 @@ import { redirect } from "next/navigation";
 export const metadata = {
   title: "Invitation gallery",
   description:
-    "Browse premium wedding invitation cards and guest websites by Protorev Digital.",
+    "Live wedding invitation work from Protorev Digital.",
 };
 
 export default function TemplatesPage() {
-  redirect("/create?format=invitation-card");
+  redirect("/create");
 }
