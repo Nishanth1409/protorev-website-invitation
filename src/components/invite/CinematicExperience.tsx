@@ -14,6 +14,10 @@ import {
   FestivalSiteBody,
   isFestivalWebExperience,
 } from "./FestivalSiteLayouts";
+import {
+  IndianTraditionalSiteBody,
+  shouldUseIndianTraditionalSite,
+} from "./IndianTraditionalSite";
 
 type Props = {
   invite: WeddingInvite;
@@ -474,10 +478,20 @@ export function CinematicExperience({ invite, experience }: Props) {
       particleMode={particleMode}
       cover={(open) => coverFor(experience, invite, open)}
     >
-      {() =>
-        isFestivalWebExperience(experience) ? (
-          <FestivalSiteBody invite={invite} experience={experience} />
-        ) : (
+      {() => {
+        if (isFestivalWebExperience(experience)) {
+          return <FestivalSiteBody invite={invite} experience={experience} />;
+        }
+        if (
+          shouldUseIndianTraditionalSite({
+            ceremony: invite.ceremony,
+            experience,
+            isFestivalWeb: false,
+          })
+        ) {
+          return <IndianTraditionalSiteBody invite={invite} />;
+        }
+        return (
           <div style={{ background: t.bgDeep, color: t.ink }}>
             <HeroBlock invite={invite} cinematic={isEvent} />
             <div className="invite-stage px-4 sm:px-6">
@@ -487,8 +501,8 @@ export function CinematicExperience({ invite, experience }: Props) {
             <SharedEvents invite={invite} />
             <SharedLocationClosing invite={invite} />
           </div>
-        )
-      }
+        );
+      }}
     </InviteShell>
   );
 }

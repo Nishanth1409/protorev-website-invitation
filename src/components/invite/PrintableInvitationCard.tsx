@@ -5,6 +5,8 @@ import type { WeddingInvite } from "@/data/types";
 import type { ExperienceKey } from "@/data/themes";
 import { getCreateTheme } from "@/data/themes";
 import { FestivalArtCard, isRichFestivalCard } from "./FestivalArtCard";
+import { TraditionalIndianCard } from "./traditional/TraditionalIndianCard";
+import { shouldRenderTraditionalIndian } from "./traditional/indianStyle";
 
 type Props = {
   invite: WeddingInvite;
@@ -14,16 +16,16 @@ type Props = {
 
 /**
  * Fixed 5×7 invitation card for PNG / PDF export.
- * Ceremonial themes use blessing-first maroon/gold styling
- * inspired by traditional digital invitation websites.
- * Festival / ceremony themes use richer Canva-market art cards.
+ * Wedding templates use authentic Indian regional card art by faith & language.
+ * Festival / modern themes keep their own visual families.
  */
 export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
   function PrintableInvitationCard({ invite, watermarked = false }, ref) {
     const theme = invite.themeId ? getCreateTheme(invite.themeId) : null;
     const experience = (theme?.experience ?? "classic-ornate") as ExperienceKey;
+    const rich = isRichFestivalCard(experience);
 
-    if (isRichFestivalCard(experience)) {
+    if (rich) {
       return (
         <FestivalArtCard
           ref={ref}
@@ -35,15 +37,14 @@ export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
     }
 
     if (
-      experience === "temple-dawn" ||
-      experience === "classic-ornate" ||
-      experience === "ribbon-envelope" ||
-      experience === "lantern-fire" ||
-      experience === "heritage-arch" ||
-      experience === "velvet-royal"
+      shouldRenderTraditionalIndian({
+        ceremony: invite.ceremony,
+        experience,
+        isRichFestival: rich,
+      })
     ) {
       return (
-        <CeremonialBlessingCard
+        <TraditionalIndianCard
           ref={ref}
           invite={invite}
           watermarked={watermarked}

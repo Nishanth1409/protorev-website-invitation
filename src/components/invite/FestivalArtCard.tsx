@@ -5,7 +5,9 @@ import { forwardRef } from "react";
 import type { WeddingInvite } from "@/data/types";
 import type { ExperienceKey } from "@/data/themes";
 import { getCreateTheme } from "@/data/themes";
-import { LaceToran, MandalaWatermark } from "./FestivalDecor";
+import { getIndianCardStyle } from "./traditional/indianStyle";
+import { MangoToran } from "./traditional/IndianMotifs";
+import { MandalaWatermark } from "./FestivalDecor";
 
 type Props = {
   invite: WeddingInvite;
@@ -90,8 +92,16 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
     const motifKey = themeMeta?.artMotif;
     const motif = motifKey ? MOTIF[motifKey] : undefined;
     const t = invite.theme;
+    const indian =
+      (invite.ceremony ?? "wedding") === "wedding" || invite.ceremony === "engagement"
+        ? getIndianCardStyle(invite.faith, invite.language)
+        : null;
 
     if (experience === "diya-vivah" || experience === "marigold-baraat" || experience === "gruhapravesha-glow") {
+      const gold = indian?.gold ?? t.accent;
+      const cream = indian?.cream ?? t.ink;
+      const maroon = indian?.maroon ?? t.bg;
+      const deep = indian?.deep ?? t.bgDeep;
       return (
         <div
           ref={ref}
@@ -101,21 +111,21 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
             width: "100%",
             maxWidth: 420,
             aspectRatio: "5 / 7",
-            background: `radial-gradient(circle at 50% 12%, ${t.glow}, transparent 42%), linear-gradient(180deg, ${t.bg}, ${t.bgDeep})`,
-            color: t.ink,
+            background: `radial-gradient(circle at 50% 12%, ${gold}33, transparent 42%), linear-gradient(180deg, ${maroon}, ${deep})`,
+            color: cream,
             fontFamily: "Georgia, 'Times New Roman', serif",
           }}
         >
           <div className="absolute inset-x-0 top-0 px-2 pt-2 opacity-90">
-            <LaceToran color={t.accent} />
+            <MangoToran color={gold} />
           </div>
-          <div className="pointer-events-none absolute inset-3 border" style={{ borderColor: t.border }} />
-          <div className="pointer-events-none absolute inset-5 border" style={{ borderColor: `${t.accent}66` }} />
-          <MandalaWatermark color={t.accent} />
+          <div className="pointer-events-none absolute inset-3 border" style={{ borderColor: `${gold}66` }} />
+          <div className="pointer-events-none absolute inset-5 border" style={{ borderColor: `${gold}44` }} />
+          <MandalaWatermark color={gold} />
 
           <div className="relative z-10 flex h-full flex-col items-center px-[8%] pb-[8%] pt-[12%] text-center">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.32em]" style={{ color: t.accent }}>
-              {invite.ceremony === "housewarming" ? "Gruhapravesha" : "Shubha Vivaha"} · {invite.languageLabel}
+            <p className="text-[10px] font-semibold uppercase tracking-[0.32em]" style={{ color: gold }}>
+              {indian?.openingLine ?? "Shubha Vivaha"} · {invite.languageLabel}
             </p>
             {motif && (
               <div className="relative mt-3 h-24 w-full max-w-[220px] overflow-hidden rounded-2xl border" style={{ borderColor: t.border }}>
@@ -123,20 +133,20 @@ export const FestivalArtCard = forwardRef<HTMLDivElement, Props>(
               </div>
             )}
             <div className="mt-4 flex-1">
-              <Names invite={invite} accent={t.accent} ink={t.ink} />
-              <div className="mx-auto mt-4 h-px w-16" style={{ background: t.accent }} />
-              <p className="mt-3 text-sm" style={{ color: t.accent }}>
+              <Names invite={invite} accent={gold} ink={cream} />
+              <div className="mx-auto mt-4 h-px w-16" style={{ background: gold }} />
+              <p className="mt-3 text-sm" style={{ color: gold }}>
                 {invite.blessingNative}
               </p>
-              <p className="mt-2 text-[11px] leading-relaxed" style={{ color: t.inkSoft }}>
+              <p className="mt-2 text-[11px] leading-relaxed" style={{ color: `${cream}bb` }}>
                 {invite.tagline}
               </p>
             </div>
             <div>
-              <p className="text-sm tracking-[0.18em]" style={{ color: t.accent }}>
+              <p className="text-sm tracking-[0.18em]" style={{ color: gold }}>
                 {invite.weddingDateLabel}
               </p>
-              <p className="mt-1 text-xs" style={{ color: t.ink }}>
+              <p className="mt-1 text-xs" style={{ color: cream }}>
                 {invite.location.name}
               </p>
               <p className="mt-3 text-[9px] uppercase tracking-[0.22em]" style={{ color: t.inkSoft }}>
