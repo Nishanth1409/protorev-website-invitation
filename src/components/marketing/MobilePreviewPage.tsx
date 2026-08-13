@@ -14,7 +14,7 @@ type Props = {
   backHref?: string;
 };
 
-/** Live preview page — phone only, sticky actions below. */
+/** Live preview — floating phone on cream stage, sticky WhatsApp CTA. */
 export function MobilePreviewPage({
   children,
   themeName,
@@ -24,8 +24,8 @@ export function MobilePreviewPage({
   backHref = "/create",
 }: Props) {
   return (
-    <div className="min-h-[calc(100svh-4rem)] bg-[#F7F4EF]">
-      <div className="px-4 pb-36 pt-6">
+    <div className="min-h-screen bg-[#F7F4EF]">
+      <div className="mx-auto max-w-lg px-4 pb-36 pt-6">
         <Link
           href={backHref}
           className="text-xs font-medium text-[#7A6A60] hover:text-[#1A1210]"
@@ -39,7 +39,13 @@ export function MobilePreviewPage({
           <p className="mt-1 text-xs text-[#5C4A42]">{subtitle}</p>
         )}
 
-        <div className="mt-6 flex justify-center">
+        <div
+          className="mt-8 flex justify-center rounded-[2rem] px-4 py-10"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 30%, rgba(232,197,106,0.22), transparent 60%)",
+          }}
+        >
           <MobileDeviceFrame scrollable label={`Preview ${themeName}`}>
             {children}
           </MobileDeviceFrame>
@@ -50,8 +56,8 @@ export function MobilePreviewPage({
         </p>
       </div>
 
-      <div className="sticky bottom-0 z-50 border-t border-[#E8DFD4] bg-white/95 px-4 py-4 backdrop-blur-md">
-        <div className="flex flex-col gap-2">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#E8DFD4] bg-white/95 px-4 py-4 backdrop-blur-md">
+        <div className="mx-auto flex max-w-lg flex-col gap-2">
           <a
             href={whatsAppHref}
             target="_blank"
@@ -76,4 +82,3 @@ export function MobilePreviewPage({
     </div>
   );
 }
-

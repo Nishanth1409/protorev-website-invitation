@@ -70,7 +70,7 @@ export function CustomDesignShowcase({
   }
 
   return (
-    <section className="px-5 py-6" id="customise">
+    <section className="mx-auto max-w-3xl px-5 py-6" id="customise">
       <div className="overflow-hidden rounded-[1.5rem] border border-[var(--line)] bg-white shadow-[var(--shadow-soft)]">
         <div className="p-5">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">

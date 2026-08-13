@@ -21,18 +21,18 @@ export function LandingPage() {
     <main className="relative overflow-hidden bg-[#F7F4EF]">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
 
-      <section className="px-5 pb-10 pt-14 text-center">
+      <section className="mx-auto max-w-3xl px-5 pb-10 pt-14 text-center">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
           Protorev Digital
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210]">
+        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
           A website as beautiful
           <br />
           as your wedding day
         </h1>
         <p className="mt-5 text-sm leading-relaxed text-[#5C4A42]">
-          Mobile invitation designs — preview on phone, customise on WhatsApp.
-          We deliver the finished invite for your family.
+          Floating mobile invitation designs — preview on phone, customise on
+          WhatsApp. We deliver the finished invite for your family.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
           Design · Personalise · Share
@@ -55,7 +55,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="space-y-12 px-5 pb-14">
+      <section className="mx-auto grid max-w-6xl gap-14 px-5 pb-14 sm:grid-cols-2 lg:grid-cols-3">
         {featured.map((theme, i) => {
           if (!theme) return null;
           const pres = galleryPresentation(theme);
@@ -69,7 +69,7 @@ export function LandingPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.04 }}
-              className="text-center"
+              className="flex flex-col items-center text-center"
             >
               <div className="mb-3 flex justify-center gap-2">
                 <Link
@@ -91,9 +91,9 @@ export function LandingPage() {
                 </a>
               </div>
               <div
-                className="mx-auto max-w-[260px] rounded-2xl px-2 pt-5"
+                className="w-full max-w-[280px] rounded-[2rem] px-3 pb-5 pt-7"
                 style={{
-                  background: `linear-gradient(180deg, ${theme.theme.bgDeep}, #F7F4EF 70%)`,
+                  background: `radial-gradient(ellipse at 50% 28%, ${theme.theme.glow}, transparent 58%), linear-gradient(180deg, ${theme.theme.bgDeep}55, transparent 70%)`,
                 }}
               >
                 <PhoneMockup theme={theme} />
@@ -101,7 +101,7 @@ export function LandingPage() {
               <h3 className="mt-4 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
                 {pres.title}
               </h3>
-              <p className="mt-1 text-sm text-[#5C4A42]">{pres.tagline}</p>
+              <p className="mt-1 max-w-xs text-sm text-[#5C4A42]">{pres.tagline}</p>
               {price != null && (
                 <p className="mt-2 text-sm font-semibold text-[#1A1210]">
                   From {formatInr(price)}
@@ -110,12 +110,13 @@ export function LandingPage() {
             </motion.article>
           );
         })}
-        <div className="text-center">
-          <Link href="/create" className="text-sm font-semibold text-[#4A0E18]">
-            View all mobile designs →
-          </Link>
-        </div>
       </section>
+
+      <div className="pb-6 text-center">
+        <Link href="/create" className="text-sm font-semibold text-[#4A0E18]">
+          View all floating designs →
+        </Link>
+      </div>
 
       <CustomDesignShowcase />
       <TemplateOrCustomize />

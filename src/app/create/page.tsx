@@ -1,6 +1,5 @@
 import { Suspense } from "react";
 import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
-import { MobileSiteShell } from "@/components/marketing/MobileSiteShell";
 import { CreateHub } from "@/components/marketing/CreateHub";
 
 export const metadata = {
@@ -11,12 +10,12 @@ export const metadata = {
 
 export default function CreatePage() {
   return (
-    <MobileSiteShell>
+    <>
       <SiteHeader />
       <Suspense fallback={<div className="min-h-[50vh]" />}>
         <CreateHub />
       </Suspense>
       <SiteFooter />
-    </MobileSiteShell>
+    </>
   );
 }

@@ -28,11 +28,11 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
         </div>
       )}
 
-      <section className="px-5">
+      <section className="mx-auto max-w-6xl px-5">
         <h2 className="mb-3 text-lg font-bold text-[var(--ink)]">
           Customisation packages
         </h2>
-        <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pricingPlans.map((plan) => (
             <article
               key={plan.id}

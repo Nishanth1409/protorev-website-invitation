@@ -1,5 +1,4 @@
 import { SiteFooter, SiteHeader } from "@/components/marketing/SiteChrome";
-import { MobileSiteShell } from "@/components/marketing/MobileSiteShell";
 import { PricingTable } from "@/components/commerce/PricingTable";
 
 export const metadata = {
@@ -10,12 +9,12 @@ export const metadata = {
 
 export default function PricingPage() {
   return (
-    <MobileSiteShell>
+    <>
       <SiteHeader />
       <main className="bg-[var(--background)] pb-16 pt-8">
         <PricingTable />
       </main>
       <SiteFooter />
-    </MobileSiteShell>
+    </>
   );
 }

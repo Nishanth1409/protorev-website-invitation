@@ -19,6 +19,12 @@ import {
   shouldUseIndianTraditionalSite,
 } from "./IndianTraditionalSite";
 import { getIndianCardStyle } from "./traditional/indianStyle";
+import {
+  FloatingCeremonyHero,
+  FoilScratchCover,
+  LanternRopeCover,
+  MistRevealCover,
+} from "./InteractiveCovers";
 
 type Props = {
   invite: WeddingInvite;
@@ -405,41 +411,43 @@ function coverFor(
       return <RibbonCover invite={invite} onOpen={onOpen} />;
     case "gilded-curtain":
     case "velvet-royal":
-      return <CurtainCover invite={invite} onOpen={onOpen} />;
+    case "peacock-palace":
+      return <LanternRopeCover invite={invite} onOpen={onOpen} />;
+    case "glass-bento":
+    case "ivory-edit":
+    case "soft-bloom":
+    case "petal-story":
+      return <MistRevealCover invite={invite} onOpen={onOpen} />;
+    case "classic-ornate":
+    case "celestial-ring":
+      return <FoilScratchCover invite={invite} onOpen={onOpen} />;
     case "cyber-terminal":
     case "neon-dual":
     case "nova-glitch":
       return <CyberCover invite={invite} onOpen={onOpen} />;
     case "aurora-orbit":
-    case "celestial-ring":
     case "cosmic-swipe":
       return <AuroraCover invite={invite} onOpen={onOpen} />;
     case "vivah-festival":
     case "poster-night":
     case "mandala-orbit":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Celebration Night" />;
+      return <CurtainCover invite={invite} onOpen={onOpen} />;
     case "lotus-garden":
-    case "soft-bloom":
-    case "petal-story":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Bloom & Blessing" />;
+      return <MistRevealCover invite={invite} onOpen={onOpen} />;
     case "island-sunset":
       return <DefaultCover invite={invite} onOpen={onOpen} kicker="Destination Vows" />;
     case "film-poster":
     case "cinema-split":
     case "noir-strip":
       return <DefaultCover invite={invite} onOpen={onOpen} kicker="Cinematic Story" />;
-    case "glass-bento":
-    case "ivory-edit":
-    case "classic-ornate":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Editorial Invite" />;
     case "lantern-fire":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Lantern Light" />;
+      return <LanternRopeCover invite={invite} onOpen={onOpen} />;
     case "festival-lane":
     case "diya-vivah":
     case "marigold-baraat":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Festival Lights" />;
+      return <LanternRopeCover invite={invite} onOpen={onOpen} />;
     case "mehendi-mandala":
-      return <DefaultCover invite={invite} onOpen={onOpen} kicker="Mehendi Garden" />;
+      return <MistRevealCover invite={invite} onOpen={onOpen} />;
     case "naming-lotus":
       return <DefaultCover invite={invite} onOpen={onOpen} kicker="Naming Blessing" />;
     case "campus-farewell":
@@ -487,15 +495,17 @@ function StoryStrip({ invite }: { invite: WeddingInvite }) {
 }
 
 function HeroBlock({ invite, cinematic }: { invite: WeddingInvite; cinematic?: boolean }) {
+  if (cinematic) {
+    return <FloatingCeremonyHero invite={invite} />;
+  }
+
   const t = invite.theme;
   const c = invite.copy;
   return (
-    <section className="relative z-20 flex min-h-[78svh] items-center justify-center px-4 py-14 sm:min-h-[88vh] sm:px-6 sm:py-16">
+    <section className="relative z-20 flex min-h-[78svh] items-center justify-center px-4 py-14">
       <Stage className="w-full">
         <div
-          className={`mx-auto w-full border px-6 py-12 text-center backdrop-blur-md sm:px-10 sm:py-14 ${
-            cinematic ? "max-w-3xl rounded-[1.5rem] sm:rounded-[2rem]" : "max-w-xl rounded-[1.8rem]"
-          }`}
+          className="mx-auto w-full max-w-xl rounded-[1.8rem] border px-6 py-12 text-center backdrop-blur-md"
           style={{
             background: t.card,
             borderColor: t.border,
@@ -504,30 +514,26 @@ function HeroBlock({ invite, cinematic }: { invite: WeddingInvite; cinematic?: b
           }}
         >
           <div
-            className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border text-xl sm:h-16 sm:w-16 sm:text-2xl"
+            className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border text-xl"
             style={{ borderColor: t.border, color: t.accent }}
           >
             {invite.emblem || invite.monogram}
           </div>
-          <p className="mb-3 text-[0.65rem] tracking-[0.35em] sm:text-xs" style={{ color: t.inkSoft }}>
+          <p className="mb-3 text-[0.65rem] tracking-[0.35em]" style={{ color: t.inkSoft }}>
             {c.saveTheDate}
           </p>
-          <h1 className="invite-name text-4xl leading-tight sm:text-5xl lg:text-6xl">
-            {invite.bride}
-          </h1>
+          <h1 className="invite-name text-4xl leading-tight">{invite.bride}</h1>
           {invite.groom?.trim() ? (
             <>
-              <p className="invite-script my-2 text-3xl leading-none sm:text-4xl" style={{ color: t.accent }}>
+              <p className="invite-script my-2 text-3xl leading-none" style={{ color: t.accent }}>
                 &
               </p>
-              <h1 className="invite-name mb-5 text-4xl leading-tight sm:text-5xl lg:text-6xl">
-                {invite.groom}
-              </h1>
+              <h1 className="invite-name mb-5 text-4xl leading-tight">{invite.groom}</h1>
             </>
           ) : (
             <div className="mb-5" />
           )}
-          <p className="tracking-[0.2em] sm:tracking-[0.25em]" style={{ color: t.accentSoft }}>
+          <p className="tracking-[0.2em]" style={{ color: t.accentSoft }}>
             {invite.weddingDateLabel}
           </p>
           <p className="mx-auto mt-5 max-w-md text-sm leading-relaxed" style={{ color: t.inkSoft }}>
@@ -536,6 +542,65 @@ function HeroBlock({ invite, cinematic }: { invite: WeddingInvite; cinematic?: b
           <p className="mt-4 text-sm" style={{ color: t.ink }}>
             {invite.blessingNative}
           </p>
+        </div>
+      </Stage>
+    </section>
+  );
+}
+
+function GuestEssentials({ invite }: { invite: WeddingInvite }) {
+  const t = invite.theme;
+  const wa = `https://wa.me/?text=${encodeURIComponent(
+    `RSVP: ${invite.bride}${invite.groom?.trim() ? ` & ${invite.groom}` : ""} — Yes, we will join!`,
+  )}`;
+  const items = [
+    { label: "Dress code", value: "Festive formal" },
+    { label: "Venue", value: invite.location.name },
+    { label: "City", value: invite.location.address.split(",").slice(-2).join(",").trim() || invite.location.address },
+    { label: "Hashtag", value: `#${invite.bride.replace(/\s/g, "")}Weds${(invite.groom || "Us").replace(/\s/g, "")}` },
+  ];
+
+  return (
+    <section className="relative z-20 px-4 py-12">
+      <Stage>
+        <h2 className="mb-6 text-center invite-name text-2xl" style={{ color: t.ink }}>
+          Things to Know
+        </h2>
+        <div className="grid grid-cols-1 gap-3">
+          {items.map((item) => (
+            <div
+              key={item.label}
+              className="rounded-2xl border px-4 py-4 text-center"
+              style={{ borderColor: t.border, background: t.card }}
+            >
+              <p className="text-[10px] uppercase tracking-[0.22em]" style={{ color: t.inkSoft }}>
+                {item.label}
+              </p>
+              <p className="mt-1 text-sm font-semibold" style={{ color: t.ink }}>
+                {item.value}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div
+          className="mt-10 rounded-[1.5rem] border px-5 py-8 text-center"
+          style={{ borderColor: t.border, background: t.card }}
+        >
+          <h2 className="invite-name text-2xl" style={{ color: t.ink }}>
+            Will you join us?
+          </h2>
+          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed" style={{ color: t.inkSoft }}>
+            We&apos;ve saved a seat for you — confirm on WhatsApp so we can welcome you warmly.
+          </p>
+          <a
+            href={wa}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 inline-flex rounded-full bg-[#25D366] px-6 py-3 text-sm font-semibold text-white"
+          >
+            RSVP via WhatsApp
+          </a>
         </div>
       </Stage>
     </section>
@@ -596,11 +661,14 @@ export function CinematicExperience({ invite, experience }: Props) {
         return (
           <div style={{ background: t.bgDeep, color: t.ink }}>
             <HeroBlock invite={invite} cinematic={isEvent} />
-            <div className="invite-stage px-4 sm:px-6">
-              <SharedCountdown invite={invite} />
-            </div>
+            {!isEvent && (
+              <div className="invite-stage px-4">
+                <SharedCountdown invite={invite} />
+              </div>
+            )}
             {isEvent && <StoryStrip invite={invite} />}
             <SharedEvents invite={invite} />
+            {isEvent && <GuestEssentials invite={invite} />}
             <SharedLocationClosing invite={invite} />
           </div>
         );

@@ -53,31 +53,30 @@ export function CreateHub() {
   const startingPrice = getPlan("custom-card")?.priceInr ?? 699;
 
   return (
-    <main className="relative overflow-hidden bg-[#F7F4EF] pb-16">
+    <main className="relative overflow-hidden bg-[#F7F4EF] pb-20">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
 
-      {/* Hero */}
-      <section className="px-5 pb-8 pt-12 text-center">
+      <section className="mx-auto max-w-3xl px-5 pb-8 pt-14 text-center">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
           Protorev Digital
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.75rem] font-semibold leading-[1.2] text-[#1A1210]">
+        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
           A website as beautiful
           <br />
           as your wedding day
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#5C4A42]">
+        <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-[#5C4A42]">
           Your guests will feel it before they even arrive.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
           Design · Personalise · Share
         </p>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
+        <div className="mt-7 flex flex-wrap justify-center gap-2">
           <button
             type="button"
             onClick={() => setFormat("event-page")}
-            className={`rounded-full px-4 py-2 text-xs font-semibold ${
+            className={`rounded-full px-5 py-2.5 text-xs font-semibold ${
               format === "event-page"
                 ? "bg-[#1A1210] text-[#F7F4EF]"
                 : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
@@ -88,7 +87,7 @@ export function CreateHub() {
           <button
             type="button"
             onClick={() => setFormat("invitation-card")}
-            className={`rounded-full px-4 py-2 text-xs font-semibold ${
+            className={`rounded-full px-5 py-2.5 text-xs font-semibold ${
               format === "invitation-card"
                 ? "bg-[#1A1210] text-[#F7F4EF]"
                 : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
@@ -98,15 +97,14 @@ export function CreateHub() {
           </button>
           <Link
             href="/pricing"
-            className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-xs font-semibold text-[#5C4A42]"
+            className="rounded-full border border-[#D9CFC4] bg-white px-5 py-2.5 text-xs font-semibold text-[#5C4A42]"
           >
             Packages & pricing →
           </Link>
         </div>
       </section>
 
-      {/* Style filters */}
-      <section className="px-5">
+      <section className="mx-auto max-w-4xl px-5">
         <div className="flex flex-wrap justify-center gap-1.5 border-y border-[#E8DFD4] py-3">
           {(["all", ...allLookFamilies, "custom"] as const).map((id) => (
             <button
@@ -114,36 +112,31 @@ export function CreateHub() {
               type="button"
               onClick={() => setLook(id)}
               className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
-                look === id
-                  ? "bg-[#4A0E18] text-[#F8F1E3]"
-                  : "text-[#7A6A60]"
+                look === id ? "bg-[#4A0E18] text-[#F8F1E3]" : "text-[#7A6A60]"
               }`}
             >
-              {id === "all"
-                ? "All"
-                : id === "custom"
-                  ? "Custom"
-                  : lookMeta[id].label}
+              {id === "all" ? "All" : id === "custom" ? "Custom" : lookMeta[id].label}
             </button>
           ))}
         </div>
-        <p className="mt-2 text-center text-[10px] leading-relaxed text-[#8A7A70]">
-          Every design includes · Invitation · Events · Gallery · WhatsApp
-          delivery
+        <p className="mt-2 text-center text-[10px] text-[#8A7A70]">
+          Every design includes · Invitation · Events · Gallery · WhatsApp delivery
         </p>
       </section>
 
-      {/* Single-column mobile template list */}
-      <section className="mt-8 space-y-14 px-5">
+      {/* Floating phone gallery — full width, phones float in soft stages */}
+      <section className="mx-auto mt-10 grid max-w-6xl gap-16 px-5 sm:grid-cols-2 lg:grid-cols-3">
         {themes.map((theme, i) => (
           <TemplateMobileCard key={theme.id} theme={theme} index={i} />
         ))}
         {themes.length === 0 && (
-          <p className="py-16 text-center text-sm text-[#7A6A60]">
+          <p className="col-span-full py-16 text-center text-sm text-[#7A6A60]">
             No designs in this collection yet.
           </p>
         )}
+      </section>
 
+      <section className="mx-auto mt-16 max-w-lg px-5">
         <div className="overflow-hidden rounded-2xl bg-[linear-gradient(135deg,#2A0810,#4A0E18)] px-5 py-8 text-center text-[#F8F1E3]">
           <p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#E8C56A]">
             ✦ Custom design ✦
@@ -152,8 +145,8 @@ export function CreateHub() {
             Fully bespoke for your story
           </h2>
           <p className="mt-2 text-xs text-white/75">
-            Share inspiration photos on WhatsApp — we design a one-of-a-kind
-            mobile invitation for your family.
+            Share inspiration on WhatsApp — we craft a one-of-a-kind floating
+            invitation experience.
           </p>
           <p className="mt-3 text-base font-semibold text-[#E8C56A]">
             Starting {formatInr(startingPrice)}
@@ -197,16 +190,16 @@ function TemplateMobileCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-20px" }}
-      transition={{ delay: (index % 4) * 0.04 }}
-      className="text-center"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: (index % 3) * 0.06 }}
+      className="flex flex-col items-center text-center"
     >
       <div className="mb-4 flex flex-wrap justify-center gap-2">
         <Link
           href={`/create/${theme.id}?ready=1`}
-          className="rounded-full bg-[#1A1210] px-4 py-2 text-[11px] font-semibold text-[#F7F4EF] sm:text-xs"
+          className="rounded-full bg-[#1A1210] px-4 py-2 text-[11px] font-semibold text-[#F7F4EF]"
         >
           Live preview
         </Link>
@@ -214,50 +207,44 @@ function TemplateMobileCard({
           href={wa}
           target="_blank"
           rel="noreferrer"
-          className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-[11px] font-semibold text-[#1A1210] sm:text-xs"
+          className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-[11px] font-semibold text-[#1A1210]"
         >
           Customize design
         </a>
       </div>
 
+      {/* Soft floating stage behind the phone */}
       <div
-        className="relative mx-auto max-w-[280px] rounded-[1.25rem] px-3 pb-4 pt-6"
+        className="relative w-full max-w-[300px] rounded-[2rem] px-4 pb-6 pt-8"
         style={{
-          background: `linear-gradient(180deg, ${theme.theme.bgDeep} 0%, #F7F4EF 72%)`,
+          background: `radial-gradient(ellipse at 50% 30%, ${theme.theme.glow}, transparent 60%), linear-gradient(180deg, ${theme.theme.bgDeep}66 0%, transparent 75%)`,
         }}
       >
-        {pres.featured && (
-          <span className="absolute left-1/2 top-2 -translate-x-1/2 rounded-full bg-[#E8C56A] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2A0810]">
-            Featured
+        {(pres.featured || theme.badge === "Premium") && (
+          <span className="absolute left-1/2 top-2 z-10 -translate-x-1/2 rounded-full bg-[#E8C56A] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wide text-[#2A0810]">
+            {theme.badge === "Premium" ? "Luxe" : "Featured"}
           </span>
         )}
         <PhoneMockup theme={theme} />
       </div>
 
-      <h3 className="mt-5 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210] sm:text-2xl">
+      <h3 className="mt-5 font-[family-name:var(--font-display)] text-xl font-semibold text-[#1A1210]">
         {pres.title}
       </h3>
-      <p className="mx-auto mt-2 max-w-sm text-sm leading-relaxed text-[#5C4A42]">
+      <p className="mt-2 max-w-xs text-sm leading-relaxed text-[#5C4A42]">
         {pres.tagline}
       </p>
 
       {price != null && (
-        <div className="mt-4 flex items-center justify-center gap-2 text-sm">
+        <div className="mt-3 flex items-center justify-center gap-2 text-sm">
           {compareAt != null && (
-            <span className="text-[#8A7A70] line-through">
-              {formatInr(compareAt)}
-            </span>
+            <span className="text-[#8A7A70] line-through">{formatInr(compareAt)}</span>
           )}
           <span className="font-bold text-[#1A1210]">{formatInr(price)}</span>
-          {compareAt != null && (
-            <span className="rounded-full bg-[#4A0E18]/10 px-2 py-0.5 text-[10px] font-semibold text-[#4A0E18]">
-              Intro offer
-            </span>
-          )}
         </div>
       )}
 
-      <div className="mt-5 flex flex-wrap justify-center gap-2">
+      <div className="mt-4 flex flex-wrap justify-center gap-2">
         <a
           href={wa}
           target="_blank"

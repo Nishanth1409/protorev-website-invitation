@@ -41,7 +41,7 @@ export function TemplateOrCustomize({
   }
 
   return (
-    <section className="px-5 py-8">
+    <section className="mx-auto max-w-3xl px-5 py-8">
       <div className="space-y-4">
         <div className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 shadow-[var(--shadow-card)]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">

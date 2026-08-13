@@ -1,18 +1,16 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { motion } from "framer-motion";
 
 type Props = {
   children: ReactNode;
-  /** Scroll invitation content inside the phone screen */
   scrollable?: boolean;
   className?: string;
   label?: string;
 };
 
-/**
- * iPhone-style frame — all invitation previews stay mobile width.
- */
+/** Floating iPhone-style frame — invitation previews stay mobile width. */
 export function MobileDeviceFrame({
   children,
   scrollable = true,
@@ -20,10 +18,14 @@ export function MobileDeviceFrame({
   label = "Mobile preview",
 }: Props) {
   return (
-    <div className={`relative mx-auto w-full max-w-[280px] sm:max-w-[300px] ${className}`}>
+    <motion.div
+      className={`relative mx-auto w-full max-w-[300px] ${className}`}
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+    >
       <div
-        className="pointer-events-none absolute -inset-5 rounded-[2.75rem] blur-2xl opacity-60"
-        style={{ background: "rgba(196,154,74,0.15)" }}
+        className="pointer-events-none absolute -inset-6 rounded-[2.75rem] blur-3xl opacity-50"
+        style={{ background: "rgba(196,154,74,0.22)" }}
         aria-hidden
       />
       <div
@@ -31,7 +33,7 @@ export function MobileDeviceFrame({
         style={{ aspectRatio: "9 / 19.5" }}
         aria-label={label}
       >
-        <div className="absolute left-1/2 top-0 z-30 h-[22px] w-[36%] -translate-x-1/2 rounded-b-[14px] bg-[#141418]" />
+        <div className="absolute left-1/2 top-[8px] z-30 h-[22px] w-[34%] -translate-x-1/2 rounded-full bg-[#0a0a0d]" />
         <div
           className={`mobile-preview-root absolute inset-[3px] overflow-hidden rounded-[1.65rem] bg-[#F7F4EF] ${
             scrollable ? "overflow-y-auto overscroll-contain" : ""
@@ -40,6 +42,6 @@ export function MobileDeviceFrame({
           {children}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }

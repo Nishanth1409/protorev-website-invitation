@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { getInvite, invites } from "@/data/invites";
 import { InvitationExperience } from "@/components/invite/InvitationExperience";
-import { MobileSiteShell } from "@/components/marketing/MobileSiteShell";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -26,9 +25,5 @@ export default async function InvitePage({ params }: Props) {
   const invite = getInvite(slug);
   if (!invite) notFound();
 
-  return (
-    <MobileSiteShell>
-      <InvitationExperience invite={invite} />
-    </MobileSiteShell>
-  );
+  return <InvitationExperience invite={invite} />;
 }
