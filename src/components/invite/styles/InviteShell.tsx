@@ -44,7 +44,7 @@ export function InviteShell({
 
   return (
     <div
-      className="relative min-h-screen overflow-x-hidden invite-viewport"
+      className="relative min-h-full overflow-x-hidden invite-viewport"
       lang={invite.language}
     >
       {!opened ? (

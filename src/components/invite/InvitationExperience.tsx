@@ -51,11 +51,8 @@ export function InvitationExperience({ invite }: Props) {
 
   if (format === "invitation-card" && theme) {
     inner = (
-      <div className="flex min-h-full items-start justify-center bg-[#1a1a1a] p-2 pt-4">
-        <div
-          className="origin-top"
-          style={{ transform: "scale(0.62)", width: 420, marginBottom: -120 }}
-        >
+      <div className="mobile-card-stage flex min-h-full items-start justify-center bg-[#1a1210] px-2 pb-8 pt-6">
+        <div className="w-full max-w-[100%] [&_[data-invite-card]]:!max-w-none">
           <PrintableInvitationCard invite={invite} watermarked={false} />
         </div>
       </div>

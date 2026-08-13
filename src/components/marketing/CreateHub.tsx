@@ -124,13 +124,13 @@ export function CreateHub() {
         </p>
       </section>
 
-      {/* Floating phone gallery — full width, phones float in soft stages */}
-      <section className="mx-auto mt-10 grid max-w-6xl gap-16 px-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Mobile-first floating phone gallery — one design per row */}
+      <section className="mx-auto mt-10 max-w-md space-y-16 px-5">
         {themes.map((theme, i) => (
           <TemplateMobileCard key={theme.id} theme={theme} index={i} />
         ))}
         {themes.length === 0 && (
-          <p className="col-span-full py-16 text-center text-sm text-[#7A6A60]">
+          <p className="py-16 text-center text-sm text-[#7A6A60]">
             No designs in this collection yet.
           </p>
         )}
@@ -198,7 +198,7 @@ function TemplateMobileCard({
     >
       <div className="mb-4 flex flex-wrap justify-center gap-2">
         <Link
-          href={`/create/${theme.id}?ready=1`}
+          href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
           className="rounded-full bg-[#1A1210] px-4 py-2 text-[11px] font-semibold text-[#F7F4EF]"
         >
           Live preview
@@ -254,7 +254,7 @@ function TemplateMobileCard({
           Customize design
         </a>
         <Link
-          href={`/create/${theme.id}?ready=1`}
+          href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
           className="rounded-full border border-[#D9CFC4] px-4 py-2.5 text-xs font-semibold text-[#1A1210]"
         >
           Try this design

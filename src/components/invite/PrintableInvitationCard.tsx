@@ -6,7 +6,10 @@ import type { ExperienceKey } from "@/data/themes";
 import { getCreateTheme } from "@/data/themes";
 import { FestivalArtCard, isRichFestivalCard } from "./FestivalArtCard";
 import { TraditionalIndianCard } from "./traditional/TraditionalIndianCard";
-import { shouldRenderTraditionalIndian } from "./traditional/indianStyle";
+import {
+  getIndianCardStyle,
+  shouldRenderTraditionalIndian,
+} from "./traditional/indianStyle";
 
 type Props = {
   invite: WeddingInvite;
@@ -52,23 +55,27 @@ export const PrintableInvitationCard = forwardRef<HTMLDivElement, Props>(
       );
     }
 
-    if (
-      experience === "classic-ornate" ||
-      experience === "temple-dawn" ||
-      experience === "velvet-royal" ||
-      experience === "ribbon-envelope" ||
-      experience === "heritage-arch" ||
-      experience === "lantern-fire" ||
-      experience === "vivah-festival"
-    ) {
-      return (
-        <CeremonialBlessingCard
-          ref={ref}
-          invite={invite}
-          watermarked={watermarked}
-        />
-      );
-    }
+  if (
+    experience === "gilded-curtain" ||
+    experience === "velvet-royal" ||
+    experience === "ribbon-envelope" ||
+    experience === "heritage-arch" ||
+    experience === "classic-ornate" ||
+    experience === "temple-dawn" ||
+    experience === "lantern-fire" ||
+    experience === "vivah-festival" ||
+    experience === "film-poster" ||
+    experience === "soft-bloom" ||
+    experience === "lotus-garden"
+  ) {
+    return (
+      <CeremonialBlessingCard
+        ref={ref}
+        invite={invite}
+        watermarked={watermarked}
+      />
+    );
+  }
 
     return (
       <ModernStudioCard
@@ -110,26 +117,26 @@ function WatermarkLayer() {
 const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
   function CeremonialBlessingCard({ invite, watermarked = false }, ref) {
     const c = invite.copy;
-    const gold = "#E8C56A";
-    const cream = "#F8F1E3";
-    const maroon = "#4A0E18";
-    const deep = "#2A0810";
+    const style = getIndianCardStyle(invite.faith, invite.language);
+    const gold = style.gold;
+    const cream = style.cream;
+    const maroon = style.maroon;
+    const deep = style.deep;
 
     return (
       <div
         ref={ref}
         data-invite-card
-        className="invite-print-card relative overflow-hidden"
+        className="invite-print-card physical-invite-card relative overflow-hidden"
         style={{
           width: "100%",
           maxWidth: 420,
           aspectRatio: "5 / 7",
-          background: `radial-gradient(circle at 50% 18%, rgba(232,197,106,0.18), transparent 42%), linear-gradient(180deg, ${maroon}, ${deep})`,
+          background: `radial-gradient(circle at 50% 18%, ${gold}33, transparent 42%), linear-gradient(180deg, ${maroon}, ${deep})`,
           color: cream,
         }}
         lang={invite.language}
       >
-        {/* Ornate gold bands */}
         <div
           className="absolute inset-x-0 top-0 h-8"
           style={{
@@ -146,11 +153,11 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
         />
         <div
           className="pointer-events-none absolute inset-4 border"
-          style={{ borderColor: "rgba(232,197,106,0.55)" }}
+          style={{ borderColor: `${gold}88` }}
         />
         <div
           className="pointer-events-none absolute inset-6 border"
-          style={{ borderColor: "rgba(232,197,106,0.28)" }}
+          style={{ borderColor: `${gold}44` }}
         />
 
         <div className="relative z-10 flex h-full flex-col items-center justify-between px-[9%] py-[11%] text-center">
@@ -161,14 +168,11 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
             >
               {invite.emblem}
             </div>
-            <p className="invite-meta" style={{ color: gold }}>
-              Opening blessing
+            <p className="invite-blessing text-base leading-snug" style={{ color: gold }} lang={invite.language}>
+              {style.openingLine}
             </p>
-            <p className="invite-blessing mt-2 text-lg" style={{ color: cream }}>
-              {invite.copy.openingTitle}
-            </p>
-            <p className="invite-meta mt-1" style={{ color: "rgba(248,241,227,0.7)" }}>
-              {invite.faithLabel} · {invite.languageLabel}
+            <p className="invite-meta mt-1.5" style={{ color: `${cream}99` }} lang={invite.language}>
+              {style.subOpening}
             </p>
           </div>
 
@@ -180,7 +184,7 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
               {invite.bride}
             </h1>
             <p className="invite-script my-1 text-xl leading-none" style={{ color: gold }}>
-              &
+              {style.wedsWord}
             </p>
             <h1 className="invite-name text-[1.7rem] leading-tight" style={{ color: cream }} lang={invite.language}>
               {invite.groom}
@@ -189,7 +193,7 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
             <p className="invite-blessing mt-4 text-sm leading-relaxed" style={{ color: gold }} lang={invite.language}>
               {invite.blessingNative}
             </p>
-            <p className="invite-body-copy mt-2 text-[11px] leading-relaxed" style={{ color: "rgba(248,241,227,0.75)" }}>
+            <p className="invite-body-copy mt-2 text-[11px] leading-relaxed" style={{ color: `${cream}bb` }}>
               {invite.tagline}
             </p>
           </div>
@@ -201,11 +205,8 @@ const CeremonialBlessingCard = forwardRef<HTMLDivElement, Props>(
             <p className="invite-body-copy mt-2 text-xs" style={{ color: cream }}>
               {invite.location.name}
             </p>
-            <p className="mt-4 text-[10px] tracking-[0.28em]" style={{ color: "rgba(232,197,106,0.8)" }}>
-              ✦ {c.openingTitle} ✦
-            </p>
-            <p className="mt-2 text-[9px] uppercase tracking-[0.22em]" style={{ color: "rgba(248,241,227,0.55)" }}>
-              {invite.styleLabel} · Protorev Digital
+            <p className="mt-4 text-[10px] tracking-[0.28em]" style={{ color: `${gold}cc` }}>
+              ✦ {invite.faithLabel} · {invite.languageLabel} ✦
             </p>
           </div>
         </div>

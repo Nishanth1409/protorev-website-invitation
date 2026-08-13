@@ -55,7 +55,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-14 px-5 pb-14 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="mx-auto max-w-md space-y-14 px-5 pb-14">
         {featured.map((theme, i) => {
           if (!theme) return null;
           const pres = galleryPresentation(theme);
@@ -73,7 +73,7 @@ export function LandingPage() {
             >
               <div className="mb-3 flex justify-center gap-2">
                 <Link
-                  href={`/create/${theme.id}?ready=1`}
+                  href={`/create/${theme.id}?faith=hindu&langs=en&ready=1`}
                   className="rounded-full bg-[#1A1210] px-3 py-2 text-[11px] font-semibold text-[#F7F4EF]"
                 >
                   Live preview

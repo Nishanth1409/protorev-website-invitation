@@ -17,6 +17,7 @@ import {
   assembleInvite,
 } from "@/lib/buildInvite";
 import { faithMeta } from "@/data/invites";
+import { PhoneMockup } from "./PhoneMockup";
 
 type Props = {
   theme: CreateTheme;
@@ -137,9 +138,9 @@ export function ThemeStudio({
 
   return (
     <div className="relative min-h-screen bg-[#F7F4EF]">
-      {(!ready || setupOpen) && (
-      <div className="sticky top-0 z-[70] border-b border-[var(--line)] bg-[rgba(248,248,252,0.94)] backdrop-blur-xl">
-        <div className="mx-auto flex w-full max-w-[430px] items-center justify-between gap-3 px-4 py-3">
+      {/* Always show compact chrome so faith/language stays reachable */}
+      <div className="sticky top-0 z-[70] border-b border-[var(--line)] bg-[rgba(247,244,239,0.96)] backdrop-blur-xl">
+        <div className="mx-auto flex w-full max-w-lg items-center justify-between gap-3 px-4 py-3">
           <div className="min-w-0">
             <Link
               href="/create"
@@ -147,43 +148,36 @@ export function ThemeStudio({
             >
               ← All themes
             </Link>
-            <h1 className="truncate text-base font-bold text-[var(--ink)] sm:text-lg">
+            <h1 className="truncate text-base font-bold text-[var(--ink)]">
               {theme.name}
             </h1>
-            <p className="truncate text-[11px] text-[var(--ink-soft)] sm:text-xs">
+            <p className="truncate text-[11px] text-[var(--ink-soft)]">
               {format.label} · {theme.badge ?? "Studio"}
             </p>
           </div>
 
-          {ready && !setupOpen ? (
-            <button
-              type="button"
-              onClick={openSetup}
-              className="shrink-0 rounded-full border border-[var(--line)] bg-white px-3 py-2 text-left shadow-[var(--shadow-card)] transition hover:border-[var(--grad-a)] sm:px-4"
-              title="Change faith or languages"
-            >
-              <span className="block text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
-                Your selection
-              </span>
-              <span className="text-sm font-semibold text-[var(--ink)]">
-                {faithMeta[faith]?.icon} {faithMeta[faith]?.label} ·{" "}
-                {formatLangSummary(languages)}
-              </span>
-              <span className="mt-0.5 block text-[11px] text-[var(--grad-a)]">
-                Change →
-              </span>
-            </button>
-          ) : (
-            <p className="hidden text-xs text-[var(--ink-mute)] sm:block">
-              Choose faith & languages
-            </p>
-          )}
+          <button
+            type="button"
+            onClick={openSetup}
+            className="shrink-0 rounded-full border border-[var(--line)] bg-white px-3 py-2 text-left shadow-[var(--shadow-card)]"
+            title="Change faith or languages"
+          >
+            <span className="block text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
+              {ready ? "Your selection" : "Choose"}
+            </span>
+            <span className="text-sm font-semibold text-[var(--ink)]">
+              {faithMeta[faith]?.icon} {faithMeta[faith]?.label} ·{" "}
+              {formatLangSummary(languages)}
+            </span>
+            <span className="mt-0.5 block text-[11px] text-[var(--grad-a)]">
+              Change →
+            </span>
+          </button>
         </div>
 
-        {/* Guest language switcher — only enabled languages */}
         {ready && !setupOpen && languages.length > 1 && (
           <div className="border-t border-[var(--line)] bg-white/70">
-            <div className="mx-auto flex w-full max-w-[430px] gap-2 overflow-x-auto px-4 py-2">
+            <div className="mx-auto flex w-full max-w-lg gap-2 overflow-x-auto px-4 py-2">
               <span className="shrink-0 self-center text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
                 View in
               </span>
@@ -208,7 +202,6 @@ export function ThemeStudio({
           </div>
         )}
       </div>
-      )}
 
       <AnimatePresence>
         {setupOpen && (
@@ -389,20 +382,17 @@ export function ThemeStudio({
           key={`${faith}-${activeLanguage}-${theme.id}`}
         />
       ) : (
-        <div className="mx-auto flex min-h-[70svh] max-w-lg flex-col items-center justify-center px-6 text-center">
-          <div
-            className="mb-6 h-40 w-full max-w-xs rounded-3xl border"
-            style={{
-              background: `linear-gradient(145deg, ${theme.theme.bgDeep}, ${theme.theme.bg})`,
-              borderColor: theme.theme.border,
-              boxShadow: `0 20px 60px ${theme.theme.glow}`,
-            }}
-          />
-          <h2 className="text-2xl font-bold text-[var(--ink)]">{theme.name}</h2>
+        <div className="mx-auto flex min-h-[70svh] max-w-md flex-col items-center justify-center px-6 py-10 text-center">
+          <PhoneMockup theme={theme} />
+          <h2 className="mt-8 text-2xl font-bold text-[var(--ink)]">{theme.name}</h2>
           <p className="mt-2 text-sm text-[var(--ink-soft)]">{theme.blurb}</p>
-          <p className="mt-6 text-xs text-[var(--ink-mute)]">
-            Select faith & languages above to preview
-          </p>
+          <button
+            type="button"
+            onClick={openSetup}
+            className="pr-gradient-btn mt-6 rounded-full px-5 py-3 text-sm font-semibold"
+          >
+            Choose faith & language
+          </button>
         </div>
       )}
     </div>

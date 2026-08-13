@@ -22,7 +22,7 @@ export function FloatingCeremonyHero({ invite }: { invite: WeddingInvite }) {
 
   return (
     <section
-      className="relative flex min-h-[92svh] flex-col overflow-hidden"
+      className="relative flex min-h-[100%] flex-col overflow-hidden"
       style={{
         background: `radial-gradient(circle at 72% 12%, ${t.glow}, transparent 42%), linear-gradient(180deg, ${t.bg} 0%, ${t.bgDeep} 100%)`,
         color: t.ink,

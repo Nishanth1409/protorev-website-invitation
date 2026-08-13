@@ -13,7 +13,8 @@ type Props = {
 function frameFor(faith: WeddingInvite["faith"], border: string) {
   if (faith === "muslim" || border === "geometry") return "/cards/frame-muslim.jpg";
   if (faith === "christian") return "/cards/frame-cream.jpg";
-  return "/cards/frame-cream.jpg";
+  if (faith === "sikh" || faith === "jain") return "/cards/frame-cream.jpg";
+  return "/cards/frame-hindu.jpg";
 }
 
 function Watermark() {

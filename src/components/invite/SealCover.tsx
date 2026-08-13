@@ -15,7 +15,7 @@ export function SealCover({ invite, onOpen }: Props) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-[60] flex flex-col"
+      className="absolute inset-0 z-[60] flex flex-col"
       style={{ background: t.bgDeep, color: t.text }}
       initial={{ opacity: 1 }}
       exit={{ opacity: 0, y: -12 }}

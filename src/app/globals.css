@@ -332,11 +332,15 @@ a {
   margin-inline: auto;
 }
 
-/* Marketing site always phone-column; no wide desktop layouts */
-.site-mobile-shell {
-  width: 100%;
-  max-width: 430px;
-  margin-inline: auto;
+.mobile-preview-root [data-invite-card] {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.mobile-card-stage [data-invite-card] {
+  max-width: 100% !important;
+  width: 100% !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
 
 .mobile-preview-root {

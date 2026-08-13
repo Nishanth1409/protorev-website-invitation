@@ -58,7 +58,10 @@ export default async function ThemePreviewPage({ params, searchParams }: Props) 
     sp.lang && languages.includes(sp.lang as LanguageId)
       ? (sp.lang as LanguageId)
       : languages[0];
-  const startReady = sp.ready === "1" && hasFaith && languages.length > 0;
+
+  // Live preview opens immediately with sample faith/language.
+  // Pass ready=0 only if you want the setup sheet first.
+  const startReady = sp.ready !== "0";
 
   return (
     <ThemeStudio
