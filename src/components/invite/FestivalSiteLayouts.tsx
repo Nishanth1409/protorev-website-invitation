@@ -110,7 +110,7 @@ export function FestivalSiteBody({
 
       {experience === "festival-lane" && (
         <section className="px-4 py-12 sm:px-6">
-          <div className="invite-stage mx-auto grid gap-4 sm:grid-cols-3">
+          <div className="invite-stage mx-auto grid grid-cols-1 gap-4">
             {["Diyas lit", "Marigold path", "Family feast"].map((label, i) => (
               <article
                 key={label}

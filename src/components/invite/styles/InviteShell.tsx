@@ -88,7 +88,7 @@ export function SharedEvents({ invite }: { invite: WeddingInvite }) {
       >
         {c.eventsTitle}
       </h2>
-      <div className="mx-auto grid max-w-lg grid-cols-1 gap-4 md:max-w-3xl md:grid-cols-2 xl:max-w-5xl xl:grid-cols-3 2xl:max-w-6xl">
+      <div className="mx-auto grid max-w-lg grid-cols-1 gap-4">
         {invite.events.map((event) => (
           <article
             key={event.id}

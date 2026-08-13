@@ -21,18 +21,18 @@ export function LandingPage() {
     <main className="relative overflow-hidden bg-[#F7F4EF]">
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
 
-      <section className="mx-auto max-w-lg px-5 pb-10 pt-14 text-center">
+      <section className="px-5 pb-10 pt-14 text-center">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
           Protorev Digital
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210] sm:text-4xl">
+        <h1 className="font-[family-name:var(--font-display)] text-[1.85rem] font-semibold leading-[1.15] text-[#1A1210]">
           A website as beautiful
           <br />
           as your wedding day
         </h1>
-        <p className="mt-5 text-sm leading-relaxed text-[#5C4A42] sm:text-base">
-          Mobile-first invitation designs — preview on phone, customise on
-          WhatsApp. We deliver the finished invite for your family.
+        <p className="mt-5 text-sm leading-relaxed text-[#5C4A42]">
+          Mobile invitation designs — preview on phone, customise on WhatsApp.
+          We deliver the finished invite for your family.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
           Design · Personalise · Share
@@ -55,7 +55,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-lg space-y-12 px-5 pb-14">
+      <section className="space-y-12 px-5 pb-14">
         {featured.map((theme, i) => {
           if (!theme) return null;
           const pres = galleryPresentation(theme);

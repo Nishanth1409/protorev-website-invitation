@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { createThemes, getCreateTheme } from "@/data/themes";
 import { ThemeStudio } from "@/components/marketing/ThemeStudio";
+import { MobileSiteShell } from "@/components/marketing/MobileSiteShell";
 import type { FaithId, LanguageId } from "@/data/types";
 import { allFaithIds, allLanguageIds } from "@/lib/buildInvite";
 
@@ -61,12 +62,14 @@ export default async function ThemePreviewPage({ params, searchParams }: Props) 
   const startReady = sp.ready === "1" && hasFaith && languages.length > 0;
 
   return (
-    <ThemeStudio
-      theme={theme}
-      initialFaith={faith}
-      initialLanguages={languages}
-      initialActiveLanguage={activeLanguage}
-      startReady={startReady}
-    />
+    <MobileSiteShell>
+      <ThemeStudio
+        theme={theme}
+        initialFaith={faith}
+        initialLanguages={languages}
+        initialActiveLanguage={activeLanguage}
+        startReady={startReady}
+      />
+    </MobileSiteShell>
   );
 }

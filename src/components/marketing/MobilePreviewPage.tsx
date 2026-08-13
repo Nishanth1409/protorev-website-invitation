@@ -25,7 +25,7 @@ export function MobilePreviewPage({
 }: Props) {
   return (
     <div className="min-h-[calc(100svh-4rem)] bg-[#F7F4EF]">
-      <div className="mx-auto max-w-lg px-4 pb-36 pt-6">
+      <div className="px-4 pb-36 pt-6">
         <Link
           href={backHref}
           className="text-xs font-medium text-[#7A6A60] hover:text-[#1A1210]"
@@ -50,8 +50,8 @@ export function MobilePreviewPage({
         </p>
       </div>
 
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t border-[#E8DFD4] bg-white/95 px-4 py-4 backdrop-blur-md">
-        <div className="mx-auto flex max-w-lg flex-col gap-2">
+      <div className="sticky bottom-0 z-50 border-t border-[#E8DFD4] bg-white/95 px-4 py-4 backdrop-blur-md">
+        <div className="flex flex-col gap-2">
           <a
             href={whatsAppHref}
             target="_blank"
@@ -76,3 +76,4 @@ export function MobilePreviewPage({
     </div>
   );
 }
+

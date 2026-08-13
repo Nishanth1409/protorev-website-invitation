@@ -139,7 +139,7 @@ export function ThemeStudio({
     <div className="relative min-h-screen bg-[#F7F4EF]">
       {(!ready || setupOpen) && (
       <div className="sticky top-0 z-[70] border-b border-[var(--line)] bg-[rgba(248,248,252,0.94)] backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
+        <div className="mx-auto flex w-full max-w-[430px] items-center justify-between gap-3 px-4 py-3">
           <div className="min-w-0">
             <Link
               href="/create"
@@ -183,7 +183,7 @@ export function ThemeStudio({
         {/* Guest language switcher — only enabled languages */}
         {ready && !setupOpen && languages.length > 1 && (
           <div className="border-t border-[var(--line)] bg-white/70">
-            <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-2 sm:px-6">
+            <div className="mx-auto flex w-full max-w-[430px] gap-2 overflow-x-auto px-4 py-2">
               <span className="shrink-0 self-center text-[10px] font-semibold uppercase tracking-wide text-[var(--ink-mute)]">
                 View in
               </span>

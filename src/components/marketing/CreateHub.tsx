@@ -57,16 +57,16 @@ export function CreateHub() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,#fff8f0,transparent_55%)]" />
 
       {/* Hero */}
-      <section className="mx-auto max-w-lg px-5 pb-8 pt-12 text-center sm:pt-16">
+      <section className="px-5 pb-8 pt-12 text-center">
         <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#8B6914]">
           Protorev Digital
         </p>
-        <h1 className="font-[family-name:var(--font-display)] text-[1.75rem] font-semibold leading-[1.2] text-[#1A1210] sm:text-4xl">
+        <h1 className="font-[family-name:var(--font-display)] text-[1.75rem] font-semibold leading-[1.2] text-[#1A1210]">
           A website as beautiful
           <br />
           as your wedding day
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#5C4A42] sm:text-base">
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-[#5C4A42]">
           Your guests will feel it before they even arrive.
         </p>
         <p className="mt-3 text-xs font-medium tracking-wide text-[#8B6914]">
@@ -77,7 +77,7 @@ export function CreateHub() {
           <button
             type="button"
             onClick={() => setFormat("event-page")}
-            className={`rounded-full px-4 py-2 text-xs font-semibold sm:text-sm ${
+            className={`rounded-full px-4 py-2 text-xs font-semibold ${
               format === "event-page"
                 ? "bg-[#1A1210] text-[#F7F4EF]"
                 : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
@@ -88,7 +88,7 @@ export function CreateHub() {
           <button
             type="button"
             onClick={() => setFormat("invitation-card")}
-            className={`rounded-full px-4 py-2 text-xs font-semibold sm:text-sm ${
+            className={`rounded-full px-4 py-2 text-xs font-semibold ${
               format === "invitation-card"
                 ? "bg-[#1A1210] text-[#F7F4EF]"
                 : "border border-[#D9CFC4] bg-white text-[#5C4A42]"
@@ -98,7 +98,7 @@ export function CreateHub() {
           </button>
           <Link
             href="/pricing"
-            className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-xs font-semibold text-[#5C4A42] sm:text-sm"
+            className="rounded-full border border-[#D9CFC4] bg-white px-4 py-2 text-xs font-semibold text-[#5C4A42]"
           >
             Packages & pricing →
           </Link>
@@ -106,14 +106,14 @@ export function CreateHub() {
       </section>
 
       {/* Style filters */}
-      <section className="mx-auto max-w-lg px-5">
+      <section className="px-5">
         <div className="flex flex-wrap justify-center gap-1.5 border-y border-[#E8DFD4] py-3">
           {(["all", ...allLookFamilies, "custom"] as const).map((id) => (
             <button
               key={id}
               type="button"
               onClick={() => setLook(id)}
-              className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] sm:text-[11px] ${
+              className={`rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] ${
                 look === id
                   ? "bg-[#4A0E18] text-[#F8F1E3]"
                   : "text-[#7A6A60]"
@@ -127,14 +127,14 @@ export function CreateHub() {
             </button>
           ))}
         </div>
-        <p className="mt-2 text-center text-[10px] leading-relaxed text-[#8A7A70] sm:text-xs">
+        <p className="mt-2 text-center text-[10px] leading-relaxed text-[#8A7A70]">
           Every design includes · Invitation · Events · Gallery · WhatsApp
           delivery
         </p>
       </section>
 
       {/* Single-column mobile template list */}
-      <section className="mx-auto mt-8 max-w-lg space-y-14 px-5">
+      <section className="mt-8 space-y-14 px-5">
         {themes.map((theme, i) => (
           <TemplateMobileCard key={theme.id} theme={theme} index={i} />
         ))}

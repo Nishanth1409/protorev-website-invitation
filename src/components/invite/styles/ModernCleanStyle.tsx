@@ -50,7 +50,7 @@ export function ModernCleanStyle({ invite }: { invite: WeddingInvite }) {
       {() => (
         <div className="bg-white" style={{ color: t.ink }}>
           <section className="relative z-20 mx-auto max-w-3xl px-6 py-20">
-            <div className="grid gap-8 md:grid-cols-2 md:items-end">
+            <div className="grid grid-cols-1 gap-6">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em]" style={{ color: t.inkSoft }}>
                   {c.weddingOf}

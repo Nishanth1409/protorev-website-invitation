@@ -10,34 +10,33 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
   return (
     <div>
       {showHeader && (
-        <div className="mx-auto max-w-3xl px-6 pb-10 pt-6 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
+        <div className="px-5 pb-8 pt-2 text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--grad-a)]">
             How pricing works
           </p>
-          <h1 className="mt-3 text-4xl font-bold tracking-tight text-[var(--ink)] md:text-5xl">
+          <h1 className="mt-3 text-2xl font-bold tracking-tight text-[var(--ink)]">
             Browse themes.{" "}
             <span className="pr-gradient-text">We customise for you.</span>
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--ink-soft)]">
-            No login. No payment on this website. No self-download.
-            Choose a theme, WhatsApp us your details — we design and deliver
-            your invitation. Starting from {formatInr(pricingPlans[0].priceInr)}.
+          <p className="mx-auto mt-3 text-sm leading-relaxed text-[var(--ink-soft)]">
+            No login. No payment on this website. Choose a theme, WhatsApp us —
+            we design and deliver. From {formatInr(pricingPlans[0].priceInr)}.
           </p>
-          <p className="mt-4 text-lg font-bold text-[#25D366]">
+          <p className="mt-3 text-base font-bold text-[#25D366]">
             {COMPANY.phoneDisplay}
           </p>
         </div>
       )}
 
-      <section className="mx-auto max-w-6xl px-6">
-        <h2 className="mb-4 text-xl font-bold text-[var(--ink)]">
+      <section className="px-5">
+        <h2 className="mb-3 text-lg font-bold text-[var(--ink)]">
           Customisation packages
         </h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="space-y-4">
           {pricingPlans.map((plan) => (
             <article
               key={plan.id}
-              className={`rounded-3xl border p-6 shadow-[var(--shadow-card)] ${
+              className={`rounded-3xl border p-5 shadow-[var(--shadow-card)] ${
                 plan.highlighted
                   ? "border-[var(--grad-a)] bg-[rgba(91,74,255,0.04)]"
                   : "border-[var(--line)] bg-white"
@@ -74,7 +73,7 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
                 })}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-6 inline-flex w-full justify-center rounded-2xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
+                className="mt-5 inline-flex w-full justify-center rounded-2xl bg-[#25D366] px-4 py-3 text-sm font-semibold text-white"
               >
                 WhatsApp to order
               </a>
@@ -89,14 +88,14 @@ export function PricingTable({ showHeader = true }: { showHeader?: boolean }) {
           >
             {COMPANY.email}
           </a>
-          {" · "}
-          <Link href="/create" className="font-semibold text-[var(--grad-a)]">
+          <br />
+          <Link href="/create" className="mt-2 inline-block font-semibold text-[var(--grad-a)]">
             Browse themes first →
           </Link>
         </p>
       </section>
 
-      <div className="mt-10">
+      <div className="mt-8">
         <CustomDesignShowcase />
       </div>
 

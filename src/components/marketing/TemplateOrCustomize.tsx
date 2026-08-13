@@ -41,13 +41,13 @@ export function TemplateOrCustomize({
   }
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-10">
-      <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-[1.75rem] border border-[var(--line)] bg-white p-6 shadow-[var(--shadow-card)] sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
+    <section className="px-5 py-8">
+      <div className="space-y-4">
+        <div className="rounded-[1.5rem] border border-[var(--line)] bg-white p-5 shadow-[var(--shadow-card)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--grad-a)]">
             Step 1
           </p>
-          <h3 className="mt-2 text-2xl font-bold text-[var(--ink)]">
+          <h3 className="mt-2 text-xl font-bold text-[var(--ink)]">
             Browse theme examples
           </h3>
           <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">
@@ -56,36 +56,36 @@ export function TemplateOrCustomize({
           </p>
           <Link
             href="/create"
-            className="pr-gradient-btn mt-5 inline-flex rounded-2xl px-5 py-3 text-sm font-semibold"
+            className="pr-gradient-btn mt-4 inline-flex rounded-2xl px-5 py-3 text-sm font-semibold"
           >
             Open theme gallery
           </Link>
         </div>
 
-        <div className="rounded-[1.75rem] border border-transparent bg-[linear-gradient(135deg,#0f0f1a,#1e1b4b)] p-6 text-white shadow-[var(--shadow-soft)] sm:p-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
+        <div className="rounded-[1.5rem] border border-transparent bg-[linear-gradient(135deg,#0f0f1a,#1e1b4b)] p-5 text-white shadow-[var(--shadow-soft)]">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#A5B4FC]">
             Step 2
           </p>
-          <h3 className="mt-2 text-2xl font-bold">Order customisation</h3>
+          <h3 className="mt-2 text-xl font-bold">Order customisation</h3>
           <p className="mt-2 text-sm leading-relaxed text-white/75">
-            Message customer service with the theme you liked. We customise and
-            deliver — no login, no online payment, no DIY download.
+            Message us with the theme you liked. We customise and deliver — no
+            login, no online payment, no DIY download.
           </p>
-          <p className="mt-4 text-lg font-bold text-[#25D366]">
+          <p className="mt-3 text-base font-bold text-[#25D366]">
             {COMPANY.phoneDisplay}
           </p>
-          <div className="mt-5 flex flex-wrap gap-3">
+          <div className="mt-4 flex flex-col gap-2">
             <a
               href={wa}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex rounded-2xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
+              className="inline-flex justify-center rounded-2xl bg-[#25D366] px-5 py-3 text-sm font-semibold text-white"
             >
               WhatsApp us
             </a>
             <a
               href={mail}
-              className="inline-flex rounded-2xl border border-white/25 px-5 py-3 text-sm font-semibold text-white"
+              className="inline-flex justify-center rounded-2xl border border-white/25 px-5 py-3 text-sm font-semibold text-white"
             >
               Email {COMPANY.name}
             </a>

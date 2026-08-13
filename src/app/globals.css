@@ -332,6 +332,13 @@ a {
   margin-inline: auto;
 }
 
+/* Marketing site always phone-column; no wide desktop layouts */
+.site-mobile-shell {
+  width: 100%;
+  max-width: 430px;
+  margin-inline: auto;
+}
+
 .mobile-preview-root {
   width: 100%;
   max-width: 100%;
@@ -352,13 +359,7 @@ a {
 
 .invite-grid-story {
   grid-template-columns: 1fr;
-  max-width: 56rem;
-}
-
-@media (min-width: 768px) {
-  .invite-grid-story {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  max-width: 390px;
 }
 
 .invite-music-dock {
