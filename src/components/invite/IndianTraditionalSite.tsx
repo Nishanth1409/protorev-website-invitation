@@ -1,105 +1,122 @@
 "use client";
 
+import Image from "next/image";
 import type { WeddingInvite } from "@/data/types";
-import {
-  BrassLampPair,
-  MangoToran,
-  TempleGopuram,
-} from "./traditional/IndianMotifs";
 import { getIndianCardStyle, MODERN_WESTERN_EXPERIENCES } from "./traditional/indianStyle";
 import {
   SharedCountdown,
-  SharedEvents,
   SharedLocationClosing,
 } from "./styles/InviteShell";
-import { LaceToran, MandalaWatermark } from "./FestivalDecor";
 
-/** Guest websites with South/North Indian wedding invitation feel. */
+/** Guest websites that feel like opening a printed Indian invitation online. */
 export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite }) {
   const style = getIndianCardStyle(invite.faith, invite.language);
-  const t = invite.theme;
   const single = !invite.groom?.trim();
+  const frame =
+    invite.faith === "muslim" ? "/cards/frame-muslim.jpg" : "/cards/frame-cream.jpg";
 
   return (
-    <div style={{ background: style.deep, color: style.cream }}>
-      <section className="relative min-h-[92svh] overflow-hidden px-4 py-16 sm:px-6">
-        <MandalaWatermark color={style.gold} />
+    <div style={{ background: "#1A0A0E", color: "#F7F0E4" }}>
+      <section className="relative flex min-h-[92svh] items-center justify-center px-4 py-14 sm:px-6">
         <div
-          className="absolute inset-0 opacity-40"
+          className="absolute inset-0 opacity-50"
           style={{
-            background: `radial-gradient(circle at 50% 0%, ${style.gold}33, transparent 50%)`,
+            background:
+              "radial-gradient(circle at 50% 20%, rgba(184,134,11,0.35), transparent 55%), #1A0A0E",
           }}
         />
 
-        <div className="relative z-10 mx-auto max-w-2xl text-center">
-          <MangoToran color={style.gold} />
-          <p className="mt-4 text-sm tracking-[0.32em]" style={{ color: style.gold }}>
-            {style.openingLine}
-          </p>
-          <p className="mt-1 text-xs tracking-[0.22em]" style={{ color: `${style.cream}99` }}>
-            {style.subOpening}
-          </p>
-
-          {style.regional === "south" && invite.faith === "hindu" && (
-            <div className="mt-6">
-              <TempleGopuram color={style.gold} cream={style.cream} />
-            </div>
-          )}
-
+        <div className="relative z-10 w-full max-w-md">
           <div
-            className="mx-auto mt-8 max-w-lg rounded-[1.75rem] border px-6 py-10 sm:px-10"
-            style={{
-              borderColor: `${style.gold}55`,
-              background: `linear-gradient(180deg, ${style.maroon}ee, ${style.deep}f5)`,
-              boxShadow: `0 0 60px ${style.gold}22`,
-            }}
+            className="physical-invite-card relative overflow-hidden"
+            style={{ aspectRatio: "5 / 7" }}
           >
-            <LaceToran color={style.gold} />
-            <p className="mt-4 text-xs" style={{ color: `${style.cream}bb` }}>
-              {invite.hosts}
-            </p>
-            <p className="mt-3 text-sm italic" style={{ color: style.gold }}>
-              {invite.ofLabel ?? invite.copy.weddingOf}
-            </p>
-            <h1 className="mt-4 font-[family-name:var(--font-display)] text-4xl sm:text-5xl" lang={invite.language}>
-              {invite.bride}
-            </h1>
-            {!single && (
-              <>
-                <p className="my-2 text-lg uppercase tracking-[0.35em]" style={{ color: style.gold }}>
-                  {style.wedsWord}
+            <Image src={frame} alt="" fill priority className="object-cover" sizes="420px" />
+            <div
+              className="absolute inset-[10%] flex flex-col items-center justify-between rounded-sm px-5 py-6 text-center"
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(252,247,236,0.94), rgba(247,240,228,0.96))",
+                color: "#3D2415",
+              }}
+            >
+              <div>
+                <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+                  {style.openingLine}
                 </p>
-                <h1 className="font-[family-name:var(--font-display)] text-4xl sm:text-5xl" lang={invite.language}>
-                  {invite.groom}
+                <p className="mt-1 text-[10px] tracking-[0.2em]" style={{ color: "#B8860B" }}>
+                  {style.subOpening}
+                </p>
+                <div className="relative mx-auto mt-4 h-16 w-32 overflow-hidden rounded-2xl">
+                  <Image
+                    src="/motifs/diyas.jpg"
+                    alt=""
+                    fill
+                    className="object-cover"
+                    sizes="128px"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs" style={{ color: "#6B4E3D" }}>
+                  {invite.hosts}
+                </p>
+                <p
+                  className="mt-2 font-[family-name:var(--font-script)] text-xl"
+                  style={{ color: "#B8860B" }}
+                >
+                  {invite.ofLabel ?? invite.copy.weddingOf}
+                </p>
+                <h1
+                  className="mt-2 font-[family-name:var(--font-display)] text-3xl"
+                  style={{ color: "#6B1E2A" }}
+                  lang={invite.language}
+                >
+                  {invite.bride}
                 </h1>
-              </>
-            )}
-            <p className="mt-5 text-base" style={{ color: style.gold }}>
-              {invite.blessingNative}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: `${style.cream}cc` }}>
-              {invite.invitationCopy}
-            </p>
-            <div className="mt-6">
-              <BrassLampPair color={style.gold} />
+                {!single && (
+                  <>
+                    <p className="my-1 text-xs uppercase tracking-[0.35em]" style={{ color: "#B8860B" }}>
+                      {style.wedsWord}
+                    </p>
+                    <h1
+                      className="font-[family-name:var(--font-display)] text-3xl"
+                      style={{ color: "#6B1E2A" }}
+                      lang={invite.language}
+                    >
+                      {invite.groom}
+                    </h1>
+                  </>
+                )}
+                <p className="mt-4 text-base" style={{ color: "#6B1E2A" }}>
+                  {invite.blessingNative}
+                </p>
+              </div>
+
+              <div
+                className="w-full rounded border px-3 py-2"
+                style={{ borderColor: "rgba(184,134,11,0.45)", background: "rgba(255,250,240,0.9)" }}
+              >
+                <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+                  {invite.weddingDateLabel}
+                </p>
+                <p className="mt-1 text-xs">{invite.location.name}</p>
+              </div>
             </div>
-            <p className="mt-4 text-sm tracking-[0.2em]" style={{ color: style.gold }}>
-              {invite.weddingDateLabel}
-            </p>
-            <p className="mt-2 text-sm">{invite.location.name}</p>
           </div>
         </div>
       </section>
 
-      <div className="invite-stage px-4 sm:px-6" style={{ background: t.bgDeep }}>
+      <div className="invite-stage px-4 sm:px-6" style={{ background: "#F7F0E4", color: "#3D2415" }}>
         <SharedCountdown invite={invite} />
       </div>
 
-      <section className="px-4 py-10 sm:px-6" style={{ background: style.maroon }}>
+      <section className="px-4 py-12 sm:px-6" style={{ background: "#4A0E18" }}>
         <div className="invite-stage mx-auto max-w-3xl">
           <h2
             className="mb-6 text-center font-[family-name:var(--font-display)] text-2xl"
-            style={{ color: style.gold }}
+            style={{ color: "#E8C56A" }}
           >
             {invite.copy.eventsTitle}
           </h2>
@@ -109,17 +126,19 @@ export function IndianTraditionalSiteBody({ invite }: { invite: WeddingInvite })
                 key={e.id}
                 className="rounded-2xl border px-4 py-4"
                 style={{
-                  borderColor: `${style.gold}44`,
-                  background: `${style.deep}cc`,
-                  color: style.cream,
+                  borderColor: "rgba(232,197,106,0.35)",
+                  background: "rgba(42,8,16,0.85)",
+                  color: "#F8F1E3",
                 }}
               >
                 <p className="text-lg">{e.emoji}</p>
-                <h3 className="mt-1 font-semibold" style={{ color: style.gold }}>
+                <h3 className="mt-1 font-semibold" style={{ color: "#E8C56A" }}>
                   {e.title}
                 </h3>
-                <p className="mt-1 text-sm">{e.dateLabel} · {e.time}</p>
-                <p className="text-xs" style={{ color: `${style.cream}aa` }}>
+                <p className="mt-1 text-sm">
+                  {e.dateLabel} · {e.time}
+                </p>
+                <p className="text-xs text-white/70">
                   {e.venue}, {e.city}
                 </p>
               </article>

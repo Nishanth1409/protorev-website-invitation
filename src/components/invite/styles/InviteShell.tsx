@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { AnimatePresence } from "framer-motion";
 import type { WeddingInvite } from "@/data/types";
 import { MusicToggle } from "../MusicToggle";
 import { ParticleCanvas } from "../ParticleCanvas";
@@ -48,8 +47,9 @@ export function InviteShell({
       className="relative min-h-screen overflow-x-hidden invite-viewport"
       lang={invite.language}
     >
-      <AnimatePresence>{!opened && cover(() => setOpened(true))}</AnimatePresence>
-      {opened && (
+      {!opened ? (
+        cover(() => setOpened(true))
+      ) : (
         <>
           <MusicToggle music={music} accent={t.accent} enabled />
           <ParticleCanvas color={t.particle} active mode={particleMode} />

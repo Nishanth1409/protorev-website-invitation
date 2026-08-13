@@ -18,6 +18,7 @@ import {
   IndianTraditionalSiteBody,
   shouldUseIndianTraditionalSite,
 } from "./IndianTraditionalSite";
+import { getIndianCardStyle } from "./traditional/indianStyle";
 
 type Props = {
   invite: WeddingInvite;
@@ -291,11 +292,114 @@ function DefaultCover({
   );
 }
 
+function PhysicalCardCover({
+  invite,
+  onOpen,
+}: {
+  invite: WeddingInvite;
+  onOpen: () => void;
+}) {
+  const style = getIndianCardStyle(invite.faith, invite.language);
+  const frame =
+    invite.faith === "muslim" ? "/cards/frame-muslim.jpg" : "/cards/frame-cream.jpg";
+  const single = !invite.groom?.trim();
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[60] flex items-center justify-center px-4 sm:px-6"
+      style={{
+        background:
+          "radial-gradient(circle at 50% 30%, rgba(184,134,11,0.28), transparent 50%), #1A0A0E",
+      }}
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="physical-invite-card relative w-full max-w-sm overflow-hidden text-left transition hover:scale-[1.01]"
+        style={{ aspectRatio: "5 / 7" }}
+        aria-label={invite.copy.openInvite}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={frame} alt="" className="absolute inset-0 h-full w-full object-cover" />
+        <div
+          className="absolute inset-[11%] flex flex-col items-center justify-between rounded-sm px-4 py-5 text-center"
+          style={{
+            background:
+              "linear-gradient(180deg, rgba(252,247,236,0.95), rgba(247,240,228,0.96))",
+            color: "#3D2415",
+          }}
+        >
+          <div>
+            <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+              {style.openingLine}
+            </p>
+            <p className="mt-1 text-[10px] tracking-[0.18em]" style={{ color: "#B8860B" }}>
+              {style.subOpening}
+            </p>
+          </div>
+          <div>
+            <p
+              className="font-[family-name:var(--font-script)] text-xl"
+              style={{ color: "#B8860B" }}
+            >
+              {invite.ofLabel ?? invite.copy.weddingOf}
+            </p>
+            <h1
+              className="mt-2 font-[family-name:var(--font-display)] text-3xl leading-tight"
+              style={{ color: "#6B1E2A" }}
+              lang={invite.language}
+            >
+              {invite.bride}
+            </h1>
+            {!single && (
+              <>
+                <p className="my-1 text-xs uppercase tracking-[0.35em]" style={{ color: "#B8860B" }}>
+                  {style.wedsWord}
+                </p>
+                <h1
+                  className="font-[family-name:var(--font-display)] text-3xl leading-tight"
+                  style={{ color: "#6B1E2A" }}
+                  lang={invite.language}
+                >
+                  {invite.groom}
+                </h1>
+              </>
+            )}
+          </div>
+          <div>
+            <p className="text-sm font-semibold" style={{ color: "#6B1E2A" }}>
+              {invite.weddingDateLabel}
+            </p>
+            <p
+              className="mt-3 inline-flex rounded-full px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-white"
+              style={{ background: "linear-gradient(135deg,#6B1E2A,#B8860B)" }}
+            >
+              {invite.copy.openInvite} →
+            </p>
+          </div>
+        </div>
+      </button>
+    </motion.div>
+  );
+}
+
 function coverFor(
   experience: ExperienceKey,
   invite: WeddingInvite,
   onOpen: () => void,
 ) {
+  if (
+    shouldUseIndianTraditionalSite({
+      ceremony: invite.ceremony,
+      experience,
+      isFestivalWeb: isFestivalWebExperience(experience),
+    })
+  ) {
+    return <PhysicalCardCover invite={invite} onOpen={onOpen} />;
+  }
+
   switch (experience) {
     case "ribbon-envelope":
     case "heritage-arch":
