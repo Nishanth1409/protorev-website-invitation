@@ -1,9 +1,17 @@
 "use client";
 
+import type { ReactNode } from "react";
 import type { WeddingInvite } from "@/data/types";
 import { getCreateTheme } from "@/data/themes";
+import { galleryPresentation } from "@/data/galleryPresentation";
+import {
+  customizeEmailUrl,
+  customizeWhatsAppUrl,
+} from "@/data/contact";
+import { languageMeta } from "@/data/types";
+import { MobilePreviewPage } from "@/components/marketing/MobilePreviewPage";
 import { CinematicExperience } from "./CinematicExperience";
-import { InvitationCardExperience } from "./InvitationCardExperience";
+import { PrintableInvitationCard } from "./PrintableInvitationCard";
 import { RoyalNightStyle } from "./styles/RoyalNightStyle";
 import { GardenBloomStyle } from "./styles/GardenBloomStyle";
 import { ModernCleanStyle } from "./styles/ModernCleanStyle";
@@ -16,23 +24,69 @@ type Props = {
 };
 
 /**
- * Cards → printable Canva-style export experience.
- * Event pages → full scrolling website experience.
+ * All theme previews render inside a mobile phone frame only.
  */
 export function InvitationExperience({ invite }: Props) {
   const theme = invite.themeId ? getCreateTheme(invite.themeId) : null;
   const format = invite.inviteFormat ?? theme?.format;
+  const pres = theme ? galleryPresentation(theme) : null;
+  const langLabel = languageMeta[invite.language].label;
+
+  const wa = customizeWhatsAppUrl({
+    themeName: pres?.title ?? invite.styleLabel,
+    format: format ?? "invitation-card",
+    faith: invite.faithLabel,
+    languages: langLabel,
+    bride: invite.bride,
+    groom: invite.groom,
+  });
+  const mail = customizeEmailUrl({
+    themeName: pres?.title ?? invite.styleLabel,
+    format: format ?? "invitation-card",
+    bride: invite.bride,
+    groom: invite.groom,
+  });
+
+  let inner: ReactNode;
 
   if (format === "invitation-card" && theme) {
-    return <InvitationCardExperience invite={invite} />;
-  }
-
-  if (theme) {
-    return (
-      <CinematicExperience invite={invite} experience={theme.experience} />
+    inner = (
+      <div className="flex min-h-full items-start justify-center bg-[#1a1a1a] p-2 pt-4">
+        <div
+          className="origin-top"
+          style={{ transform: "scale(0.62)", width: 420, marginBottom: -120 }}
+        >
+          <PrintableInvitationCard invite={invite} watermarked={false} />
+        </div>
+      </div>
+    );
+  } else if (theme) {
+    inner = (
+      <div className="invite-mobile-canvas min-h-full">
+        <CinematicExperience invite={invite} experience={theme.experience} />
+      </div>
+    );
+  } else {
+    inner = (
+      <div className="invite-mobile-canvas min-h-full">
+        <LegacyStyle invite={invite} />
+      </div>
     );
   }
 
+  return (
+    <MobilePreviewPage
+      themeName={pres?.title ?? invite.styleLabel}
+      subtitle={`${invite.faithLabel} · ${langLabel}`}
+      whatsAppHref={wa}
+      emailHref={mail}
+    >
+      {inner}
+    </MobilePreviewPage>
+  );
+}
+
+function LegacyStyle({ invite }: { invite: WeddingInvite }) {
   switch (invite.designStyle) {
     case "garden-bloom":
       return <GardenBloomStyle invite={invite} />;

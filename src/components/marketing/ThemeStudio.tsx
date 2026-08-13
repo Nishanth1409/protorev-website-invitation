@@ -17,7 +17,6 @@ import {
   assembleInvite,
 } from "@/lib/buildInvite";
 import { faithMeta } from "@/data/invites";
-import { TemplateOrCustomize } from "@/components/marketing/TemplateOrCustomize";
 
 type Props = {
   theme: CreateTheme;
@@ -137,7 +136,8 @@ export function ThemeStudio({
   const canOpen = Boolean(draftFaith && draftLangs.length > 0);
 
   return (
-    <div className="relative min-h-screen bg-[var(--background)]">
+    <div className="relative min-h-screen bg-[#F7F4EF]">
+      {(!ready || setupOpen) && (
       <div className="sticky top-0 z-[70] border-b border-[var(--line)] bg-[rgba(248,248,252,0.94)] backdrop-blur-xl">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
           <div className="min-w-0">
@@ -208,6 +208,7 @@ export function ThemeStudio({
           </div>
         )}
       </div>
+      )}
 
       <AnimatePresence>
         {setupOpen && (
@@ -383,25 +384,10 @@ export function ThemeStudio({
       </AnimatePresence>
 
       {ready ? (
-        <>
-          <InvitationExperience
-            invite={invite}
-            key={`${faith}-${activeLanguage}-${theme.id}`}
-          />
-          {theme.format === "event-page" && (
-            <div className="border-t border-[var(--line)] bg-[var(--background)] px-4 py-8 sm:px-6">
-              <div className="mx-auto max-w-xl">
-                <TemplateOrCustomize
-                  compact
-                  themeName={theme.name}
-                  format={theme.format}
-                  faith={faithMeta[faith]?.label}
-                  languages={languages.map((id) => languageMeta[id].label).join(", ")}
-                />
-              </div>
-            </div>
-          )}
-        </>
+        <InvitationExperience
+          invite={invite}
+          key={`${faith}-${activeLanguage}-${theme.id}`}
+        />
       ) : (
         <div className="mx-auto flex min-h-[70svh] max-w-lg flex-col items-center justify-center px-6 text-center">
           <div
